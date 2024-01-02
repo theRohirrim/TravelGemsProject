@@ -1,3 +1,5 @@
+import styles from './network.module.css'
+
 const NetworkPage = () => {
     return (
         <main>

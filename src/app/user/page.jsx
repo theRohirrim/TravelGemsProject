@@ -1,3 +1,5 @@
+import styles from './user.module.css'
+
 const UserPage = () => {
     return (
         <main>
