@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import NavLink from "./navlink/NavLink";
+import styles from "./links.module.css"
 
 const links = [
     {
@@ -17,19 +18,17 @@ const links = [
         path: '/saved'
     },
     {
-        title: 'user',
+        title: 'User',
         path: '/user'
     }
 ]
 
 const Links = () => {
     return (
-        <div>
-            <div>
-            {links.map((link => (
-                    <NavLink item={link} key={link.title} />
-                )))}
-            </div>
+        <div className={styles.links}>
+        {links.map((link => (
+                <NavLink item={link} key={link.title} />
+            )))}
         </div>
     )
 }
