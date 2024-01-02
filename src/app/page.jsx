@@ -1,9 +1,15 @@
+import { getLocations } from '@/lib/data'
 import styles from './page.module.css'
 
-export default function Home() {
+const Home = async () => {
+  const {locations} = await getLocations();
+
+  console.log('here are locations :', locations)
   return (
     <main>
       HomePage!
     </main>
   )
 }
+
+export default Home;

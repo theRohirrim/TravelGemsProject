@@ -7,18 +7,12 @@ const getMongoUri = () => {
   return process.env.MONGODB_URI_DEV;
 };
 
-const connection = {};
-
 export const connectToDatabase = async () => {
   try {
-    if (connection.isConnected) {
-      console.log("Using existing connection")
-      return
-    }
-    const db = await mongoose.connect(getMongoUri())
-    connection.isConnected = db.connections[0].readyState;
+    await mongoose.connect(getMongoUri(), {})
+    console.log("Connected to MongoDB")
   } catch (error) {
     console.log(error)
-    throw new Error("Error connecting to the database")
+    throw new Error("Error connecting to the database: ", error)
   }
 }

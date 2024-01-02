@@ -57,8 +57,11 @@ const locationSchema = new mongoose.Schema({
     description: {
         type: String,
         max: 100
+    },
+    img: {
+        type: String
     }
 },{timestamps: true})
 
-export const User = mongoose.models.User || mongoose.model("User", userSchema)
-export const Location = mongoose.models.Location || mongoose.model("Location", locationSchema)
+export const Users = mongoose.models.Users || mongoose.model("Users", userSchema)
+export const Locations = mongoose.models.Locations || mongoose.model("Locations", locationSchema)

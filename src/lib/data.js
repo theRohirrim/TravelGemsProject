@@ -1,11 +1,12 @@
-import { Location, User } from "./models"
+import { NextResponse } from "next/server";
+import { Locations,  Users } from "./models"
 import { connectToDatabase } from "./utils"
 
-export const getLocations = async () => {
+export async function getLocations() {
+    await connectToDatabase();
     try {
-        connectToDatabase()
-        const locations = await Location.find()
-        return locations
+        const locations = await Locations.find({})
+        return locations;
 
     } catch (error) {
         console.log(error)
@@ -15,8 +16,8 @@ export const getLocations = async () => {
 
 export const getLocationById = async (_id) => {
     try {
-        connectToDatabase()
-        const location = await Location.find({_id})
+        await connectToDatabase()
+        const location = await Locations.find({_id})
         return location
 
     } catch (error) {
@@ -25,10 +26,13 @@ export const getLocationById = async (_id) => {
     }
 }
 
+export const postLocation = async () => {
+}
+
 export const getUsers = async () => {
     try {
         connectToDatabase()
-        const users = await User.find()
+        const users = await Users.find()
         return users
 
     } catch (error) {
@@ -40,7 +44,7 @@ export const getUsers = async () => {
 export const getUserById = async (id) => {
     try {
         connectToDatabase()
-        const user = await User.findById(id)
+        const user = await Users.findById(id)
         return user
 
     } catch (error) {
