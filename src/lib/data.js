@@ -1,12 +1,13 @@
+import { connectToDatabase } from "./db"
+import { Locations } from "@/models/locations";
+import { Users } from "@/models/users";
 import { NextResponse } from "next/server";
-import { Locations,  Users } from "./models"
-import { connectToDatabase } from "./utils"
 
 export async function getLocations() {
     await connectToDatabase();
     try {
         const locations = await Locations.find({})
-        return locations;
+        return NextResponse.json({locations});
 
     } catch (error) {
         console.log(error)
