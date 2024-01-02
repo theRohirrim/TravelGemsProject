@@ -33,6 +33,6 @@ const locationSchema = new mongoose.Schema({
     img: {
         type: String
     }
-},{timestamps: true})
+},{ timestamps: true }, { collection: 'locations' })
 
-export const Locations = mongoose.models.Locations || mongoose.model("Locations", locationSchema)
+export const Locations = mongoose.models.Locations || mongoose.model("Locations", locationSchema, 'locations')

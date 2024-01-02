@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-},{timestamps: true})
+},{timestamps: true}, {collection: 'users'})
 
-export const Users = mongoose.models.Users || mongoose.model("Users", userSchema)
+export const Users = mongoose.models.Users || mongoose.model("Users", userSchema, 'users')

@@ -3,15 +3,14 @@ import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
 import { NextResponse } from "next/server";
 
-export async function getLocations() {
-    await connectToDatabase();
+export const getLocations = async () => {
     try {
+        connectToDatabase()
         const locations = await Locations.find({})
-        return NextResponse.json({locations});
+        return locations
 
     } catch (error) {
-        console.log(error)
-        throw new Error("Failed to fetch location data")
+        throw new Error("Error loading location data: ", error)
     }
 }
 
