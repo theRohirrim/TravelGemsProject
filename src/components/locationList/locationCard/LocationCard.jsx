@@ -15,7 +15,6 @@ const LocationCard = ({location}) => {
                 src={location.img} 
                 alt='' 
                 fill
-                sizes='100px'
                 className={styles.img} />
                 }
             </div>
