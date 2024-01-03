@@ -6,8 +6,8 @@ const LocationCard = ({location}) => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                {location.place_name}
-                {location.location}
+                <h2>{location.place_name}</h2>
+                <h3>{location.location}</h3>
             </div>
             <div className={styles.imgContainer}>
                 {location.img && 
@@ -20,8 +20,8 @@ const LocationCard = ({location}) => {
                 }
             </div>
             <div className={styles.footer}>
-                {location.category}
-                {location.description}
+                <p>{location.category}</p>
+                <p>{location.description}</p>
             </div>
 
         </div>
