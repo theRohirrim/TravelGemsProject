@@ -5,8 +5,6 @@ import LocationList from '@/components/locationList/LocationList';
 const Home = async () => {
   const locations = await getLocations();
 
-  console.log('locations: ', locations)
-
   return (
     <main>
       HomePage!
