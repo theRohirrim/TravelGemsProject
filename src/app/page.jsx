@@ -1,10 +1,10 @@
+import GoogleMapView from '@/components/GoogleMapView/GoogleMapView'
 import styles from './page.module.css'
-import GoogleMap from '../components/map/Map'
 
 export default function Home() {
   return (
     <main>
-      <GoogleMap /> 
+      <GoogleMapView /> 
     </main>
   )
 }
