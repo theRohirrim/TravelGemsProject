@@ -1,6 +1,7 @@
 "use client"
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import React from 'react';
+import styles from './googlemapview.module.css'
 
 const GoogleMapView = ({ locations }) => {
     // size of map 
@@ -16,7 +17,7 @@ const GoogleMapView = ({ locations }) => {
 
     // display map, centered on coords
     return (
-        <div>
+        <div className={styles.mapViewerWrapper}>
             <LoadScript
                 googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
             >
