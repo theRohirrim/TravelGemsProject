@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import React, { useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
+import Link from 'next/link';
 
 const GoogleMapView = ({ locations }) => {
   const containerStyle = {
@@ -59,7 +60,9 @@ const GoogleMapView = ({ locations }) => {
                 />
                 <div className={style.popText}>
 
+                <Link href={`/${selectLocation._id}`}>
                 <h4>{selectLocation.place_name}</h4>
+                </Link>
                 <p>{selectLocation.category}</p>
                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
                 </div>
