@@ -18,6 +18,9 @@ const LocationCard = ({location}) => {
                 src={location.img} 
                 alt='' 
                 fill
+                size=''
+                unoptimized={true}
+                priority
                 className={styles.img} />
                 }
             </div>

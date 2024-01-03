@@ -1,22 +1,14 @@
 import { checkCollection, getLocations } from '@/lib/data';
-import GoogleMapView from '@/components/GoogleMapView/GoogleMapView';
-import styles from './page.module.css';
-import LocationList from '@/components/locationList/LocationList';
-import MapAndListButtons from '@/components/Map&ListButons/Map&ListButtons';
-import MapsNavigation from '@/components/mapsNavigation/MapsNavigation';
+import ExplorePage from '@/components/explore/ExplorePage';
 
 const Home = async () => {
+
   let locations = await getLocations();
   locations = JSON.parse(JSON.stringify(locations))
 
   return (
     <main>
-      <LocationList locations={locations} />
-      <div className={styles.mapViewWrapper}>
-        <MapsNavigation />
-        <GoogleMapView locations={locations} />
-        <MapAndListButtons />
-      </div>
+      <ExplorePage locations={locations} />
     </main>
   );
 };
