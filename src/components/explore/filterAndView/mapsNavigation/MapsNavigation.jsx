@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import styling from "./mapsNav.module.css";
 
