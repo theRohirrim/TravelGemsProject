@@ -4,17 +4,6 @@ import { Users } from "@/models/users";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-export const getLocations = async () => {
-    try {
-        connectToDatabase()
-        const locations = await Locations.find({})
-        return locations
-
-    } catch (error) {
-        throw new Error("Error loading location data: ", error)
-    }
-}
-
 export const checkCollection = async () => {
     try {
         connectToDatabase()
@@ -27,6 +16,17 @@ export const checkCollection = async () => {
         });
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getLocations = async () => {
+    try {
+        connectToDatabase()
+        const locations = await Locations.find({})
+        return locations
+
+    } catch (error) {
+        throw new Error("Error loading location data: ", error)
     }
 }
 

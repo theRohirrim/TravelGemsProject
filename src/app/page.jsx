@@ -10,6 +10,7 @@ const Home = async () => {
 
   return (
     <main>
+      <LocationList locations={locations} />
       <div className={styles.mapViewWrapper}>
         <MapsNavigation />
         <GoogleMapView locations={locations} />

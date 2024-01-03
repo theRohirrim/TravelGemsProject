@@ -1,14 +1,15 @@
-import { getLocations } from "@/lib/data"
+import LocationCard from "./locationCard/LocationCard"
+import styles from "./locationlist.module.css"
 
 const LocationList = async ({locations}) => {
     return (
-        <>
+        <div className={styles.container}>
         {locations.map((location) => (
-        <div key={location.place_name}>
-            <h2>{location.place_name}</h2>
-        </div>
+            <div className={styles.card}>
+            <LocationCard key={location.place_name} location={location} />
+            </div>
         ))}
-        </>
+        </div>
     )
 }
 
