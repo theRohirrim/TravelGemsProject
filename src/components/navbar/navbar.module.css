@@ -1,5 +1,6 @@
 .container { 
     border: 1px solid blue;
+    background-color: rgb(171, 164, 164);
 
     padding: 10px;
     position: fixed;

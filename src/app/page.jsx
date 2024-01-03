@@ -10,7 +10,7 @@ const Home = async () => {
     <main>
       HomePage!
       <LocationList locations={locations} />
-      <GoogleMapView locations={locations} /> 
+      <GoogleMapView locations={locations} />
     </main>
   )
 }
