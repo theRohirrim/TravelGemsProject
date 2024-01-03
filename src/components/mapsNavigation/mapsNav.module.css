@@ -1,0 +1,32 @@
+.mapWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+  border: 2px solid black;
+}
+
+.search_input {
+  background-color: #ffffff;
+  color: #646464;
+  padding: 0.8rem 1rem;
+  border-radius: 30px;
+  border: none;
+  width: 30vw;
+}
+.form {
+  margin: auto;
+  margin-top: 10px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px;
+}
+
+
+.button{
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+}
