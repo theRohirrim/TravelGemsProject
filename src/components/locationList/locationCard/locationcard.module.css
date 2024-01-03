@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+
+    border: 1px solid orange;
+}
+
+.header {
+
+}
+
+.imgContainer {
+    position: relative;
+    width: 90%;
+}
+
+.img {
+}
+
+.footer {
+
+}

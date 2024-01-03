@@ -1,12 +1,11 @@
 import { getLocations } from "@/lib/data"
+import LocationCard from "./locationCard/LocationCard"
 
 const LocationList = async ({locations}) => {
     return (
         <>
         {locations.map((location) => (
-        <div key={location.place_name}>
-            <h2>{location.place_name}</h2>
-        </div>
+            <LocationCard location={location} />
         ))}
         </>
     )
