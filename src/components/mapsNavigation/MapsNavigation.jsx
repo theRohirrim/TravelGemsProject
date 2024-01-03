@@ -1,14 +1,18 @@
+import React from "react";
+import styling from "./mapsNav.module.css";
+
 const MapsNavigation = () => { 
     return ( 
-        <div> 
-            <form action="/search_results">
-            <input type="text" placeholder="search..." />
-            <button type="submit">Search</button>
+        <div className={styling.mapWrapper}>
+            <form action="/search_results"className={styling.form} >
+                <input type="text" placeholder="Search places" className={styling.search_input} />
             </form> 
-            <button> Add Location</button>
-            <button> Filter </button>
+            <div className={`${styling.buttonWrapper} flex justify-between mt-4`}>
+                <button className={styling.button}>Add Location</button>
+                <button className={styling.button}>Filter</button>
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default MapsNavigation
+export default MapsNavigation;
