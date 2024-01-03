@@ -1,12 +1,14 @@
 import { getLocations } from "@/lib/data"
 
-const LocationList = async () => {
-    const locations = await getLocations();
-    console.log(locations)
+const LocationList = async ({locations}) => {
     return (
-        <div>
-            Location List
+        <>
+        {locations.map((location) => (
+        <div key={location.place_name}>
+            <h2>{location.place_name}</h2>
         </div>
+        ))}
+        </>
     )
 }
 

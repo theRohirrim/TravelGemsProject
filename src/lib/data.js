@@ -1,6 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export const getLocations = async () => {
@@ -11,6 +12,21 @@ export const getLocations = async () => {
 
     } catch (error) {
         throw new Error("Error loading location data: ", error)
+    }
+}
+
+export const checkCollection = async () => {
+    try {
+        connectToDatabase()
+        console.log(mongoose.connection.db.listCollections())
+        mongoose.connection.db.listCollections({name: 'locations'})
+        .next(function(err, collinfo) {
+            if (collinfo) {
+                console.log("CheckCollection ", collinfo)
+            }
+        });
+    } catch (error) {
+        console.log(error)
     }
 }
 
