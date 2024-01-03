@@ -1,9 +1,9 @@
 .links {
-    border: 1px solid red;
-
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
+    justify-content: space-evenly;
+    align-items:center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
 }
+

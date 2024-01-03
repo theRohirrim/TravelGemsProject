@@ -1,3 +1,17 @@
 .container {
-    border: 1px solid green;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.3s;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 0 25px 20px -20px rgba(0,0,0,0.4);
+
 }
+
+.container:hover {
+    transform: translateY(2px);
+    background-color: #f44566; 
+  }

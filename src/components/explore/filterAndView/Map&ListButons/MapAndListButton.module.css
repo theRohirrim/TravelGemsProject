@@ -1,11 +1,7 @@
 .buttonContainer { 
     display:flex; 
     justify-content: space-evenly;
-    margin-top: 20px;
-
-    border: 1px solid red;
-
-    margin-bottom: 20px;
+margin:20px
 }
 
 .viewButtons { 
@@ -18,6 +14,5 @@
 .active {
     cursor: none;
     pointer-events: none;
-
     background-color: rgb(180, 195, 209);
 }

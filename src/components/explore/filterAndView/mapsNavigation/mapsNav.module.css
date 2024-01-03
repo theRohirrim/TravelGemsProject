@@ -29,4 +29,7 @@
 .button{
   border-radius: 12px;
   padding: 0.6rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }

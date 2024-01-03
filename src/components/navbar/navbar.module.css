@@ -1,13 +1,9 @@
 .container { 
-    border: 1px solid blue;
-    background-color: rgb(171, 164, 164);
-
+    background-color: rgb(255, 255, 255);
     padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
-
-
     padding-left: 8vw;
     padding-right: 8vw;
     padding-bottom: 3vh;
