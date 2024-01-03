@@ -1,11 +1,18 @@
-import styling from "./MapAndListButton.module.css"
+import styles from "./MapAndListButton.module.css"
 
 
-const MapAndListButtons = () => { 
+const MapAndListButtons = ({mapView, setMapView}) => { 
+
+    const handleClick = () => {
+        setMapView((current) => {
+            return !current
+        })
+    }
+
     return ( 
-        <div className={styling.buttonContainer}> 
-        <button className={styling.viewButtons}> Map View</button>
-        <button className={styling.viewButtons}> List View </button>
+        <div className={styles.buttonContainer}> 
+        <button onClick={handleClick} className={`${styles.viewButtons} ${mapView === true && styles.active}`}> Map View</button>
+        <button onClick={handleClick} className={`${styles.viewButtons} ${mapView === false && styles.active}`}> List View </button>
         </div>
     )
 }

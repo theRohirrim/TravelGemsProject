@@ -12,5 +12,12 @@
     width:40vw;
     height: 5vh;
     border-radius: 12px;
+    cursor: pointer;
 }
 
+.active {
+    cursor: none;
+    pointer-events: none;
+
+    background-color: rgb(180, 195, 209);
+}
