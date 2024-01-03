@@ -5,8 +5,9 @@ import React from 'react';
 const GoogleMapView = ({ locations }) => {
     // size of map 
     const containerStyle = {
-        width: '100%',
-        height: '70vh'
+        width: '80vw',
+        height: '35vh',
+        margin: 'auto' 
     }
 
 
@@ -27,6 +28,7 @@ const GoogleMapView = ({ locations }) => {
                     {locations.map(location => (
                         <MarkerF
                             position={{lat: location.latitude, lng: location.longitude}}
+                            key={location._id}
                         />
                     ))}
         
