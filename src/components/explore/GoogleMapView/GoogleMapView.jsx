@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import React, { useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
+
 const GoogleMapView = ({ locations }) => {
   const containerStyle = {
     width: '80vw',
