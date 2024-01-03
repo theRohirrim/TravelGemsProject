@@ -1,7 +1,7 @@
 "use client"
 import { GoogleMap, LoadScript, MarkerF, useLoadScript } from '@react-google-maps/api';
 import React from 'react';
-import styles from './googlemapview.module.css'
+import styles from './googleMap.module.css'
 
 const GoogleMapView = ({ locations }) => {
     // size of map 
