@@ -2,4 +2,12 @@
     border: 1px solid blue;
 
     padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+
+    padding-left: 8vw;
+    padding-right: 8vw;
+    padding-bottom: 3vh;
 }
