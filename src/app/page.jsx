@@ -6,7 +6,8 @@ import MapAndListButtons from '@/components/Map&ListButons/Map&ListButtons';
 import MapsNavigation from '@/components/mapsNavigation/MapsNavigation';
 
 const Home = async () => {
-  const locations = await getLocations();
+  let locations = await getLocations();
+  locations = JSON.parse(JSON.stringify(locations))
 
   return (
     <main>

@@ -8,11 +8,16 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(184, 181, 189);
+}
+
+main {
+    margin-bottom: 10vh;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    background-color: rgb(184, 181, 189);
-    height: 100vh;
 }
