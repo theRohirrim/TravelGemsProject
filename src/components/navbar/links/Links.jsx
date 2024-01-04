@@ -22,8 +22,8 @@ const links = [
         icon: 'saved',
     },
     {
-        title: 'User',
-        path: '/user',
+        title: 'Profile',
+        path: '/user/659410c69f7ae624673bafdb',
         icon: 'user',
     }
 ];
