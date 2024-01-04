@@ -7,7 +7,7 @@ const LocationCard = async ({id}) => {
     let location = await getLocationById(id)
     location = location[0] 
     return (
-        <main className={styles.container}>
+        <section className={styles.locationContainer}>
             <section className={styles.imageContainer}> 
             <h1 className={styles.title}>{location.place_name}</h1>
             <div className={styles.imgContainer}>
@@ -29,7 +29,7 @@ const LocationCard = async ({id}) => {
             <div className={styles.address}> {location.address} </div>
             <div className={styles.description}>{location.description}</div>
             </section>
-        </main>
+        </section>
     )
 }
 
