@@ -1,11 +1,11 @@
 "use client"
-import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useLoadScript, MarkerF } from '@react-google-maps/api';
 import React, { useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
 
-const GoogleMapView = ({ locations }) => {
+const GoogleMapView = ({ locations, addLocation, setAddLocation, selectedLocation, setSelectedLocation }) => {
     const containerStyle = {
         width: '80vw',
         height: '35vh',
@@ -35,44 +35,64 @@ const GoogleMapView = ({ locations }) => {
         setLocation("");
     };
 
+
+    const handleMapClick = (e) => {
+        setSelectedLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() })
+    }
+
     return (
         <div>
-            {isLoaded && <GoogleMap mapContainerStyle={containerStyle} center={coords} zoom={13}>
-                {locations.map((location) => (
-                    <Marker
-                        position={{ lat: location.latitude, lng: location.longitude }}
-                        key={location._id}
-                        onClick={() => handleMarkerClick(location)}
-                    />
-                ))}
+            {isLoaded &&
+                <GoogleMap
+                    onClick={handleMapClick}
+                    mapContainerStyle={containerStyle}
+                    center={coords}
+                    zoom={13}>
+                    {locations.map((location) => (
+                        <Marker
+                            position={{ lat: location.latitude, lng: location.longitude }}
+                            key={location._id}
+                            onClick={() => handleMarkerClick(location)}
+                        />
+                    ))}
 
-                {selectLocation && (
-                    <InfoWindow
-                        position={{
-                            lat: selectLocation.latitude,
-                            lng: selectLocation.longitude,
-                        }}
-                        onCloseClick={handleInfoWindowClose}
-                    >
-                        <div className={style.popupWrapper}>
-                            <Image
-                                src={selectLocation.img}
-                                alt=''
-                                width={100}
-                                height={100}
-                            />
-                            <div className={style.popText}>
+                    {addLocation && <>
+                        <MarkerF position={selectedLocation}>
+                        <InfoWindow visible={true}>
+                        <Link  href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
+                            <p>Add new travel gem</p>
+                        </Link>
+                        </InfoWindow>
+                        </MarkerF>
+                    </>}
 
-                                <Link href={`/${selectLocation._id}`}>
-                                    <h4>{selectLocation.place_name}</h4>
-                                </Link>
-                                <p>{selectLocation.category}</p>
-                                <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
+                    {selectLocation && (
+                        <InfoWindow
+                            position={{
+                                lat: selectLocation.latitude,
+                                lng: selectLocation.longitude,
+                            }}
+                            onCloseClick={handleInfoWindowClose}
+                        >
+                            <div className={style.popupWrapper}>
+                                <Image
+                                    src={selectLocation.img}
+                                    alt=''
+                                    width={100}
+                                    height={100}
+                                />
+                                <div className={style.popText}>
+
+                                    <Link href={`/${selectLocation._id}`}>
+                                        <h4>{selectLocation.place_name}</h4>
+                                    </Link>
+                                    <p>{selectLocation.category}</p>
+                                    <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
+                                </div>
                             </div>
-                        </div>
-                    </InfoWindow>
-                )}
-            </GoogleMap>
+                        </InfoWindow>
+                    )}
+                </GoogleMap>
             }
         </div>
     );
