@@ -18,6 +18,15 @@ const nextConfig = {
                 hostname: "images.pexels.com"
             }
         ]
+    },
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/explore',
+                permanent: true
+            }
+        ]
     }
 }
 
