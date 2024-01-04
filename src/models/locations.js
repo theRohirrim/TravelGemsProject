@@ -8,7 +8,7 @@ const locationSchema = new mongoose.Schema({
         min: 3,
         max: 40
     },
-    location: {
+    address: {
         type: String,
         required: true,
         max: 50
@@ -21,8 +21,8 @@ const locationSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    category: {
-        type: String,
+    categories: {
+        type: Array,
         min: 3,
         max: 20
     },
@@ -31,6 +31,15 @@ const locationSchema = new mongoose.Schema({
         max: 100
     },
     img: {
+        type: String
+    },
+    rating: {
+        type: Number
+    },
+    created_by: {
+        type: String
+    },
+    date_created: {
         type: String
     }
 },{ timestamps: true }, { collection: 'locations' })
