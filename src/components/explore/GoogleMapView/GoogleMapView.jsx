@@ -4,17 +4,42 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
-import { TbLocation } from "react-icons/tb"
+import { LiaLocationArrowSolid } from "react-icons/lia"
 
 const GoogleMapView = ({ locations }) => {
     const [coordinates, setCoordinates] = useState({});
     const [selectLocation, setSelectLocation] = useState("");
+    const [distance, setDistance] = useState(0);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
             setCoordinates({lat: latitude, lng: longitude})
         })
-    }, []);
+    }, [selectLocation]);
+
+    useEffect(() => {
+        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+    }, [selectLocation]);
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const earthRadius = 6371; // in kilometers
+    
+        const degToRad = (deg) => {
+          return deg * (Math.PI / 180);
+        };
+    
+        const dLat = degToRad(lat2 - lat1);
+        const dLon = degToRad(lon2 - lon1);
+    
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    
+        const distance = earthRadius * c;
+        setDistance(distance.toFixed(1))
+      };
 
     const containerStyle = {
         width: '80vw',
@@ -83,7 +108,7 @@ const GoogleMapView = ({ locations }) => {
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
                                 <p className={style.directions} onClick={handleDirectionsClick}>
-                                Directions <TbLocation /></p>
+                                <LiaLocationArrowSolid /> {distance} mi</p>
                             </div>
                         </div>
                     </InfoWindow>
