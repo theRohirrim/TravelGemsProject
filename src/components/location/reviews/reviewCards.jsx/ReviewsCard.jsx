@@ -1,14 +1,8 @@
-import { getReviews } from "@/lib/data";
 import style from "./reviews.module.css"
-const ReviewsCard = async ({id}) => {
-const allReviews = await getReviews();
 
-const filterReviews = allReviews.filter((review)=> {
-  return review.location_id.toString() === id})
-  return (
-    <article className={style.reviewContainer}>
-      <p> Reviews... </p>
-{filterReviews.map((review)=>{
+
+const ReviewsCard = ({review}) => {
+
   return(
   <section className={style.reviewCard} key={review._id.toString()}>
     
@@ -27,9 +21,6 @@ const filterReviews = allReviews.filter((review)=> {
       
     </p>
   </section>
-    )
-})}
-    </article>
   )
 }
 
