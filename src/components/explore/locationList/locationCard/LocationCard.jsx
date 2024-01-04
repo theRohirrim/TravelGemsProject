@@ -7,7 +7,7 @@ const LocationCard = ({location}) => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <Link href={`/${location._id}`}>
+                <Link href={`/explore/${location._id}`}>
                     <h2>{location.place_name}</h2>
                     <h3>{location.location}</h3>
                 </Link>

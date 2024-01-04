@@ -8,7 +8,7 @@ import styles from "./links.module.css"
 const links = [
     {
         title: 'Explore',
-        path: '/',
+        path: '/explore',
         icon: 'explore', // Specify the icon key
     },
     {

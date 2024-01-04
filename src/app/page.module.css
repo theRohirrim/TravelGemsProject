@@ -1,0 +1,24 @@
+.error {
+    text-align: center;
+    align-items: center;
+
+    margin-top: 40vh;
+}
+
+.loading {
+    text-align: center;
+    align-items: center;
+
+    margin-top: 40vh;
+}
+
+.notFoundContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    text-align: center;
+    align-items: center;
+
+    margin-top: 25vh;
+}
