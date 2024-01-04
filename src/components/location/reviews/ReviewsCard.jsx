@@ -1,8 +1,14 @@
 import { getReviews } from "@/lib/data";
-
+i
 
 const ReviewsCard = ({id}) => {
   console.log(id)
+
+  const allReviews = async () => {
+const reviews = await getReviews();
+console.log(reviews "here are the reviews");
+  }
+Reviews()
   return (
     <div>ReviewsCard</div>
   )
