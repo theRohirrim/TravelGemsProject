@@ -1,16 +1,29 @@
 import { getReviews } from "@/lib/data";
-i
 
-const ReviewsCard = ({id}) => {
-  console.log(id)
 
-  const allReviews = async () => {
-const reviews = await getReviews();
-console.log(reviews "here are the reviews");
-  }
-Reviews()
+const ReviewsCard = async ({id}) => {
+
+  const reviews = await getReviews()
+
+  console.log(reviews)
+
+  // const filteredReviews = reviews.filter((review) => { 
+  //   // console.log(review, "review")
+  //   return review.location_id === id 
+  // })
+
   return (
-    <div>ReviewsCard</div>
+    <>
+    {/* {filteredReviews.map((review) => { 
+      <article>
+        <p>{review.body}</p>
+        <button>Delete</button>
+        <p> {review.username}</p>
+        <button>like</button>
+        <span>{review.votes} </span>  
+      </article>
+    })} */}
+    </>
   )
 }
 

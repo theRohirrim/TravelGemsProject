@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
-import { Review } from '@/models/reviews';
+import { Review, Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
 
 export const checkCollection = async () => {
@@ -72,18 +72,9 @@ export const getUserById = async (id) => {
 // when filtered 
 export const getReviews = async () => {
     try {
-        const reviews = await Review.find({});
+        await connectToDatabase()
+        const reviews = await Reviews.find({});
         return reviews;
-    } catch (error) {
-        throw new Error("Failed to fetch review data");
-    }
-};
-
-// getting reviews from single location 
-export const getReviewbyId = async (location_id) => {
-    try {
-        const review = await Review.find({location_id:location_id});
-        return review;
     } catch (error) {
         throw new Error("Failed to fetch review data");
     }
@@ -91,18 +82,10 @@ export const getReviewbyId = async (location_id) => {
 
 export const postReview = async (reviewData) => {
     try {
-        const newReview = await Review.create(reviewData);
+        const newReview = await Reviews.create(reviewData);
         return newReview;
     } catch (error) {
         throw new Error("failed to adding review");
     }
 };
 
-
-const checkGetReviews = async () => {
-    const reviews = await getReviews();
-    console.log(reviews , "here are the reviews");
-  
-  };
-  
-  checkGetReviews()
