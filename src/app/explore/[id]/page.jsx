@@ -9,15 +9,10 @@ const SingleLocationPage = async ({ params }) => {
     let location = await getLocationById(id)
     location = location[0]
 
-    console.log(location)
-
-
     return (
         <main className={styles.container}>
             <div className={styles.textContainer}>
-                <h1 className={styles.title}>{location.place_name}</h1>
-                <h3 className={styles.subtitle}>{location.categories.join(',')}</h3>
-                <div className={styles.imgContainer}>
+                <h1 className={styles.title}>{location.place_name}</h1>                <div className={styles.imgContainer}>
                 {location.img && 
                 <Image 
                 src={location.img} 
