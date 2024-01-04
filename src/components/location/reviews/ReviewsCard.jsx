@@ -1,50 +1,39 @@
 import { getReviews } from "@/lib/data";
-
-
+import style from "./reviews.module.css"
 const ReviewsCard = async ({id}) => {
+console.log(id, "this is the id")
+const allReviews = await getReviews();
 
-  const reviews = await getReviews()
-
-  console.log(reviews)
-
-  // const filteredReviews = reviews.filter((review) => { 
-  //   // console.log(review, "review")
-  //   return review.location_id === id 
-  // })
-
+const filterReviews = allReviews.filter((review)=> {
+  return review.location_id.toString() === id})
+  console.log(filterReviews, "filterReviews")
   return (
-    <>
-    {/* {filteredReviews.map((review) => { 
-      <article>
-        <p>{review.body}</p>
-        <button>Delete</button>
-        <p> {review.username}</p>
-        <button>like</button>
-        <span>{review.votes} </span>  
-      </article>
-    })} */}
-    </>
+    <article>
+{filterReviews.map((review)=>{
+  return(
+  <section key={review._id.toString()}>
+    <p>
+      {review.body}
+    </p>
+    <p>
+      {review.username}
+    </p>
+    <p>
+      {review.rating} 
+    </p>
+    <p>
+    {review.createdAt.toLocaleDateString()}
+    </p>
+    <p>
+      {review.votes}
+    </p>
+  </section>
+    )
+})}
+    </article>
   )
 }
 
 export default ReviewsCard
-
-
-// // filter reviews by review id 
-
-// const Reviews = () => {
-//     const checkGetReviews = async () => {
-//         const reviews = await getReviews();
-//         console.log(reviews "here are the reviews");
-  
-// };
-
-// checkGetReviews()
-//   return (
-//     <div>Reviews</div>
-//   )
-// }
-
-// export default Reviews
 
 
