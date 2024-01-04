@@ -8,9 +8,7 @@ const LocationCard = async ({id}) => {
     // Get location data by ID
     let location = await getLocationById(id)
     location = location[0] 
-    for (let key in location) { 
-        console.log(key)
-    }
+    console.log(location.address)
 
 
     return (
