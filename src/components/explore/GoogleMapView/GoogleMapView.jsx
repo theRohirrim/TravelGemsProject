@@ -81,7 +81,7 @@ const GoogleMapView = ({ locations }) => {
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
-                                <p onClick={handleDirectionsClick}>get directions</p>
+                                <p className={style.directions} onClick={handleDirectionsClick}>Get directions</p>
                             </div>
                         </div>
                     </InfoWindow>
