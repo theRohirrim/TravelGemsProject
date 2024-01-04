@@ -41,6 +41,13 @@ const GoogleMapView = ({ locations }) => {
         setSelectLocation("");
     };
 
+    const handleDirectionsClick = () => {
+        window.open('https://www.google.com/maps/dir/?api=1&origin='+
+        coordinates.lat+','+coordinates.lng+'&destination='
+        +selectLocation.latitude
+        +','+selectLocation.longitude+'&travelmode=driving')
+    }
+
     return (
         <div>
             {isLoaded && <GoogleMap mapContainerStyle={containerStyle} center={coordinates} zoom={12}>
@@ -74,6 +81,7 @@ const GoogleMapView = ({ locations }) => {
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
+                                <p onClick={handleDirectionsClick}>get directions</p>
                             </div>
                         </div>
                     </InfoWindow>
