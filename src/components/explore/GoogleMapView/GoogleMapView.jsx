@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
+import { TbLocation } from "react-icons/tb"
 
 const GoogleMapView = ({ locations }) => {
     const [coordinates, setCoordinates] = useState({});
@@ -81,7 +82,8 @@ const GoogleMapView = ({ locations }) => {
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
-                                <p className={style.directions} onClick={handleDirectionsClick}>Get directions</p>
+                                <p className={style.directions} onClick={handleDirectionsClick}>
+                                Directions <TbLocation /></p>
                             </div>
                         </div>
                     </InfoWindow>
