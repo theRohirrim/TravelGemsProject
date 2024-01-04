@@ -2,7 +2,6 @@ import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
 import mongoose from "mongoose";
-import { NextResponse } from "next/server";
 
 export const checkCollection = async () => {
     try {
@@ -42,8 +41,17 @@ export const getLocationById = async (_id) => {
     }
 }
 
-export const postLocation = async () => {
-}
+// export const postLocation = async (location) => {
+//     try {
+//         await connectToDatabase()
+//         await Locations.insertOne(location)
+//     } catch (error) {
+//         console.log(error)
+//         throw new Error("Failed to post new location")
+//     }
+// }
+
+
 
 export const getUsers = async () => {
     try {
