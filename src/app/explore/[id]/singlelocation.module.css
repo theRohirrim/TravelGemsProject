@@ -1,5 +1,8 @@
 .container {
     display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
     justify-content: space-between;
     gap: 100px;
 
@@ -7,39 +10,28 @@
     border: 1px solid orange;
 }
 
-.imgContainerBig {
-    flex: 1;
+.imgContainer {
+    display:inline-block;
     position: relative;
+    margin: 1vh;
 
-    height: calc(100vh - 200px);
-}
+    width: 80vw;
+    height: 50vh;
 
-.imgContainerSmall {
-    display: none;
+    z-index: -1;
 }
 
 .img {
     object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+
+
+    border-radius: 10px;
 }
 
 .textContainer {
     flex: 2;
     flex-direction: column;
     gap: 50px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .imgContainerBig {
-        display: none;
-    }
-    
-    .imgContainerSmall {
-        flex: 1;
-        position: relative;
-    }
 }
