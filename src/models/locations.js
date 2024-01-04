@@ -1,6 +1,31 @@
 const { default: mongoose } = require("mongoose");
 
 const locationSchema = new mongoose.Schema({
+    _id: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        required: true,
+    created_by: { 
+        type: String, 
+        required: true,
+        min: 3,
+        max: 40
+    },
+    date_created: { 
+        type: String, 
+        required: true,
+    },
+    categories: { 
+        type: Array, 
+        required: true,
+    },
+    address: {
+        type: String,
+    },
+    place_name: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     created_by: { 
         type: String, 
         required: true,
