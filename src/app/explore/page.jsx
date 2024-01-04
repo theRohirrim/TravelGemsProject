@@ -3,12 +3,12 @@ import ExplorePage from '@/components/explore/ExplorePage';
 
 const Home = async () => {
 
-  let locations = await getLocations();
-  locations = JSON.parse(JSON.stringify(locations))
+  let allLocations = await getLocations();
+  allLocations = JSON.parse(JSON.stringify(allLocations))
 
   return (
     <main>
-      <ExplorePage locations={locations} />
+      <ExplorePage allLocations={allLocations} />
     </main>
   );
 };
