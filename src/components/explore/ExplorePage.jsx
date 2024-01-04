@@ -13,14 +13,27 @@ const ExplorePage = ({ allLocations }) => {
     const [filterOptions, setFilterOptions] = useState({})
 
     useEffect(() => {
-        Object.entries(filterOptions)
-        setLocations(locations.filter(
-            
-        ))
+        let filteredLocations = allLocations
+        for (const [key, value] of Object.entries(filterOptions)) {
+            // Rating filter
+            if (key === 'rating') {
+                filteredLocations = filteredLocations.filter((location) => {
+                    return location.rating >= value
+                })
+            }
+
+            // Category filter
+            if (key === 'categories') {
+                filteredLocations = filteredLocations.filter((location) => {
+                    return value.every(r => location.categories.includes(r))
+                })
+            }
+
+        }
+
+        setLocations(filteredLocations)
+
     }, [filterOptions])
-
-    const filteredArray = yourArray.filter(obj => obj.categories.includes("sports"));
-
 
     return (
         <>
