@@ -11,7 +11,7 @@ const SingleLocationPage = async ({ params }) => {
 
 
     return (
-        <div className={styles.container}>
+        <main className={styles.container}>
             <div className={styles.imgContainer}>
                 {location.img && 
                 <Image 
@@ -26,7 +26,7 @@ const SingleLocationPage = async ({ params }) => {
                 <h3 className={styles.subtitle}>{location.location}</h3>
                 <div className={styles.content}>{location.description}</div>
             </div>
-        </div>
+        </main>
     )
 }
 
