@@ -69,10 +69,21 @@ export const getUserById = async (id) => {
     }
 };
 
+// when filtered 
 export const getReviews = async () => {
     try {
         const reviews = await Review.find({});
         return reviews;
+    } catch (error) {
+        throw new Error("Failed to fetch review data");
+    }
+};
+
+// getting reviews from single location 
+export const getReviewbyId = async (location_id) => {
+    try {
+        const review = await Review.find({location_id:location_id});
+        return review;
     } catch (error) {
         throw new Error("Failed to fetch review data");
     }
@@ -88,3 +99,10 @@ export const postReview = async (reviewData) => {
 };
 
 
+const checkGetReviews = async () => {
+    const reviews = await getReviews();
+    console.log(reviews , "here are the reviews");
+  
+  };
+  
+  checkGetReviews()

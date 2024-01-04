@@ -1,16 +1,11 @@
 import Image from "next/image"
-import styles from "./locationCard/LocationCard.module.css"
+import styles from "./LocationCard.module.css"
 import { getLocationById } from "@/lib/data"
 
 const LocationCard = async ({id}) => { 
-    console.log(id) 
-
     // Get location data by ID
     let location = await getLocationById(id)
     location = location[0] 
-    console.log(location)
-
-
     return (
         <main className={styles.container}>
             <section className={styles.imageContainer}> 
@@ -32,7 +27,6 @@ const LocationCard = async ({id}) => {
             <div className={styles.rating}>{location.rating} stars out of 5</div> 
             </div>
             <div className={styles.address}> {location.address} </div>
-
             <div className={styles.description}>{location.description}</div>
             </section>
         </main>
