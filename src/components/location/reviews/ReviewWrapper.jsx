@@ -1,6 +1,7 @@
 import { getReviews } from "@/lib/data";
 import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
+import NewReview from "./submitReview/NewReview";
 
 
 const ReviewWrapper = async ({id}) => {
@@ -11,8 +12,8 @@ const filterReviews = allReviews.filter((review)=> {
 
   return (
     <article className={style.reviewContainer}>
+    <NewReview /> 
       <p> Reviews... </p>
-
 {filterReviews.map((review)=>{
  return(
   <ReviewsCard review = {review} />
