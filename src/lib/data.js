@@ -29,6 +29,31 @@ export const getLocations = async () => {
         throw new Error("Error loading location data: ", error)
     }
 }
+export const postLocation = async (reviewData) => {
+    try {
+        const newLocation = await Locations.create(locationData);
+        return newLocation;
+    } catch (error) {
+        throw new Error("failed to add new location");
+    }
+};
+
+// const locationData = {
+//     img: "https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=600",
+//     description: "Free Red Trees Stock Photo",
+//     created_by: "admin",
+//     categories: ["nature", "autumn"],
+//     address: " Danish Nature, Odense",
+//     longitude: -0.0901926471773134,
+//     latitude: 51.52723022284781, 
+//     rating: 2.3,
+//     place_name: "Danish Nature",
+//     reviews_by_id: ["65967d8f98b9e3c0c93dd94f", "65967e8c98b9e3c0c93dd951", "65967ea798b9e3c0c93dd952", "65967ebf98b9e3c0c93dd953"]
+// };
+
+// const result = await postLocation(locationData);
+// console.log(result);
+
 
 export const getLocationById = async (_id) => {
     try {
@@ -42,8 +67,7 @@ export const getLocationById = async (_id) => {
     }
 }
 
-export const postLocation = async () => {
-}
+
 
 export const getUsers = async () => {
     try {
@@ -101,3 +125,4 @@ export const postReview = async (reviewData) => {
 
 // const result = await postReview(reviewData);
 // console.log(result);
+
