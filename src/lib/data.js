@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
-import { Review } from '@/models/reviews';
+import { Review, Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
 
 export const checkCollection = async () => {

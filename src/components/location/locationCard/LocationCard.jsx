@@ -2,10 +2,8 @@ import Image from "next/image"
 import styles from "./LocationCard.module.css"
 import { getLocationById } from "@/lib/data"
 
-const LocationCard = async ({id}) => { 
-    // Get location data by ID
-    let location = await getLocationById(id)
-    location = location[0] 
+const LocationCard = async ({location}) => { 
+
     return (
         <section className={styles.locationContainer}>
             <section className={styles.imageContainer}> 

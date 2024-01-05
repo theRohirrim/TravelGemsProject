@@ -5,20 +5,19 @@ import NewReview from "./submitReview/NewReview";
 
 
 const ReviewWrapper = async ({id}) => {
-const allReviews = await getReviews();
-
-const filterReviews = allReviews.filter((review)=> {
-  return review.location_id.toString() === id})
+  const allReviews = await getReviews();
+  
+  const filterReviews = allReviews.filter((review)=> {
+    return review.location_id.toString() === id
+  })
 
   return (
     <article className={style.reviewContainer}>
     <NewReview /> 
       <p> Reviews... </p>
-{filterReviews.map((review)=>{
- return(
-  <ReviewsCard review = {review} />
- )
-})} 
+      {filterReviews.map((review)=>{
+        return(<ReviewsCard key={review._id} review = {review} />)
+      })} 
     </article>
   )
 }

@@ -1,5 +1,6 @@
 import LocationCard from '@/components/location/locationCard/LocationCard';
 import ReviewWrapper from '@/components/location/reviews/ReviewWrapper';
+import { getLocationById } from '@/lib/data';
 
 const SingleLocationPage = async ({ params }) => {
     const id = params.id
