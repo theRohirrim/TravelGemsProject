@@ -1,19 +1,19 @@
 "use client"
-import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useLoadScript, MarkerF } from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
 import { LiaLocationArrowSolid } from "react-icons/lia"
 
-const GoogleMapView = ({ locations }) => {
-    const [coordinates, setCoordinates] = useState({lat: 51.507351, lng: -0.127758});
+const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLocation }) => {
+    const [coordinates, setCoordinates] = useState({ lat: 51.507351, lng: -0.127758 });
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
-            setCoordinates({lat: latitude, lng: longitude})
+        navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+            setCoordinates({ lat: latitude, lng: longitude })
         })
     }, [selectLocation]);
 
@@ -23,22 +23,22 @@ const GoogleMapView = ({ locations }) => {
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
-    
+
         const degToRad = (deg) => {
-          return deg * (Math.PI / 180);
+            return deg * (Math.PI / 180);
         };
-    
+
         const dLat = degToRad(lat2 - lat1);
         const dLon = degToRad(lon2 - lon1);
-    
+
         const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         const distance = earthRadius * c;
         setDistance(distance.toFixed(1))
-      };
+    };
 
     const containerStyle = {
         width: '80vw',
@@ -67,15 +67,24 @@ const GoogleMapView = ({ locations }) => {
     };
 
     const handleDirectionsClick = () => {
-        window.open('https://www.google.com/maps/dir/?api=1&origin='+
-        coordinates.lat+','+coordinates.lng+'&destination='
-        +selectLocation.latitude
-        +','+selectLocation.longitude+'&travelmode=driving')
+        window.open('https://www.google.com/maps/dir/?api=1&origin=' +
+            coordinates.lat + ',' + coordinates.lng + '&destination='
+            + selectLocation.latitude
+            + ',' + selectLocation.longitude + '&travelmode=driving')
+    }
+
+    const handleMapClick = (e) => {
+        setSelectedLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() })
+
     }
 
     return (
         <div>
-            {isLoaded && <GoogleMap mapContainerStyle={containerStyle} center={coordinates} zoom={12}>
+            {isLoaded && <GoogleMap 
+              onClick={handleMapClick}
+              mapContainerStyle={containerStyle} 
+              center={coordinates} 
+              zoom={12}>
                 {locations.map((location) => (
                     <Marker
                         position={{ lat: location.latitude, lng: location.longitude }}
@@ -83,6 +92,14 @@ const GoogleMapView = ({ locations }) => {
                         onClick={() => handleMarkerClick(location)}
                     />
                 ))}
+
+               {addLocation && <MarkerF position={selectedLocation}>
+                    <InfoWindow visible={true}>
+                        <Link href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
+                            <p>Add new travel gem</p>
+                        </Link>
+                    </InfoWindow>
+                </MarkerF>}
 
                 {selectLocation && (
                     <InfoWindow
@@ -107,7 +124,7 @@ const GoogleMapView = ({ locations }) => {
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
                                 <p className={style.directions} onClick={handleDirectionsClick}>
-                                <LiaLocationArrowSolid /> {distance} mi</p>
+                                    <LiaLocationArrowSolid /> {distance} mi</p>
                             </div>
                         </div>
                     </InfoWindow>

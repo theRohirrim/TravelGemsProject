@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Select from 'react-select';
 import styles from "./mapsNav.module.css";
 import { IoMdAdd } from "react-icons/io";
@@ -13,7 +13,7 @@ const categoryOptions = [
     {value: 'Entertainment', label: 'Entertainment'}
 ]
 
-const MapsNavigation = ({filterOptions, setFilterOptions}) => {
+const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLocation, setSelectedLocation}) => {
 
     const handleRatingChange = (event) => {
         event.preventDefault()
@@ -39,12 +39,15 @@ const MapsNavigation = ({filterOptions, setFilterOptions}) => {
         })
     }
 
+    const handleAddClick = () => {
+        setAddLocation(addLocation => !addLocation)
+        setSelectedLocation({})
+    }
 
     return ( 
         <div className={styles.mapWrapper}>
             <div className={`${styles.buttonWrapper} flex justify-between mt-4`}>
                 <div className={styles.topFilters}>
-                    <button className={styles.button}>Add Gem <IoMdAdd /></button>
                     <div className={styles.ratingContainer}>
                         <label>Rating</label>
                         <input onChange={handleRatingChange} className={styles.rangeInput} type="range" id="rating" defaultValue={5} min={0} max={5} step={0.5} />
@@ -62,6 +65,8 @@ const MapsNavigation = ({filterOptions, setFilterOptions}) => {
                     classNamePrefix="select"
                     />
                 </div>
+                <button onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
+                {addLocation && <p>select a location on the map</p>}
             </div>
 
         </div>
