@@ -84,7 +84,9 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                 onClick={handleMapClick}
                 mapContainerStyle={containerStyle}
                 center={coordinates}
-                zoom={12}>
+                zoom={12}
+               
+            >
                 {locations.map((location) => (
                     <Marker
                         position={{ lat: location.latitude, lng: location.longitude }}
@@ -96,8 +98,10 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                                 width: 40,
                                 height: 40
                             },
-                            anchor: {x: 20, y: 7}
+                            origin: {x:0, y: 0},
+                            anchor: {x: 20, y: 8}
                         }}
+                        animation={2}
                     />
                 ))}
 
