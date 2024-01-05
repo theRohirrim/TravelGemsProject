@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
-import { Review, Reviews } from '@/models/reviews';
+import { Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
 
 export const checkCollection = async () => {
@@ -88,3 +88,16 @@ export const postReview = async (reviewData) => {
         throw new Error("failed to adding review");
     }
 };
+
+// const reviewData = {
+//     body: "Hala added a review shesffgjkgjilrgj",
+//     rating: 2,
+//     location_id: "659568dbedc28e2e44f28bc1", 
+//     user_id: "659411769f7ae624673bafde",
+//     username: "admin",
+//     votes: 5,
+//     place_name: "Hala Garden",
+// }
+
+// const result = await postReview(reviewData);
+// console.log(result);
