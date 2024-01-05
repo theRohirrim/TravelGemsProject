@@ -63,7 +63,7 @@ const GoogleMapView = ({ locations }) => {
                             />
                             <div className={style.popText}>
 
-                                <Link href={`/${selectLocation._id}`}>
+                                <Link href={`/explore/${selectLocation._id}`}>
                                     <h4>{selectLocation.place_name}</h4>
                                 </Link>
                                 <p>{selectLocation.category}</p>
