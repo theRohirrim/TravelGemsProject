@@ -3,6 +3,7 @@ import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
 import { Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 export const checkCollection = async () => {
     try {
@@ -67,6 +68,17 @@ export const getLocationById = async (_id) => {
     }
 }
 
+export const getLocationsByUsername = async (created_by) => {
+    try {
+        await connectToDatabase()
+        const location = await Locations.find({created_by})
+        return location
+
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to fetch individual location")
+    }
+}
 
 
 export const getUsers = async () => {
@@ -103,6 +115,16 @@ export const getReviews = async () => {
         throw new Error("Failed to fetch review data");
     }
 };
+
+export const getReviewsById = async (user_id) => {
+    try {
+        const reviews = await Review.find({user_id});
+        return reviews;
+    } catch (error) {
+        throw new Error("Failed to fetch review data");
+    }
+};
+
 
 export const postReview = async (reviewData) => {
     try {

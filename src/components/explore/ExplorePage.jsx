@@ -37,16 +37,16 @@ const ExplorePage = ({ allLocations }) => {
 
     return (
         <>
-        <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
-        <MapAndListButtons mapView={mapView} setMapView={setMapView}/>
-        <div className={`${mapView === true && styles.disabled}`}>
-        <LocationList locations={locations} />
-        </div>
-        <div className={`${mapView === false && styles.disabled}`}>
-        <GoogleMapView locations={locations} />
-        </div>
+            <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
+            <MapAndListButtons mapView={mapView} setMapView={setMapView} />
+            <div className={`${mapView === true && styles.disabled}`}>
+                <LocationList locations={locations} />
+            </div>
+            <div className={`${mapView === false && styles.disabled}`}>
+                <GoogleMapView locations={locations} />
+            </div>
         </>
-        )
+    )
 }
 
 export default ExplorePage;
