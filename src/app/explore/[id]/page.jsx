@@ -1,6 +1,5 @@
 import LocationCard from '@/components/location/locationCard/LocationCard';
 import ReviewWrapper from '@/components/location/reviews/ReviewWrapper';
-import { getLocationById } from '@/lib/data';
 
 // WITH API FETCH
 const getData = async (id) => {

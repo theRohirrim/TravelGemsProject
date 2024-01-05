@@ -11,6 +11,8 @@ const ExplorePage = ({ allLocations }) => {
     const [locations, setLocations] = useState(allLocations)
     const [mapView, setMapView] = useState(true)
     const [filterOptions, setFilterOptions] = useState({})
+    const [addLocation, setAddLocation] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState({})
 
     useEffect(() => {
         let filteredLocations = allLocations
@@ -37,13 +39,13 @@ const ExplorePage = ({ allLocations }) => {
 
     return (
         <>
-            <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
+            <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} addLocation={addLocation} setAddLocation={setAddLocation} setSelectedLocation={setSelectedLocation} />
             <MapAndListButtons mapView={mapView} setMapView={setMapView} />
             <div className={`${mapView === true && styles.disabled}`}>
                 <LocationList locations={locations} />
             </div>
             <div className={`${mapView === false && styles.disabled}`}>
-                <GoogleMapView locations={locations} />
+                <GoogleMapView locations={locations} addLocation={addLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
             </div>
         </>
     )
