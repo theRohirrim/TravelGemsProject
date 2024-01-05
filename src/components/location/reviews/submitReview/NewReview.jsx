@@ -6,13 +6,9 @@ import { FaStar } from "react-icons/fa"
 import { FaGem } from "react-icons/fa";
 
 const NewReview = () => { 
-
-
-    const StarRating = () => { 
     const [rating, setRating] = useState(null)
-
-
-    console.log(rating)
+    
+    const StarRating = () => { 
     return ( 
         <div> 
         {[...Array(5)].map((star, i) => { 
@@ -43,7 +39,13 @@ const NewReview = () => {
     )
     }
 
-    return StarRating()
+    return ( 
+        <form className={style.newReview}>
+            <StarRating />
+            <input type="text" placeholder="Share your thoughts.."/> 
+            <button>Add Review</button>
+        </form>
+    ) 
 }
 
 export default NewReview
