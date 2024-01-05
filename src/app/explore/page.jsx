@@ -7,7 +7,7 @@ const getData = async () => {
   {next: {revalidate: 3600}})
 
   if (!res.ok) {
-    throw new Error("Something went wrong")
+    throw new Error("Something went wrong getting all locations")
   }
 
   return res.json()
