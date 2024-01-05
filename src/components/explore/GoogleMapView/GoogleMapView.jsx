@@ -80,20 +80,28 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
 
     return (
         <div>
-            {isLoaded && <GoogleMap 
-              onClick={handleMapClick}
-              mapContainerStyle={containerStyle} 
-              center={coordinates} 
-              zoom={12}>
+            {isLoaded && <GoogleMap
+                onClick={handleMapClick}
+                mapContainerStyle={containerStyle}
+                center={coordinates}
+                zoom={12}>
                 {locations.map((location) => (
                     <Marker
                         position={{ lat: location.latitude, lng: location.longitude }}
                         key={location._id}
                         onClick={() => handleMarkerClick(location)}
+                        icon={{
+                            url: "/travel_icon.svg",
+                            scaledSize: {
+                                width: 40,
+                                height: 40
+                            },
+                    
+                        }}
                     />
                 ))}
 
-               {addLocation && <MarkerF position={selectedLocation}>
+                {addLocation && <MarkerF position={selectedLocation}>
                     <InfoWindow visible={true}>
                         <Link href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
                             <p>Add new travel gem</p>
