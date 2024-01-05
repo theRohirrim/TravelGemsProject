@@ -11,11 +11,14 @@ const ReviewWrapper = async ({id}) => {
     return review.location_id.toString() === id
   })
 
+
   return (
     <article className={style.reviewContainer}>
     <NewReview /> 
-      <p> Reviews... </p>
-      {filterReviews.map((review)=>{
+      {filterReviews.length === 0 ?
+        <div className={style.reviewCard}> Be the first to reivew this location ...</div>
+      : 
+      filterReviews.map((review)=>{
         return(<ReviewsCard key={review._id} review = {review} />)
       })} 
     </article>
