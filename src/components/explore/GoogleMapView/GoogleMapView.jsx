@@ -42,7 +42,7 @@ const GoogleMapView = ({ locations }) => {
 
     const containerStyle = {
         width: '80vw',
-        height: '35vh',
+        height: '45vh',
         margin: 'auto',
     };
 
