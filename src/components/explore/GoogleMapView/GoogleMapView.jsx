@@ -97,9 +97,7 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                             scaledSize: {
                                 width: 40,
                                 height: 40
-                            },
-                            origin: {x:0, y: 0},
-                            anchor: {x: 20, y: 8}
+                            }
                         }}
                         animation={2}
                     />
