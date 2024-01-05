@@ -28,6 +28,7 @@ const reviewSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    
   },
   votes: {
     type: Number,
