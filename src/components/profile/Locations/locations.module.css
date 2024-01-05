@@ -1,3 +1,21 @@
 .img {
     width:20vw;
+
+}
+
+.locationCard {
+    border: 2px solid red;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.locationDetails {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.categories {
+    font-size: 12px;
+    display: inline;
 }
