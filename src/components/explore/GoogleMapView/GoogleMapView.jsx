@@ -96,7 +96,7 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                                 width: 40,
                                 height: 40
                             },
-                    
+                            anchor: {x: 20, y: 7}
                         }}
                     />
                 ))}
