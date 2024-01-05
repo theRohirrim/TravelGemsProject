@@ -118,7 +118,7 @@ export const getReviews = async () => {
 
 export const getReviewsById = async (user_id) => {
     try {
-        const reviews = await Review.find({user_id});
+        const reviews = await Reviews.find({user_id});
         return reviews;
     } catch (error) {
         throw new Error("Failed to fetch review data");
