@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { LiaLocationArrowSolid } from "react-icons/lia"
 
 const GoogleMapView = ({ locations }) => {
-    const [coordinates, setCoordinates] = useState({});
+    const [coordinates, setCoordinates] = useState({lat: 51.507351, lng: -0.127758});
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
 
