@@ -17,7 +17,7 @@ const NewReview = ({id}) => {
 
 
     const [rating, setRating] = useState(null)
-    // const [reviewBody, setReviewBody] = useState("")
+    const [reviewBody, setReviewBody] = useState("")
 
     const StarRating = () => { 
     return ( 
@@ -50,13 +50,15 @@ const NewReview = ({id}) => {
     )
     }
 
-    const handleReviewInput = (event) => { 
+    const handleReviewInput = (event) => {
         let reviewContent = event.target.value
         setReviewBody(reviewContent)
     }
 
+//     Review Data Template: 
+
 //     const reviewData = {
-//     body: "Hala added a review shesffgjkgjilrgj",
+//     body: "Spencer added a review shesffgjkgjilrgj",
 //     rating: 2,
 //     location_id: "659568dbedc28e2e44f28bc1", 
 //     user_id: "659411769f7ae624673bafde",
@@ -66,15 +68,10 @@ const NewReview = ({id}) => {
 // }
 
 
-// const result = await postReview(reviewData);
-// console.log(result);
 
-    const submitNewReview = (event) => { 
-        // if(reviewBody.length > 0) { 
-        //    postReview(reviewData)
-        //     console.log(result)
-        // }
+    const submitNewReview = async (event) => { 
         event.preventDefault()
+        //state cannot be used in server side, passing of the data needs to be done through fetch and api end points 
     }
 
     return ( 
