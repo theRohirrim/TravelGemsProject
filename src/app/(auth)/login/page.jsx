@@ -3,7 +3,11 @@ import styles from "./login.module.css"
 import { handleGithubLogin } from "@/lib/action";
 import { auth } from "@/lib/auth";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+    const session = await auth();
+
+    console.log(session)
+
     return (
         <main>
             <div className={styles.container}>
