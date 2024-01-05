@@ -5,7 +5,7 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = async ({children}) => {
+export const AuthProvider = ({children}) => {
     const [user, setUser] = useState('default')
 
     return (
