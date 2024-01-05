@@ -13,11 +13,11 @@ const SingleUserPage = async ({ params }) => {
     return (
         <main className={styles.container}>
             <h1>{user.username}</h1>
-            <h2>Email: {user.email}</h2>
-            <h2>Password: {user.password}</h2>
+            <h1>profile img</h1>
+            <p>{user.email}</p>
             <SelectView />
             <Reviews id={id} />
-            <Locations id={id}/>
+            <Locations id={id} username={user.username}/>
         </main>
     )
 }

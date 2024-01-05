@@ -43,6 +43,19 @@ export const getLocationById = async (_id) => {
     }
 }
 
+export const getLocationsByUsername = async (created_by) => {
+    try {
+        await connectToDatabase()
+        const location = await Locations.find({created_by})
+        return location
+
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to fetch individual location")
+    }
+}
+
+
 export const postLocation = async () => {
 }
 
