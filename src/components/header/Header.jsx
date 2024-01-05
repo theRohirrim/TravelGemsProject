@@ -4,8 +4,8 @@ const Header = () => {
     return (
         <div className={styles.container}>
             <div className={styles.heading}>
-                <img className={styles.logo} src="../Graphic Design/6.png" alt="travel gems logo" />
-                <img className= {styles.header} src="../Graphic Design/7.png" alt="travel gems logo" />
+                <img className={styles.logo} src="../Graphic Design/travel_logo.png" alt="travel gems logo" />
+                <img className= {styles.header} src="../Graphic Design/travel_header.png" alt="travel gems logo" />
             </div>
 
 
