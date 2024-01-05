@@ -12,7 +12,8 @@ const SingleLocationPage = async ({ params }) => {
     return (
         <main className={styles.container}>
             <div className={styles.textContainer}>
-                <h1 className={styles.title}>{location.place_name}</h1>                <div className={styles.imgContainer}>
+                <h1 className={styles.title}>{location.place_name}</h1>                
+                <div className={styles.imgContainer}>
                 {location.img && 
                 <Image 
                 src={location.img} 
