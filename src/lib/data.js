@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
-import { Review } from '@/models/reviews';
+import { Review, Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
 
 export const checkCollection = async () => {
@@ -69,9 +69,11 @@ export const getUserById = async (_id) => {
     }
 };
 
+// when filtered 
 export const getReviews = async () => {
     try {
-        const reviews = await Review.find({});
+        await connectToDatabase()
+        const reviews = await Reviews.find({});
         return reviews;
     } catch (error) {
         throw new Error("Failed to fetch review data");
@@ -80,11 +82,9 @@ export const getReviews = async () => {
 
 export const postReview = async (reviewData) => {
     try {
-        const newReview = await Review.create(reviewData);
+        const newReview = await Reviews.create(reviewData);
         return newReview;
     } catch (error) {
         throw new Error("failed to adding review");
     }
 };
-
-
