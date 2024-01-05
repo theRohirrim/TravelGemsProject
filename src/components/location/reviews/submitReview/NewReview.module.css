@@ -16,3 +16,7 @@
     margin: auto; 
     margin-bottom: 1vh;
 }
+
+.reviewInput { 
+    width: 70vw;
+}
