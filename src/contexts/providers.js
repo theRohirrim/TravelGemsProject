@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthProvider } from "./auth";
+import { AuthProvider } from "./Auth";
 
 export const Providers = ({ children }) => {
     return (

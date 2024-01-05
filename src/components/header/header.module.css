@@ -33,6 +33,25 @@
     align-items: center;
 }
 
+.logout {
+    display: flex;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.3s;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 20px;
+    /* box-shadow: 0 25px 20px -20px rgba(0,0,0,0.4); */
+    width: 20vh;
+}
+
+
+.logout:hover {
+    transform: translateY(2px);
+    background-color: #f44566; 
+}
+
 @media screen and (max-width: 600px) {
     .header{
         width: 20vh;

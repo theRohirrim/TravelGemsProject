@@ -1,17 +1,17 @@
 import Test from "@/components/test/Test";
-import { AuthContext } from "@/contexts/auth";
+import styles from "./login.module.css"
 import { handleGithubLogin } from "@/lib/action";
 import { auth } from "@/lib/auth";
-import { useContext } from "react";
 
-const LoginPage = async () => {
-
+const LoginPage = () => {
     return (
         <main>
-            <form action={handleGithubLogin}>
-                <button>Login with GitHub</button>
+            <div className={styles.container}>
+                <form action={handleGithubLogin}>
+                    <button>Login with GitHub</button>
+                </form>
                 <Test />
-            </form>
+            </div>
         </main>
     )
 }
