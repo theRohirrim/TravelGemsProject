@@ -1,11 +1,45 @@
 "use client"
 import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
+import { LiaLocationArrowSolid } from "react-icons/lia"
 
 const GoogleMapView = ({ locations }) => {
+    const [coordinates, setCoordinates] = useState({});
+    const [selectLocation, setSelectLocation] = useState("");
+    const [distance, setDistance] = useState(0);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
+            setCoordinates({lat: latitude, lng: longitude})
+        })
+    }, [selectLocation]);
+
+    useEffect(() => {
+        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+    }, [selectLocation]);
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const earthRadius = 6371; // in kilometers
+    
+        const degToRad = (deg) => {
+          return deg * (Math.PI / 180);
+        };
+    
+        const dLat = degToRad(lat2 - lat1);
+        const dLon = degToRad(lon2 - lon1);
+    
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        const distance = earthRadius * c;
+        setDistance(distance.toFixed(1))
+      };
+
     const containerStyle = {
         width: '80vw',
         height: '35vh',
@@ -23,21 +57,25 @@ const GoogleMapView = ({ locations }) => {
             return str.slice(0, limit)
         }
     }
-    const coords = { lat: 51.51360936836878, lng: -0.08095507300680699 };
-
-    const [selectLocation, setLocation] = useState("");
 
     const handleMarkerClick = (location) => {
-        setLocation(location)
+        setSelectLocation(location)
     };
 
     const handleInfoWindowClose = () => {
-        setLocation("");
+        setSelectLocation("");
     };
+
+    const handleDirectionsClick = () => {
+        window.open('https://www.google.com/maps/dir/?api=1&origin='+
+        coordinates.lat+','+coordinates.lng+'&destination='
+        +selectLocation.latitude
+        +','+selectLocation.longitude+'&travelmode=driving')
+    }
 
     return (
         <div>
-            {isLoaded && <GoogleMap mapContainerStyle={containerStyle} center={coords} zoom={13}>
+            {isLoaded && <GoogleMap mapContainerStyle={containerStyle} center={coordinates} zoom={12}>
                 {locations.map((location) => (
                     <Marker
                         position={{ lat: location.latitude, lng: location.longitude }}
@@ -68,6 +106,8 @@ const GoogleMapView = ({ locations }) => {
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
+                                <p className={style.directions} onClick={handleDirectionsClick}>
+                                <LiaLocationArrowSolid /> {distance} mi</p>
                             </div>
                         </div>
                     </InfoWindow>

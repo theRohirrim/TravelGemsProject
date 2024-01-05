@@ -9,3 +9,16 @@
     flex-direction:column;
     margin:10px;
 }
+
+.directions{
+    width:fit-content;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+}
+
+.directions:hover {
+    color: blue;
+}
