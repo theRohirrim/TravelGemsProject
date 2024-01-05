@@ -1,7 +1,7 @@
-.container {
+.container{
     height: 10vh;
 
-    background-color: rgb(140, 137, 137);
+    background-color: #8EB5F0;
 
     display: flex;
     align-items: center;
@@ -16,6 +16,25 @@
     width: 100%;
 }
 
+
+
 .logo{
-    scale: 0.27;
+    width: 10vh;
+
+}
+
+.header{
+    padding-top: 2vh;
+    width: 35vh;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    .header{
+        width: 20vh;
+    }
 }

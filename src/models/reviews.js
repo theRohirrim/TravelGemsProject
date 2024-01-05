@@ -28,6 +28,7 @@ const reviewSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    
   },
   votes: {
     type: Number,
@@ -37,4 +38,4 @@ const reviewSchema = new mongoose.Schema({
   },
 });
 
-export const Review = mongoose.models.Review || mongoose.model("Review", reviewSchema, 'reviews')
+export const Reviews = mongoose.models.Reviews || mongoose.model("Reviews", reviewSchema, 'reviews')

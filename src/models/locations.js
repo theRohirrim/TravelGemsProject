@@ -1,17 +1,26 @@
 const { default: mongoose } = require("mongoose");
 
 const locationSchema = new mongoose.Schema({
-    place_name: {
-        type: String,
-        require: true,
-        unique: true,
+    created_by: { 
+        type: String, 
+        required: true,
         min: 3,
         max: 40
+    },
+    categories: { 
+        type: [String], 
+        required: true,
+    },
+    place_name: {
+        type: String,
+        required: true
     },
     address: {
         type: String,
         required: true,
-        max: 50
+        unique: true,
+        min: 3,
+        max: 40
     },
     latitude: {
         type: Number,
@@ -21,11 +30,6 @@ const locationSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    categories: {
-        type: Array,
-        min: 3,
-        max: 20
-    },
     description: {
         type: String,
         max: 100
@@ -34,14 +38,10 @@ const locationSchema = new mongoose.Schema({
         type: String
     },
     rating: {
-        type: Number
+        type: Number,
     },
-    created_by: {
-        type: String
-    },
-    date_created: {
-        type: String
-    }
-},{ timestamps: true }, { collection: 'locations' })
+    reviews_by_id: [String]
+},{ timestamps: true }, { collection: 'locations' });
+
 
 export const Locations = mongoose.models.Locations || mongoose.model("Locations", locationSchema, 'locations')

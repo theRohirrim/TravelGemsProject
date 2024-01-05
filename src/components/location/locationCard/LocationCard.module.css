@@ -1,0 +1,55 @@
+.locationContainer {
+    margin-top: 12vh; 
+    margin-bottom: 4vh;
+    border: 1px solid black;
+    background-color: aliceblue;
+    border-radius: 10px;
+    width: 95vw;
+    margin-left: auto; 
+    margin-right: auto;
+
+}
+
+.imageContainer {
+    padding-top: 1vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 10px; 
+}
+
+.imgContainer {
+    width: 60vw; 
+    height: 30vh; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    object-fit: cover; 
+    max-width: 100%; 
+}
+
+.info { 
+    width: 85vw; 
+    margin: auto;  
+}
+
+.smallInfo { 
+    display: flex; 
+    width: 70vw; 
+    margin: auto;
+    padding-top: 7px; 
+    flex-direction: column;
+}
+
+.foundBy { 
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
