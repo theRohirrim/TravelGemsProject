@@ -1,14 +1,14 @@
 import LocationCard from '@/components/location/locationCard/LocationCard';
 import ReviewWrapper from '@/components/location/reviews/ReviewWrapper';
-import ReviewsCard from '@/components/location/reviews/reviewCards.jsx/ReviewsCard';
-
 
 const SingleLocationPage = async ({ params }) => {
     const id = params.id
+    let location = await getLocationById(id)
+    location = location[0]
 
     return (
         <>
-        <LocationCard  id = {id}/> 
+        <LocationCard  location = {location}/> 
         <ReviewWrapper id ={id}/> 
         </>
     )

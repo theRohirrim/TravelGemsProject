@@ -7,15 +7,15 @@ const locationSchema = new mongoose.Schema({
         min: 3,
         max: 40
     },
-    date_created: { 
-        type: String, 
-        required: true,
-    },
     categories: { 
-        type: Array, 
+        type: [String], 
         required: true,
     },
     place_name: {
+        type: String,
+        required: true
+    },
+    address: {
         type: String,
         required: true,
         unique: true,

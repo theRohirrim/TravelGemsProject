@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./db"
 import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
-import { Review, Reviews } from '@/models/reviews';
+import { Review } from '@/models/reviews';
 import mongoose from "mongoose";
 
 export const checkCollection = async () => {
@@ -57,10 +57,10 @@ export const getUsers = async () => {
     }
 }
 
-export const getUserById = async (id) => {
+export const getUserById = async (_id) => {
     try {
         connectToDatabase()
-        const user = await Users.findById(id)
+        const user = await Users.find({_id})
         return user
 
     } catch (error) {
@@ -88,4 +88,3 @@ export const postReview = async (reviewData) => {
         throw new Error("failed to adding review");
     }
 };
-

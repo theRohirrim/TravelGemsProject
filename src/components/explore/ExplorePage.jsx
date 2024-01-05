@@ -1,18 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GoogleMapView from './GoogleMapView/GoogleMapView';
 import styles from './explorepage.module.css'
 import MapAndListButtons from './filterAndView/Map&ListButons/Map&ListButtons';
 import MapsNavigation from './filterAndView/mapsNavigation/MapsNavigation';
 import LocationList from './locationList/LocationList';
 
-const ExplorePage = ({ locations }) => {
+const ExplorePage = ({ allLocations }) => {
+    const [locations, setLocations] = useState(allLocations)
     const [mapView, setMapView] = useState(true)
+    const [filterOptions, setFilterOptions] = useState({})
+
+    useEffect(() => {
+        let filteredLocations = allLocations
+        for (const [key, value] of Object.entries(filterOptions)) {
+            // Rating filter
+            if (key === 'rating') {
+                filteredLocations = filteredLocations.filter((location) => {
+                    return location.rating >= value
+                })
+            }
+
+            // Category filter
+            if (key === 'categories') {
+                filteredLocations = filteredLocations.filter((location) => {
+                    return value.every(r => location.categories.includes(r))
+                })
+            }
+
+        }
+
+        setLocations(filteredLocations)
+
+    }, [filterOptions])
 
     return (
         <>
-        <MapsNavigation />
+        <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
         <MapAndListButtons mapView={mapView} setMapView={setMapView}/>
         <div className={`${mapView === true && styles.disabled}`}>
         <LocationList locations={locations} />
