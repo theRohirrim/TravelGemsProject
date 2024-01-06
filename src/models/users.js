@@ -17,8 +17,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        min: 6
     },
     img: {
         type: String
@@ -29,4 +27,4 @@ const userSchema = new mongoose.Schema({
     },
 },{timestamps: true}, {collection: 'users'})
 
-export const Users = mongoose.models.Users || mongoose.model("Users", userSchema, 'users')
+export const Users = mongoose.models?.Users || mongoose.model("Users", userSchema, 'users')
