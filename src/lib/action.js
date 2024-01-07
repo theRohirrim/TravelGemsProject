@@ -1,14 +1,15 @@
+"use server"
+
 import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
+import bcrypt from 'bcryptjs'
 
 export const handleGithubLogin = async () => {
-    "use server";
     await signIn("github")
 }
 
 export const handleLogout = async () => {
-    "use server"
     await signOut()
 }
 
@@ -30,7 +31,7 @@ export const register = async (previousState, formData) => {
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const newUser = new User({
+        const newUser = new Users({
             username,
             email,
             password: hashedPassword,
