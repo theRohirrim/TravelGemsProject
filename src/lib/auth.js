@@ -10,7 +10,7 @@ const login = async (credentials) => {
     try {
         connectToDatabase()
 
-        const user = await User.findOne({username: credentials.username})
+        const user = await Users.findOne({username: credentials.username})
 
         if(!user) {
             throw new Error("User does not exist")

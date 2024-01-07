@@ -6,7 +6,7 @@ import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 
 export const handleGithubLogin = async () => {
-    await signIn("github")
+    await signIn("github", {callbackUrl: "/explore"})
 }
 
 export const handleLogout = async () => {
@@ -59,6 +59,6 @@ export const login = async (previousState, formData) => {
         if (err.message.includes("CredentialsSignin")) {
             return {error: "Invalid username or password"}
         }
-        return  { error: "Something went wrong"}
+        throw err;
     }
 }
