@@ -5,30 +5,22 @@ import Link from 'next/link'
 const LocationCard = ({location}) => {
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <Link href={`/explore/${location._id}`}>
-                    <h2>{location.place_name}</h2>
-                    <h3>{location.location}</h3>
-                </Link>
-            </div>
-            <div className={styles.imgContainer}>
-                {location.img && 
-                <Image 
-                src={location.img} 
-                alt='' 
-                fill
-                size=''
-                unoptimized={true}
-                priority
-                className={styles.img} />
-                }
-            </div>
-            <div className={styles.footer}>
-                <p>{location.category}</p>
-                <p>{location.description}</p>
-            </div>
+        <div className="card bg-base-100 shadow-xl">
+            <figure><img className='w-full h-48 object-cover' src={location.img} alt="" /></figure>
 
+            <div className="card-body rounded-b-lg bg-indigo-400">
+                    <Link href={`/explore/${location._id}`}>
+                        <h2 className="card-title text-sm absolute top-3 left-3 right-3 text-gray-800 bg-white bg-opacity-75 p-4 rounded-lg">{location.place_name}</h2>   
+                    </Link>
+                <p>{location.description}</p>
+
+                {location.categories.map(category => (
+                            <p className="badge badge-neutral">
+                                <em>{category} </em>
+                            </p>
+                        ))}
+
+            </div>
         </div>
     )
 }
