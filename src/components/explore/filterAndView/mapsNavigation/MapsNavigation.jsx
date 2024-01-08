@@ -45,15 +45,41 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
     }
 
     return ( 
-        <div className={styles.mapWrapper}>
+        <div className="p-2 ">
+            {/* <div className="join">
+                <div>
+                    <div>
+                    <input className="input input-bordered join-item" placeholder="Search"/>
+                    </div>
+                </div>
+                <select className="select select-bordered join-item">
+                    <option disabled selected>Filter</option>
+                    <option>Sci-fi</option>
+                    <option>Drama</option>
+                    <option>Action</option>
+                </select>
+                <div className="indicator">
+                    <span className="indicator-item badge badge-secondary">new</span> 
+                    <button className="btn join-item">Search</button>
+                </div>
+            </div> */}
+
+
+
             <div className={`${styles.buttonWrapper} flex justify-between mt-4`}>
-                <div className={styles.topFilters}>
+                
+                <div className="flex justify-center gap-40 ">
                     <div className={styles.ratingContainer}>
                         <label>Rating</label>
                         <input onChange={handleRatingChange} className={styles.rangeInput} type="range" id="rating" defaultValue={5} min={0} max={5} step={0.5} />
                         <p>{!filterOptions.rating || filterOptions.rating === 0 ? 'All Ratings' : filterOptions.rating === 5 ? '5 star only' : `${filterOptions.rating} stars or more`}</p>
                     </div>
+
+                    <button className="btn btn-neutral" onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
+                    {addLocation && <p>select a location on the map</p>}
                 </div>
+
+
                 <div className={styles.categoriesContainer}>
                     <p>Categories</p>
                     <Select
@@ -61,12 +87,10 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
                     name="categories"
                     options={categoryOptions}
                     onChange={handleCategoryChange}
-                    className={styles.selectDropdown}
+                    className="w-1/2"
                     classNamePrefix="select"
                     />
                 </div>
-                <button onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
-                {addLocation && <p>select a location on the map</p>}
             </div>
 
         </div>
