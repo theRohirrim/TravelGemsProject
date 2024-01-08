@@ -5,6 +5,9 @@ import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { postReview, updateLocationWithReviewId } from "./data";
+import { voteForReview } from './data';
+import { postReview } from "./data";
+
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -23,10 +26,16 @@ export const register = async (previousState, formData) => {
     try {
         connectToDatabase()
 
-        const user = await Users.findOne({username})
+        const usernameUser = await Users.findOne({username})
 
-        if (user) {
+        if (usernameUser) {
             return {error: "Username already exists"}
+        }
+
+        const emailUser = await Users.findOne({email})
+
+        if (emailUser) {
+            return {error: "Email is already used"}
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -38,8 +47,6 @@ export const register = async (previousState, formData) => {
             password: hashedPassword,
             img
         })
-
-        console.log(newUser);
 
         await newUser.save();
         return {success: true}
@@ -88,4 +95,13 @@ export const submitReview = async (formData) => {
 };
 
 
+
+
+export const handleVoting = async (reviewId) => {
+    try {
+        const updatedReview = await voteForReview(reviewId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 

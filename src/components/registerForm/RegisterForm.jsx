@@ -22,7 +22,7 @@ const RegisterForm = () => {
             <input type="password" placeholder="password" name="password"/>
             <input type="password" placeholder="password again" name="passwordRepeat"/>
             <button>Register</button>
-            {/* {state?.error} */}
+            {state?.error}
             <Link href="/login">Have an account? <b>Login</b></Link>
         </form>
     )

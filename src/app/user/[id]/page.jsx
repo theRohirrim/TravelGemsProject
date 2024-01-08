@@ -1,6 +1,7 @@
 import { getLocationsByUsername, getReviewsById, getUserById } from "@/lib/data"
 import styles from './singleuser.module.css'
-import ViewWrapper from "@/components/profile/viewWrapper/ViewWrapper"
+import Locations from "@/components/profile/Locations/Locations"
+import Reviews from "@/components/profile/reviews/Reviews"
 
 const SingleUserPage = async ({ params }) => {
     const id = params.id
@@ -15,7 +16,8 @@ const SingleUserPage = async ({ params }) => {
             <h1>{user.username}</h1>
             <h1>profile img</h1>
             <p>{user.email}</p>
-            <ViewWrapper userReviews={userReviews} locations={locations} />
+            <Reviews userReviews={userReviews} /> 
+            <Locations locations={locations} />
         </main>
     )
 }

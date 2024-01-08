@@ -163,3 +163,18 @@ export const postReview = async (reviewData) => {
 // const result = await postReview(reviewData);
 // console.log(result);
 
+export const voteForReview = async (reviewId) => {
+    try {
+        const newVote = await Reviews.findByIdAndUpdate(
+            reviewId,
+            { $inc: { votes: 1 } },
+            { new: true }
+        )
+        if (!newVote) {
+            throw new Error('Review not found');
+        }
+        return newVote;
+    } catch (error) {
+        console.log(error);
+    }
+};
