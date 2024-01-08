@@ -4,6 +4,7 @@ import { useState } from "react"
 import style from "./NewReview.module.css"
 import { FaStar } from "react-icons/fa"
 import { FaGem } from "react-icons/fa";
+import { submitReview } from "@/lib/action";
 
 const NewReview = ({id}) => { 
 
@@ -74,24 +75,25 @@ const NewReview = ({id}) => {
         //state cannot be used in server side, passing of the data needs to be done through fetch and api end points 
     }
 
-    return ( 
-        <form className={style.newReview}>
-            <StarRating />
-
-            <textarea 
-            className={style.reviewInput}
-            type="text" 
-            placeholder="Share your thoughts.."
-            onChange={handleReviewInput}
-            wrap="hardsoft"
-            > 
-            </textarea>
-            
-            <button
-            onClick = {submitNewReview}
-            >Add Review</button>
+    return (
+        <>
         
-        </form>
+            <StarRating />
+            <form action={submitReview} className={style.newReview}>
+
+                <textarea 
+                className={style.reviewInput}
+                type="text" 
+                placeholder="Share your thoughts.."
+                onChange={handleReviewInput}
+                wrap="hardsoft"
+                name="body"
+                /> 
+                
+                <button>Add Review</button>
+            
+            </form>
+        </>
     ) 
 }
 

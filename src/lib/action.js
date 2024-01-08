@@ -62,3 +62,10 @@ export const login = async (previousState, formData) => {
         throw err;
     }
 }
+
+export const submitReview = (formData) => {
+    const { body } = Object.fromEntries(formData)
+    console.log(body)
+
+    console.log("HERE YOU CAN SUBMIT REVIEW")
+}
