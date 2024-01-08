@@ -2,25 +2,25 @@ import { checkCollection, getLocations } from '@/lib/data';
 import ExplorePage from '@/components/explore/ExplorePage';
 
 // WITH API FETCH
-const getData = async () => {
-  const res = await fetch(`${process.env.API_ROUTE}/api/locations`,
-  {next: {revalidate: 3600}})
+// const getData = async () => {
+//   const res = await fetch(`${process.env.API_ROUTE}/api/locations`,
+//   {next: {revalidate: 3600}})
 
-  if (!res.ok) {
-    throw new Error("Something went wrong getting all locations")
-  }
+//   if (!res.ok) {
+//     throw new Error("Something went wrong getting all locations")
+//   }
 
-  return res.json()
-}
+//   return res.json()
+// }
 
 const Home = async () => {
 
   // FETCHING WITHOUT API
-  // let allLocations = await getLocations();
-  // allLocations = JSON.parse(JSON.stringify(allLocations))
+  let allLocations = await getLocations();
+  allLocations = JSON.parse(JSON.stringify(allLocations))
 
   // FETCHING WITH API
-  const allLocations = await getData();
+  // const allLocations = await getData();
 
   return (
     <main>
