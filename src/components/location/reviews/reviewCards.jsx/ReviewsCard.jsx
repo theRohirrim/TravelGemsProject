@@ -23,7 +23,7 @@ const ReviewsCard = ({ review }) => {
     <section className={style.reviewCard} key={review._id.toString()}>
       <p>"{review.body}" -{review.username}</p>
       <p>{review.rating}/5</p>
-      <p>{review.createdAt.toLocaleDateString()}</p>
+      <p>{review.createdAt ? review.createdAt.toLocaleDateString() : "04/01/2024"}</p>
       <p>{updatedVotes} votes</p>
       <button onClick={handleVote} disabled={voted} className={style.button}>
   {voted ? 'Voted!' : 'Like'}

@@ -5,6 +5,7 @@ import style from "./NewReview.module.css"
 import { FaStar } from "react-icons/fa"
 import { FaGem } from "react-icons/fa";
 import { submitReview } from "@/lib/action";
+import ReviewsCard from "../reviewCards.jsx/ReviewsCard";
 
 const NewReview = ({id}) => { 
 
@@ -19,13 +20,14 @@ const NewReview = ({id}) => {
 
     const [rating, setRating] = useState(null)
     const [reviewBody, setReviewBody] = useState("")
+    const [newReview, setNewReview] = useState([])
 
     const handleReviewInput = (event) => {
         let reviewContent = event.target.value
         setReviewBody(reviewContent)
     }
 
-    const formSubmission = (e) => { 
+    const formSubmission = async (e) => { 
         e.preventDefault()
     
 
@@ -39,7 +41,13 @@ const NewReview = ({id}) => {
             place_name: place_name,
         }
 
-        submitReview(reviewData)
+        
+        try {
+            const submittedReview = await submitReview(reviewData);
+            setNewReview(prevReviews => [...prevReviews, submittedReview]); 
+        } catch (error) {
+            console.error("Error submitting review:", error);
+        }
 
         setReviewBody("")
         setRating(null)
@@ -92,6 +100,11 @@ const NewReview = ({id}) => {
                 <button type="submit" >Add Review</button>
             
             </form>
+        {newReview.length > 0 ? 
+        newReview.map((review) => { 
+            return(<ReviewsCard key={review._id} review = {review} />)
+              })
+        : null }
         </>
     ) 
 }

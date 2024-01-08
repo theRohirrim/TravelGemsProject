@@ -4,8 +4,10 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
+import { postReview, updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
 import { postReview } from "./data";
+
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -73,15 +75,19 @@ export const submitReview = async (formData) => {
 
     try {
         const postedReview = await postReview(formData);
+        const locationId = postedReview.location_id
+        const reviewId = postedReview._id
+
+
         let formatedReturn = postedReview.toObject()
 
+        
     if (formatedReturn.location_id) formatedReturn.location_id = formatedReturn.location_id.toString();
     if (formatedReturn.user_id) formatedReturn.user_id = formatedReturn.user_id.toString();
     if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
-    const review_id = formatedReturn._id
-    if (formatedReturn.createdAt) formatedReturn.createdAt = formatedReturn.createdAt.toISOString();
+    
+    const successfulUpdate = await updateLocationWithReviewId({locationId, reviewId})
 
-        
     return formatedReturn;
     } catch (error) {
         throw new Error("failed to adding review");
