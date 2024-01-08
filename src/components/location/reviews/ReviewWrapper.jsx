@@ -3,14 +3,21 @@ import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
 
-
 const ReviewWrapper = async ({id}) => {
+
   const allReviews = await getReviews();
   
   const filterReviews = allReviews.filter((review)=> {
     return review.location_id.toString() === id
   })
 
+
+  filterReviews.sort((a, b) => {
+    if (!a.createdAt) return 1;  
+    if (!b.createdAt) return -1; 
+
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
 
   return (
     <article className={style.reviewContainer}>

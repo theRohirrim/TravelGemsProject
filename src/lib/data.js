@@ -37,8 +37,23 @@ export const postLocation = async (reviewData) => {
     } catch (error) {
         throw new Error("failed to add new location");
     }
-};
+}
 
+export const updateLocationWithReviewId = async ({reviewId, locationId}) => { 
+    try { 
+        const updatedLocation = await Locations.updateOne(
+            {_id : locationId}, 
+            { $push: { reviews_by_id: reviewId } })
+
+            if (updatedLocation.matchedCount === 0) {
+                console.error("No location found with the given ID");
+            } else if (updatedLocation.modifiedCount === 0) {
+                console.error("The location was not updated");
+            }
+        } catch (error) {
+            console.error("Error updating location:", error);
+        }
+    } 
 // const locationData = {
 //     img: "https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=600",
 //     description: "Free Red Trees Stock Photo",

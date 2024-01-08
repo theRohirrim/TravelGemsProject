@@ -13,7 +13,7 @@ const ReviewsCard = ({review}) => {
       {review.rating}/5
     </p>
     <p>
-    {review.createdAt.toLocaleDateString()}
+    {review.createdAt ? review.createdAt.toLocaleDateString() : "04/01/2024"}
     </p>
     {review.votes} votes 
     <button> like </button>  
