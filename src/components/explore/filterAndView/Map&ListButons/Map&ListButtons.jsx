@@ -10,9 +10,9 @@ const MapAndListButtons = ({mapView, setMapView}) => {
     }
 
     return ( 
-        <div className={styles.buttonContainer}> 
-        <button onClick={handleClick} className={`${styles.viewButtons} ${mapView === true && styles.active}`}> Map View</button>
-        <button onClick={handleClick} className={`${styles.viewButtons} ${mapView === false && styles.active}`}> List View </button>
+        <div className="join w-full p-2 mb-5 flex items-center"> 
+            <button onClick={handleClick} className={`btn btn-neutral join-item w-1/2 no-animation text-2xl ${mapView === true && "btn-disabled"}`}> Map View</button>
+            <button onClick={handleClick} className={`btn btn-neutral join-item w-1/2 no-animation text-2xl ${mapView === false && "btn-disabled"}`}> List View </button>
         </div>
     )
 }
