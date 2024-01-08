@@ -13,6 +13,7 @@ const LocationCard = ({location}) => {
                         <h2 className="card-title text-sm absolute top-3 left-3 right-3 text-gray-800 bg-white bg-opacity-75 p-4 rounded-lg">{location.place_name}</h2>   
                     </Link>
                 <p>{location.description}</p>
+                <p>{location.rating} rating</p>
 
                 {location.categories.map(category => (
                             <p className="badge badge-neutral">
