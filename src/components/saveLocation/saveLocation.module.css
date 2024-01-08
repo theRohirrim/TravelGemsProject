@@ -20,7 +20,3 @@
     background-color: rgb(172, 26, 172);
     color: var(--bg);
 }
-
-.hidden {
-    display: none;
-}

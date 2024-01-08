@@ -45,7 +45,8 @@ export const register = async (previousState, formData) => {
             username,
             email,
             password: hashedPassword,
-            img
+            img,
+            saved_locations: []
         })
 
         await newUser.save();
