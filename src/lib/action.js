@@ -4,6 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
+import { postReview } from "./data";
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -63,9 +64,24 @@ export const login = async (previousState, formData) => {
     }
 }
 
-export const submitReview = (formData) => {
-    const { body } = Object.fromEntries(formData)
-    console.log(body)
+export const submitReview = async (formData) => {
 
-    console.log("HERE YOU CAN SUBMIT REVIEW")
-}
+    try {
+        const postedReview = await postReview(formData);
+        let formatedReturn = postedReview.toObject()
+
+    if (formatedReturn.location_id) formatedReturn.location_id = formatedReturn.location_id.toString();
+    if (formatedReturn.user_id) formatedReturn.user_id = formatedReturn.user_id.toString();
+    if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
+    const review_id = formatedReturn._id
+    if (formatedReturn.createdAt) formatedReturn.createdAt = formatedReturn.createdAt.toISOString();
+
+        
+    return formatedReturn;
+    } catch (error) {
+        throw new Error("failed to adding review");
+    }
+};
+
+
+
