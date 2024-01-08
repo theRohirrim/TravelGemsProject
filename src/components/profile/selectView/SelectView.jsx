@@ -1,13 +1,18 @@
-const SelectView = () => {
-    
+"use client"
+
+const SelectView = ({ locationsView, setLocationsView }) => {
+    const handleReviewsClick = () => {
+        if (locationsView !== false) setLocationsView(false)
+    }
+
+    const handleLocationsClick = () => {
+        if (locationsView !== true) setLocationsView(true)
+    }
+
     return (
         <div>
-            <button>
-                <h2>Reviews</h2>
-            </button>
-            <button>
-                <h2>Locations</h2>
-            </button>
+            <button onClick={handleLocationsClick}>Locations</button>
+            <button onClick={handleReviewsClick}>Reviews</button>
         </div>
     );
 }
