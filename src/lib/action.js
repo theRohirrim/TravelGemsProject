@@ -23,10 +23,16 @@ export const register = async (previousState, formData) => {
     try {
         connectToDatabase()
 
-        const user = await Users.findOne({username})
+        const usernameUser = await Users.findOne({username})
 
-        if (user) {
+        if (usernameUser) {
             return {error: "Username already exists"}
+        }
+
+        const emailUser = await Users.findOne({email})
+
+        if (emailUser) {
+            return {error: "Email is already used"}
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -38,8 +44,6 @@ export const register = async (previousState, formData) => {
             password: hashedPassword,
             img
         })
-
-        console.log(newUser);
 
         await newUser.save();
         return {success: true}
