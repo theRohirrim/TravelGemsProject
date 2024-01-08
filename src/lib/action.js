@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-
+import { voteForReview } from './data';
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
 }
@@ -69,3 +69,11 @@ export const submitReview = (formData) => {
 
     console.log("HERE YOU CAN SUBMIT REVIEW")
 }
+
+export const handleVoting = async (reviewId) => {
+    try {
+        const updatedReview = await voteForReview(reviewId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
