@@ -1,5 +1,6 @@
 "use client"
 
+import { submitLocation } from '@/lib/action';
 import React, { useState } from 'react'
 
 export default function NewLocationForm({latitude, longitude}) {
@@ -8,9 +9,35 @@ export default function NewLocationForm({latitude, longitude}) {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
 
+    // address
+    // img?
+
+//     const newLocation = {
+//     img: "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+//     description: "nice park",
+//     created_by: "spikeman",
+//     categories: ["park"],
+//     address: "London",
+//     longitude: -0.16191575361148322,
+//     latitude: 51.512807425080254,
+//     place_name: "Hyde Park",
+// };
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("submit")
+        console.log("submitting...")
+       
+        const newLocation = {
+            created_by: "spikeman",
+            categories: [category],
+            place_name: placeName,
+            address: location,
+            latitude: Number(latitude),
+            longitude: Number(longitude),
+            description,
+            img: "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        }
+        console.log(newLocation)
+        submitLocation(newLocation)
     }
 
 

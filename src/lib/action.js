@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { postReview } from "./data";
+import { postLocation, postReview } from "./data";
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -83,5 +83,15 @@ export const submitReview = async (formData) => {
     }
 };
 
+export const submitLocation = async (location) => {
+    try {
+        console.log("in action...")
+        await postLocation(location)
 
+    } catch (error) {
+        console.log(error, "this is the error...")
+        throw new Error("Location could not be added")
+    }
+
+}
 

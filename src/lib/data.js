@@ -30,7 +30,7 @@ export const getLocations = async () => {
         throw new Error("Error loading location data: ", error)
     }
 }
-export const postLocation = async (reviewData) => {
+export const postLocation = async (locationData) => {
     try {
         const newLocation = await Locations.create(locationData);
         return newLocation;
