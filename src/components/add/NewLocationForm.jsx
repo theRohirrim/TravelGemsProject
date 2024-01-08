@@ -7,7 +7,7 @@ export default function NewLocationForm({latitude, longitude}) {
     const [location, setLocation] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
-    const [img, setImg] = useState([]);
+    const [img, setImg] = useState([])
 
     // address
     // img?
@@ -25,11 +25,14 @@ export default function NewLocationForm({latitude, longitude}) {
             latitude: Number(latitude),
             longitude: Number(longitude),
             description,
-            img: URL.createObjectURL(img[0]),
+            img: "https://images.pexels.com/photos/134061/pexels-photo-134061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         }
         console.log(newLocation)
         submitLocation(newLocation)
-
+        setPlaceName("")
+        setLocation("")
+        setCategory("")
+        setDescription("")
     }
 
 
