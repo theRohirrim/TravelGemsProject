@@ -45,28 +45,7 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
     }
 
     return ( 
-        <div className="p-2 ">
-            {/* <div className="join">
-                <div>
-                    <div>
-                    <input className="input input-bordered join-item" placeholder="Search"/>
-                    </div>
-                </div>
-                <select className="select select-bordered join-item">
-                    <option disabled selected>Filter</option>
-                    <option>Sci-fi</option>
-                    <option>Drama</option>
-                    <option>Action</option>
-                </select>
-                <div className="indicator">
-                    <span className="indicator-item badge badge-secondary">new</span> 
-                    <button className="btn join-item">Search</button>
-                </div>
-            </div> */}
-
-
-
-            <div className={`${styles.buttonWrapper} flex justify-between mt-4`}>
+            <div className={`${styles.buttonWrapper} flex justify-between mt-4 p-2 `}>
                 
                 <div className="flex justify-center gap-40 ">
                     <div className={styles.ratingContainer}>
@@ -91,7 +70,6 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
                     classNamePrefix="select"
                     />
                 </div>
-            </div>
 
         </div>
     );
