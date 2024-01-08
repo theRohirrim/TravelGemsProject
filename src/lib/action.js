@@ -4,6 +4,8 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
+import { voteForReview } from './data';
+import { postReview } from "./data";
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -22,10 +24,16 @@ export const register = async (previousState, formData) => {
     try {
         connectToDatabase()
 
-        const user = await Users.findOne({username})
+        const usernameUser = await Users.findOne({username})
 
-        if (user) {
+        if (usernameUser) {
             return {error: "Username already exists"}
+        }
+
+        const emailUser = await Users.findOne({email})
+
+        if (emailUser) {
+            return {error: "Email is already used"}
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -37,8 +45,6 @@ export const register = async (previousState, formData) => {
             password: hashedPassword,
             img
         })
-
-        console.log(newUser);
 
         await newUser.save();
         return {success: true}
@@ -63,9 +69,33 @@ export const login = async (previousState, formData) => {
     }
 }
 
-export const submitReview = (formData) => {
-    const { body } = Object.fromEntries(formData)
-    console.log(body)
+export const submitReview = async (formData) => {
 
-    console.log("HERE YOU CAN SUBMIT REVIEW")
-}
+    try {
+        const postedReview = await postReview(formData);
+        let formatedReturn = postedReview.toObject()
+
+    if (formatedReturn.location_id) formatedReturn.location_id = formatedReturn.location_id.toString();
+    if (formatedReturn.user_id) formatedReturn.user_id = formatedReturn.user_id.toString();
+    if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
+    const review_id = formatedReturn._id
+    if (formatedReturn.createdAt) formatedReturn.createdAt = formatedReturn.createdAt.toISOString();
+
+        
+    return formatedReturn;
+    } catch (error) {
+        throw new Error("failed to adding review");
+    }
+};
+
+
+
+
+export const handleVoting = async (reviewId) => {
+    try {
+        const updatedReview = await voteForReview(reviewId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+

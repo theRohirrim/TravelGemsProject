@@ -1,10 +1,9 @@
-import { getLocationsByUsername } from "@/lib/data";
 import styles from "./locations.module.css"
 import Link from "next/link";
 import { GoDot } from "react-icons/go";
+import { FaGem } from "react-icons/fa";
 
-const Locations = async ({ username }) => {
-    const locations = await getLocationsByUsername(username)
+const Locations = ({ locations }) => {
 
     return (
         <div>
