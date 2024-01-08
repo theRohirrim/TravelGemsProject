@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import styles from './locationcard.module.css'
 import Link from 'next/link'
+import SaveLocation from '@/components/saveLocation/SaveLocation'
 
 const LocationCard = ({location}) => {
 
     return (
         <div className={styles.container}>
+            <SaveLocation />
             <div className={styles.header}>
                 <Link href={`/explore/${location._id}`}>
                     <h2>{location.place_name}</h2>
