@@ -20,9 +20,35 @@ const NewReview = ({id}) => {
     const [rating, setRating] = useState(null)
     const [reviewBody, setReviewBody] = useState("")
 
-    const StarRating = () => { 
-    return ( 
-        <div> 
+    const handleReviewInput = (event) => {
+        let reviewContent = event.target.value
+        setReviewBody(reviewContent)
+    }
+
+    const formSubmission = (e) => { 
+        e.preventDefault()
+    
+
+        const reviewData = {
+            body: reviewBody,
+            rating: rating,
+            location_id: locationId, 
+            user_id: userId,
+            username: username,
+            votes: 0,
+            place_name: place_name,
+        }
+
+        submitReview(reviewData)
+
+        setReviewBody("")
+        setRating(null)
+    }
+
+    return (
+        <>
+            <form  className={style.newReview} onSubmit={formSubmission}>
+            <div> 
         {[...Array(5)].map((star, i) => { 
            const currentRating = i + 1;
 
@@ -30,10 +56,10 @@ const NewReview = ({id}) => {
             <label key={i}> 
                 <input
                 type="radio"
-                name="rating" 
+                name="rating"
                 className={style.radioButton}
                 value={currentRating}
-                onClick= {() => {
+                onChange= {() => {
                 if (rating === currentRating){ 
                         setRating(null)
                     } else {   
@@ -48,49 +74,22 @@ const NewReview = ({id}) => {
            )  
         })}
         </div>
-    )
-    }
-
-    const handleReviewInput = (event) => {
-        let reviewContent = event.target.value
-        setReviewBody(reviewContent)
-    }
-
-//     Review Data Template: 
-
-//     const reviewData = {
-//     body: "Spencer added a review shesffgjkgjilrgj",
-//     rating: 2,
-//     location_id: "659568dbedc28e2e44f28bc1", 
-//     user_id: "659411769f7ae624673bafde",
-//     username: "admin",
-//     votes: 5,
-//     place_name: "Hala Garden",
-// }
-
-
-
-    const submitNewReview = async (event) => { 
-        event.preventDefault()
-        //state cannot be used in server side, passing of the data needs to be done through fetch and api end points 
-    }
-
-    return (
-        <>
-        
-            <StarRating />
-            <form action={submitReview} className={style.newReview}>
-
                 <textarea 
                 className={style.reviewInput}
                 type="text" 
                 placeholder="Share your thoughts.."
                 onChange={handleReviewInput}
+                value={reviewBody}
                 wrap="hardsoft"
                 name="body"
                 /> 
-                
-                <button>Add Review</button>
+
+        <input type="hidden" name="userId" value={userId} />
+        <input type="hidden" name="username" value={username} />
+        <input type="hidden" name="locationId" value={locationId} />
+        <input type="hidden" name="place_name" value={place_name} />
+
+                <button type="submit" >Add Review</button>
             
             </form>
         </>
