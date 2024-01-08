@@ -1,9 +1,7 @@
-import { getReviewsById } from '@/lib/data'
 import React from 'react'
 import styles from "./reviews.module.css"
 
-const Reviews = async ({ id }) => {
-    const userReviews = await getReviewsById(id)
+const Reviews = ({ userReviews }) => {
 
     return (
         <div>
