@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { postReview, updateLocationWithReviewId } from "./data";
+import { updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
 import { postReview } from "./data";
 
@@ -87,7 +87,7 @@ export const submitReview = async (formData) => {
     if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
     
     const successfulUpdate = await updateLocationWithReviewId({locationId, reviewId})
-
+    
     return formatedReturn;
     } catch (error) {
         throw new Error("failed to adding review");
