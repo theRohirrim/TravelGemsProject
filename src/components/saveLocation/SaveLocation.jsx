@@ -1,9 +1,11 @@
+import { handleSaveLocation } from '@/lib/action';
 import styles from './saveLocation.module.css'
 
-const SaveLocation = () => {
+const SaveLocation = ({id, user}) => {
+    
     return (
-        <form>
-            <button className={styles.button}>
+        <form action={handleSaveLocation(id, user)}>
+            <button className={`${styles.button} ${user?.savedLocations.includes(id) && styles.active}`}>
                 Save Location
             </button>
         </form>

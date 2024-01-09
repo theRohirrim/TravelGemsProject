@@ -23,7 +23,7 @@ const LocationCard = ({location, user}) => {
                                 </p>
                             ))}
                     </div>
-                    {user && <SaveLocation />}
+                    {user && <SaveLocation id={location._id} user={user} />}
                 </div>
             </div>
         </div>

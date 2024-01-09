@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { deleteOneReview, getLocationById, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
+import { deleteOneReview, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview, postReview, getUserNameByEmail } from './data';
 
 
@@ -120,16 +120,45 @@ export const handleVoting = async (reviewId) => {
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
 
-  export const handleUserName = async (email) => {
+export const handleUserName = async (email) => {
+try {
+    const currentUserName = await getUserNameByEmail(email);
+    console.log(currentUserName)
+    return currentUserName
+} catch (error) {
+    console.log(error);
+}
+
+};
+
+export const handleSaveLocation = async (id, user) => {
+    console.log("ACTION", user)
     try {
-        const currentUserName = await getUserNameByEmail(email);
-        console.log(currentUserName)
-        return currentUserName
+        const currentUser = await getUserByEmail(user.email)
+        if (user.savedLocations.includes(id)){
+
+            const filteredArray = currentUser.savedLocations.filter(function(e) { return e !== id })
+
+            currentUser.savedLocations = filteredArray
+
+            console.log("ACTION - delete", currentUser.savedLocations)
+
+            currentUser.save()
+        } else {
+            const newArray = [...currentUser.savedLocations, id]
+            
+            currentUser.savedLocations = newArray
+
+            console.log("ACTION - add", currentUser.savedLocations)
+
+            currentUser.save();
+
+        }
+
     } catch (error) {
-      console.log(error);
+        console.log(error)
     }
-    
-  };
+}
