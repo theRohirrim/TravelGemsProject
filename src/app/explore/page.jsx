@@ -17,8 +17,13 @@ import { auth } from '@/lib/auth';
 const Home = async () => {
   // Get logged in user
   const session = await auth()
-  let user = await getUserByEmail(session.user.email)
-  user = JSON.parse(JSON.stringify(user))
+  let user;
+
+  if (session) {
+    user = await getUserByEmail(session.user.email)
+    user = JSON.parse(JSON.stringify(user))
+  }
+  
 
   // FETCHING WITHOUT API
   let allLocations = await getLocations();

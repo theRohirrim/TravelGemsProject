@@ -4,7 +4,6 @@ import Link from 'next/link'
 import SaveLocation from '@/components/saveLocation/SaveLocation'
 
 const LocationCard = ({location, user}) => {
-    console.log(user)
 
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -24,7 +23,7 @@ const LocationCard = ({location, user}) => {
                                 </p>
                             ))}
                     </div>
-                    <SaveLocation />
+                    {user && <SaveLocation />}
                 </div>
             </div>
         </div>
