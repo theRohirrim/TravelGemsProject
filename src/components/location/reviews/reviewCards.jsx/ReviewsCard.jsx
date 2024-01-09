@@ -17,6 +17,7 @@ const ReviewsCard = ({ review , userID , username }) => {
       if (!voted) {
         const updatedReview = await handleVoting(review._id);
         setVoted(true);
+        console.log(updatedReview," here is the update votes")
         setUpdatedVotes(updatedReview.votes);
       }
     } catch (error) {
@@ -28,6 +29,7 @@ const ReviewsCard = ({ review , userID , username }) => {
     e.preventDefault()
     try{ 
       const successfulDelete = await deleteReview({reviewId, locationId})
+      window.location.reload();
     } catch { 
       console.log("error deleting- see ReviewsCard")
     }

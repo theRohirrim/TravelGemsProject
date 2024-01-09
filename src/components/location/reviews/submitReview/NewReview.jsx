@@ -39,9 +39,9 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
     } catch (error) {
       console.error('Error submitting review:', error);
     }
-
     setReviewBody('');
     setRating(null);
+    
   };
 
   return (
@@ -92,7 +92,7 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
       </form>
       {newReview.length > 0
         ? newReview.map((review) => {
-            return <ReviewsCard key={review._id} review={review} />;
+            return <ReviewsCard key={review._id} review={review} userID={userID}/>;
           })
         : null}
     </>
