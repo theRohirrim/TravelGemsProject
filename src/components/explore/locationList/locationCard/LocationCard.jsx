@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './locationcard.module.css'
 import Link from 'next/link'
+import SaveLocation from '@/components/saveLocation/SaveLocation'
 
 const LocationCard = ({location}) => {
 
@@ -14,15 +15,16 @@ const LocationCard = ({location}) => {
                     </Link>
                 <p>{location.description}</p>
                 <p>{location.rating} rating</p>
-<div className="flex justify-evenly gap-8 ">
-    
-                {location.categories.map(category => (
-                            <p className="badge badge-neutral w-10">
-                                <em>{category} </em>
-                            </p>
-                        ))}
-</div>
-
+                <div className={styles.footer}>
+                    <div className={styles.categories}>
+                    {location.categories.map(category => (
+                                <p key={category} className="badge badge-neutral">
+                                    <em>{category} </em>
+                                </p>
+                            ))}
+                    </div>
+                    <SaveLocation />
+                </div>
             </div>
         </div>
     )

@@ -1,7 +1,30 @@
 "use client";
 import NavLink from "./navlink/NavLink";
-import styles from "./links.module.css";
+import styles from "./links.module.css"
 import { useSession } from 'next-auth/react';
+
+const links = [
+    {
+        title: 'Explore',
+        path: '/explore',
+        icon: 'explore', // Specify the icon key
+    },
+    {
+        title: 'Network',
+        path: '/network',
+        icon: 'network',
+    },
+    {
+        title: 'Saved',
+        path: '/saved',
+        icon: 'saved',
+    },
+    {
+        title: 'Profile',
+        path: '/user',
+        icon: 'user',
+    }
+];
 
 const Links = () => {
     const { data: session } = useSession();

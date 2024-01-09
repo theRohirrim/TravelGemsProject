@@ -122,18 +122,17 @@ export const getUserById = async (_id) => {
     }
 };
 
-export const getUserNameByEmail = async (email) => {
+export const getUserByEmail = async(email) => {
     try {
         connectToDatabase()
         const user = await Users.find({email})
-        console.log(user)
-        return user[0].username
+        return user
 
     } catch (error) {
         console.log(error)
-        throw new Error("Failed to fetch individual username")
+        throw new Error("Failed to fetch individual user data")
     }
-};
+}
 
 // when filtered 
 export const getReviews = async () => {

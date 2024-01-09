@@ -1,5 +1,6 @@
-import { checkCollection, getLocations } from '@/lib/data';
+import { checkCollection, getLocations, getUserByEmail } from '@/lib/data';
 import ExplorePage from '@/components/explore/ExplorePage';
+import { auth } from '@/lib/auth';
 
 // WITH API FETCH
 // const getData = async () => {
@@ -14,6 +15,11 @@ import ExplorePage from '@/components/explore/ExplorePage';
 // }
 
 const Home = async () => {
+  const session = await auth()
+  console.log(session)
+
+  const user = await getUserByEmail(session.user.email)
+  console.log(user)
 
   // FETCHING WITHOUT API
   let allLocations = await getLocations();

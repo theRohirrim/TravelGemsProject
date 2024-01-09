@@ -34,7 +34,7 @@ const login = async (credentials) => {
     }
 }
 
-export const nextAuth = NextAuth({
+export const authOptions = {
     ...authConfig,
     providers: 
     [ 
@@ -79,6 +79,8 @@ export const nextAuth = NextAuth({
         },
         ...authConfig.callbacks
     }
-})
+}
+
+export const nextAuth = NextAuth(authOptions)
 
 export const { handlers : { GET, POST }, auth, signIn, signOut } = nextAuth
