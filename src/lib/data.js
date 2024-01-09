@@ -177,19 +177,6 @@ export const removeReviewFromLocation = async (reviewId, locationId) => {
 
 }
 
-// const reviewData = {
-//     body: "Hala added a review shesffgjkgjilrgj",
-//     rating: 2,
-//     location_id: "659568dbedc28e2e44f28bc1", 
-//     user_id: "659411769f7ae624673bafde",
-//     username: "admin",
-//     votes: 5,
-//     place_name: "Hala Garden",
-// }
-
-// const result = await postReview(reviewData);
-// console.log(result);
-
 export const voteForReview = async (reviewId) => {
     try {
         const newVote = await Reviews.findByIdAndUpdate(
