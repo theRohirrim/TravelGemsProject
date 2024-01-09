@@ -2,6 +2,7 @@ import { getReviews } from "@/lib/data";
 import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
+import { SessionProvider } from "next-auth/react";
 
 const ReviewWrapper = async ({id, placeName}) => {
 
@@ -38,7 +39,8 @@ const ReviewWrapper = async ({id, placeName}) => {
       : 
       formatReviews.map((review)=>{
         return(<ReviewsCard key={review._id} review = {review} />)
-      })} 
+      })
+      } 
     </article>
   )
 }
