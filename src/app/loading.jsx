@@ -2,8 +2,8 @@ import styles from './page.module.css'
 
 const Loading = () => {
     return (
-        <main className="loading loading-spinner loading-lg load">
-            <h1>Loading</h1>
+        <main className="grid h-screen place-items-center">
+        <h1 className='loading loading-spinner loading-lg load scale-[5]'></h1>
         </main>
     )
 }

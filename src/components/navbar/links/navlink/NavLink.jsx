@@ -18,7 +18,7 @@ const NavLink = ({ item }) => {
     return (
         <Link href={item.path} className={`${styles.container} ${pathName === item.path && styles.active}`}>
             {item.icon && iconMapping[item.icon]} 
-            <span>{item.title}</span>
+            <span className="text-black">{item.title} </span>
         </Link>
     );
 };

@@ -14,12 +14,14 @@ const LocationCard = ({location}) => {
                     </Link>
                 <p>{location.description}</p>
                 <p>{location.rating} rating</p>
-
+<div className="flex justify-evenly gap-8 ">
+    
                 {location.categories.map(category => (
-                            <p className="badge badge-neutral">
+                            <p className="badge badge-neutral w-10">
                                 <em>{category} </em>
                             </p>
                         ))}
+</div>
 
             </div>
         </div>
