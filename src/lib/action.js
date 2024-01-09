@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { getLocationById, updateLocationWithReviewId } from "./data";
+import { deleteOneReview, getLocationById, postReview, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
 
 
@@ -103,6 +103,14 @@ export const submitReview = async (formData) => {
     }
 };
 
+export const deleteReview = async ({reviewId, locationId}) => { 
+    try { 
+        const deletedReview = await deleteOneReview(reviewId)
+        const removedReviewIdLocation = await removeReviewFromLocation(reviewId, locationId)    
+    } catch { 
+        console.log(error, "error in deleteReview")
+    }
+}
 
 
 export const handleVoting = async (reviewId) => {

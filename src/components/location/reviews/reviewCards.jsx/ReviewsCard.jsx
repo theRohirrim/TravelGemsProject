@@ -1,11 +1,25 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './reviews.module.css';
-import { handleVoting } from '@/lib/action';
+import { deleteReview, handleVoting } from '@/lib/action';
+import { useSession } from 'next-auth/react';
 
 const ReviewsCard = ({ review }) => {
+  // const { data: session, status, user} = useSession()
+  // useEffect( () => {}, [status] )
+  // console.log(status, "status in ReviewCard")
+  // console.log(session, "session in Reviewscard")
+  // console.log(user, "user in reviewCard")
+
   const [voted, setVoted] = useState(false);
   const [updatedVotes, setUpdatedVotes] = useState(review.votes);
+
+
+  const userId = "659410c69f7ae624673bafdb"
+  const username = "spikeman"
+
+  const reviewId = review._id
+  const locationId = review.location_id
 
   const handleVote = async () => {
     try {
@@ -19,6 +33,14 @@ const ReviewsCard = ({ review }) => {
     }
   };
 
+  const handleDelete = async (e) => { 
+    e.preventDefault()
+    try{ 
+      const successfulDelete = await deleteReview({reviewId, locationId})
+    } catch { 
+      console.log("error deleting- see ReviewsCard")
+    }
+  }
   return (
     <section className={style.reviewCard} key={review._id.toString()}>
       <p>"{review.body}" -{review.username}</p>
@@ -28,7 +50,9 @@ const ReviewsCard = ({ review }) => {
       <button onClick={handleVote} disabled={voted} className={style.button}>
   {voted ? 'Voted!' : 'Like'}
 </button>
-    </section>
+    {review.user_id === userId ? 
+    <button onClick={handleDelete} className={style.button}> delete </button> : 
+      null}</section>
   );
 };
 

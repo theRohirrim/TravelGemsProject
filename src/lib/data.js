@@ -152,6 +152,31 @@ export const postReview = async (reviewData) => {
     }
 };
 
+export const deleteOneReview = async (reviewId) => { 
+try { 
+    const deletedReview = await Reviews.deleteOne( {"_id": new ObjectId(reviewId)})
+    return deletedReview
+
+} catch (error) {
+    console.log(error, "error deleting from reviews (data.js) ")
+}
+}
+
+export const removeReviewFromLocation = async (reviewId, locationId) => { 
+
+    try { 
+        const updatedLocation = await Locations.updateOne(
+            {_id : new ObjectId(locationId)}, 
+            { "$pull": { "reviews_by_id": reviewId } })
+
+        return updatedLocation
+
+        } catch (error) {
+            console.error("Error updating location:", error);
+        }
+
+}
+
 // const reviewData = {
 //     body: "Hala added a review shesffgjkgjilrgj",
 //     rating: 2,
