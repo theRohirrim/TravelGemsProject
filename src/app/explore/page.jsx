@@ -15,11 +15,10 @@ import { auth } from '@/lib/auth';
 // }
 
 const Home = async () => {
+  // Get logged in user
   const session = await auth()
-  console.log(session)
-
-  const user = await getUserByEmail(session.user.email)
-  console.log(user)
+  let user = await getUserByEmail(session.user.email)
+  user = JSON.parse(JSON.stringify(user))
 
   // FETCHING WITHOUT API
   let allLocations = await getLocations();
@@ -30,7 +29,7 @@ const Home = async () => {
 
   return (
     <main>
-      <ExplorePage allLocations={allLocations} />
+      <ExplorePage allLocations={allLocations} user={user} />
     </main>
   );
 };

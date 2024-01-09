@@ -125,7 +125,7 @@ export const getUserById = async (_id) => {
 export const getUserByEmail = async(email) => {
     try {
         connectToDatabase()
-        const user = await Users.find({email})
+        const user = await Users.findOne({email})
         return user
 
     } catch (error) {
