@@ -45,15 +45,26 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
     }
 
     return ( 
-        <div className={styles.mapWrapper}>
-            <div className={`${styles.buttonWrapper} flex justify-between mt-4`}>
-                <div className={styles.topFilters}>
+            <div className={`${styles.buttonWrapper} flex justify-between mt-4 p-2 `}>
+                
+                <div className="flex justify-center gap-40 ">
                     <div className={styles.ratingContainer}>
                         <label>Rating</label>
                         <input onChange={handleRatingChange} className={styles.rangeInput} type="range" id="rating" defaultValue={5} min={0} max={5} step={0.5} />
                         <p>{!filterOptions.rating || filterOptions.rating === 0 ? 'All Ratings' : filterOptions.rating === 5 ? '5 star only' : `${filterOptions.rating} stars or more`}</p>
                     </div>
+                    <div className="dropdown dropdown-end">
+                        <button className="btn btn-neutral" onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
+                        {addLocation && <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                            <div tabIndex={0} className="card-body">
+                            <h2 className="card-title"></h2> 
+                                <p>select a location on the map</p>
+                            </div>
+                        </div>}
+                    </div>
                 </div>
+
+
                 <div className={styles.categoriesContainer}>
                     <p>Categories</p>
                     <Select
@@ -61,13 +72,10 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
                     name="categories"
                     options={categoryOptions}
                     onChange={handleCategoryChange}
-                    className={styles.selectDropdown}
+                    className="w-1/2"
                     classNamePrefix="select"
                     />
                 </div>
-                <button onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
-                {addLocation && <p>select a location on the map</p>}
-            </div>
 
         </div>
     );

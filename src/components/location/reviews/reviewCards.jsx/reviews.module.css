@@ -12,13 +12,12 @@
 
     width: 95vw;
     margin: auto; 
-
 }
 
 .button{
     border-radius: 30px;
     cursor: pointer;
-    width: 6vw;
+    width: 60px;
     height: 4vh;
     background-color:#cdb4db;
     border:none;
