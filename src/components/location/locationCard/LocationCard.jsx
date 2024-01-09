@@ -7,10 +7,10 @@ const LocationCard = async ({location}) => {
     const roundedRating = Math.round((location.rating + Number.EPSILON) * 100) / 100
 
     return (
-        <section className="mt-20 mb-5 mx-8">
+        <section className="mt-[80px] mb-5 mt-5 w-5/6 mx-auto lg:mt-40 ">
 
             <div className="card bg-base-100 shadow-xl">
-                <figure><img className='w-full h-96 object-cover' src={location.img} alt="" /></figure>
+                <figure><img className='w-full h-96 object-cover md:h-[1000px]' src={location.img} alt="" /></figure>
 
                 <div className="card-body rounded-b-lg bg-indigo-400">
 
@@ -32,7 +32,7 @@ const LocationCard = async ({location}) => {
 
                     <div className="flex flex-col justify-evenly gap-4 sm:flex-row sm:gap-8">
                         {location.categories.map(category => (
-                                    <p className="badge badge-neutral sm:w-full ">
+                                    <p className="badge badge-neutral ">
                                         <em>{category} </em>
                                     </p>
                         ))}
