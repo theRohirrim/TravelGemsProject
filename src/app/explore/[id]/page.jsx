@@ -24,11 +24,12 @@ const SingleLocationPage = async ({ params }) => {
     // FETCH WITHOUT AN API
     let location = await getLocationById(id)
     location = location[0]
+    console.log(location.place_name)
 
     return (
         <>
         <LocationCard  location ={location}/> 
-        <ReviewWrapper id ={id}/> 
+        <ReviewWrapper id ={id} placeName ={location.place_name}/> 
         </>
     )
 }
