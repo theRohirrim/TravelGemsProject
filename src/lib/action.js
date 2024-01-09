@@ -4,10 +4,8 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { deleteOneReview, getLocationById, postReview, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
-import { voteForReview } from './data';
-import { getLocationById, updateLocationWithReviewId } from "./data";
-import { voteForReview, postReview,getUserNameByEmail } from './data';
+import { deleteOneReview, getLocationById, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
+import { voteForReview, postReview, getUserNameByEmail } from './data';
 
 
 
