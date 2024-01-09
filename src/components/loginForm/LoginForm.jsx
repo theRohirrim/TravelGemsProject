@@ -13,7 +13,6 @@ const LoginForm = () => {
 
     useEffect(() => {
         state?.success && router.push('/')
-        console.log("LOGIN FORM", state)
     }, [state?.success, router])
 
     return (
