@@ -1,8 +1,5 @@
 import Image from "next/image"
 import styles from "./LocationCard.module.css"
-import { getLocationById } from "@/lib/data"
-import { FaGem } from "react-icons/fa"
-import { FiCheck } from 'react-icons/fi';
 
 
 const LocationCard = async ({location}) => { 
