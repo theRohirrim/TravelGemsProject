@@ -6,7 +6,6 @@ import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { postReview, updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
-import { postReview } from "./data";
 
 
 export const handleGithubLogin = async () => {
@@ -62,9 +61,11 @@ export const login = async (previousState, formData) => {
     try {
         await signIn("credentials", {username, password})
     } catch (err) {
-        console.log(err)
+        console.log("ERR MSG .type: ", err.type)
+        console.log("ERR MSG .message: ", err.message)
 
-        if (err.message.includes("CredentialsSignin")) {
+        if (err.type === "CredentialsSignin") {
+            console.log("CATCHES CRED SIGN IN ERR")
             return {error: "Invalid username or password"}
         }
         throw err;
