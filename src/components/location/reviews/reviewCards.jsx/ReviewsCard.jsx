@@ -4,7 +4,6 @@ import style from './reviews.module.css';
 import { deleteReview, handleVoting } from '@/lib/action';
 
 const ReviewsCard = ({ review }) => {
-
   const [voted, setVoted] = useState(false);
   const [updatedVotes, setUpdatedVotes] = useState(review.votes);
 
