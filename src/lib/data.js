@@ -39,11 +39,13 @@ export const postLocation = async (reviewData) => {
     }
 }
 
-export const updateLocationWithReviewId = async ({reviewId, locationId}) => { 
+export const updateLocationWithReviewId = async ({reviewId, locationId, newAverage}) => { 
     try { 
         const updatedLocation = await Locations.updateOne(
             {_id : locationId}, 
-            { $push: { reviews_by_id: reviewId } })
+            { $push: { reviews_by_id: reviewId },
+            $set: { rating: newAverage }, 
+         })
 
             if (updatedLocation.matchedCount === 0) {
                 console.error("No location found with the given ID");
