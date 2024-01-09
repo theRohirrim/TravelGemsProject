@@ -53,3 +53,9 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
+
+.star{
+    cursor: pointer;
+    transition: color 200ms;
+}
