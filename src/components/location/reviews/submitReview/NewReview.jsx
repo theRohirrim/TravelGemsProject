@@ -30,6 +30,7 @@ const NewReview = ({id}) => {
     const formSubmission = async (e) => { 
         e.preventDefault()
     
+        if(rating === null) setRating(0)
 
         const reviewData = {
             body: reviewBody,
