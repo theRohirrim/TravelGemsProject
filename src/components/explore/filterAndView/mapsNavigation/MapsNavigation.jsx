@@ -74,9 +74,15 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
                         <input onChange={handleRatingChange} className={styles.rangeInput} type="range" id="rating" defaultValue={5} min={0} max={5} step={0.5} />
                         <p>{!filterOptions.rating || filterOptions.rating === 0 ? 'All Ratings' : filterOptions.rating === 5 ? '5 star only' : `${filterOptions.rating} stars or more`}</p>
                     </div>
-
-                    <button className="btn btn-neutral" onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
-                    {addLocation && <p>select a location on the map</p>}
+                    <div className="dropdown dropdown-end">
+                        <button className="btn btn-neutral" onClick={handleAddClick}>Add Gem<IoMdAdd /></button>
+                        {addLocation && <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
+                            <div tabIndex={0} className="card-body">
+                            <h2 className="card-title"></h2> 
+                                <p>select a location on the map</p>
+                            </div>
+                        </div>}
+                    </div>
                 </div>
 
 
