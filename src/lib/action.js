@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { updateLocationWithReviewId } from "./data";
+import { postLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
 import { postReview } from "./data";
 
@@ -94,6 +94,15 @@ export const submitReview = async (formData) => {
     }
 };
 
+export const submitLocation = async (formData) => {
+    try {
+        console.log("trying to submit")
+        await postLocation(formData)
+    } catch (error) {
+        console.log(error, "error in submit")
+        throw new Error("Failed to post location")
+    }
+}
 
 
 

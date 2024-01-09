@@ -3,7 +3,6 @@ import { Locations } from "@/models/locations";
 import { Users } from "@/models/users";
 import { Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
 
 export const checkCollection = async () => {
     try {
@@ -30,11 +29,13 @@ export const getLocations = async () => {
         throw new Error("Error loading location data: ", error)
     }
 }
-export const postLocation = async (reviewData) => {
+export const postLocation = async (locationData) => {
     try {
+        console.log("postlocation")
         const newLocation = await Locations.create(locationData);
         return newLocation;
     } catch (error) {
+        console.log(error, "post location err")
         throw new Error("failed to add new location");
     }
 }
