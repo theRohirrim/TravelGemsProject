@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { postReview, updateLocationWithReviewId } from "./data";
+import { updateLocationWithReviewId } from "./data";
 import { voteForReview } from './data';
 
 
@@ -61,11 +61,8 @@ export const login = async (previousState, formData) => {
     try {
         await signIn("credentials", {username, password})
     } catch (err) {
-        console.log("ERR MSG .type: ", err.type)
-        console.log("ERR MSG .message: ", err.message)
-
+        
         if (err.type === "CredentialsSignin") {
-            console.log("CATCHES CRED SIGN IN ERR")
             return {error: "Invalid username or password"}
         }
         throw err;
@@ -88,7 +85,7 @@ export const submitReview = async (formData) => {
     if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
     
     const successfulUpdate = await updateLocationWithReviewId({locationId, reviewId})
-
+    
     return formatedReturn;
     } catch (error) {
         throw new Error("failed to adding review");
