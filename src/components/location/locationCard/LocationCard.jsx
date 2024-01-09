@@ -4,7 +4,7 @@ import styles from "./LocationCard.module.css"
 
 const LocationCard = async ({location}) => { 
 
-    const roundedRating = Math.round((location.rating + Number.EPSILON) * 100) / 100
+    const roundedRating = location.rating.toFixed(2)
 
     return (
         <section className={styles.locationContainer}>

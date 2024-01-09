@@ -5,6 +5,8 @@ import { FaGem } from "react-icons/fa";
 
 const Locations = ({ locations }) => {
 
+    const roundedRating = location.rating.toFixed(2)
+
     return (
         <div>
             {locations.map(location => (
@@ -15,7 +17,7 @@ const Locations = ({ locations }) => {
                     <div className="card-body rounded-b-lg bg-indigo-400">
                         <h2 className="card-title text-sm absolute top-3 left-3 right-3 text-gray-800 bg-white bg-opacity-75 p-4 rounded-lg">{location.place_name}</h2>
                         <p>{location.description}</p>
-                        <p>{location.rating} rating</p>
+                        <p>{roundedRating} rating</p>
 
                         {location.categories.map(category => (
                             <p className="badge badge-neutral">

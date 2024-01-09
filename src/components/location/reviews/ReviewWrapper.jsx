@@ -37,11 +37,9 @@ const ReviewWrapper = async ({id, placeName}) => {
       {formatReviews.length === 0 ?
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
-      <SessionProvider>
-      {formatReviews.map((review)=>{
+      formatReviews.map((review)=>{
         return(<ReviewsCard key={review._id} review = {review} />)
-      })}
-      </SessionProvider>
+      })
       } 
     </article>
   )

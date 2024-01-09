@@ -2,14 +2,8 @@
 import { useEffect, useState } from 'react';
 import style from './reviews.module.css';
 import { deleteReview, handleVoting } from '@/lib/action';
-import { useSession } from 'next-auth/react';
 
 const ReviewsCard = ({ review }) => {
-  // const { data: session, status, user} = useSession()
-  // useEffect( () => {}, [status] )
-  // console.log(status, "status in ReviewCard")
-  // console.log(session, "session in Reviewscard")
-  // console.log(user, "user in reviewCard")
 
   const [voted, setVoted] = useState(false);
   const [updatedVotes, setUpdatedVotes] = useState(review.votes);
