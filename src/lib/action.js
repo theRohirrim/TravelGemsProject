@@ -5,7 +5,7 @@ import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { getLocationById, updateLocationWithReviewId } from "./data";
-import { voteForReview } from './data';
+import { voteForReview, postReview,getUserNameByEmail } from './data';
 
 
 export const handleGithubLogin = async () => {
@@ -113,3 +113,14 @@ export const handleVoting = async (reviewId) => {
     }
   };
 
+
+  export const handleUserName = async (email) => {
+    try {
+        const currentUserName = await getUserNameByEmail(email);
+        console.log(currentUserName)
+        return currentUserName
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
