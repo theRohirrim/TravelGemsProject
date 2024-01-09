@@ -7,15 +7,15 @@ import { FaGem } from "react-icons/fa";
 import { submitReview } from "@/lib/action";
 import ReviewsCard from "../reviewCards.jsx/ReviewsCard";
 
-const NewReview = ({id}) => { 
+const NewReview = ({id, placeName}) => { 
 
     // user data currently hard coded to spikeman
     const userId = "659410c69f7ae624673bafdb"
     const username = "spikeman"
 
     // location data currently hard coded to covent garden as NewReview needs to be passed id params when rendered
-    const locationId = "659568dbedc28e2e44f28bc1"
-    const place_name = "Covent Garden"
+    const locationId = id
+    const place_name = placeName
 
 
     const [rating, setRating] = useState(null)
@@ -30,6 +30,7 @@ const NewReview = ({id}) => {
     const formSubmission = async (e) => { 
         e.preventDefault()
     
+        if(rating === null) setRating(0)
 
         const reviewData = {
             body: reviewBody,

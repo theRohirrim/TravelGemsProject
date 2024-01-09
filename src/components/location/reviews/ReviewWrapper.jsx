@@ -3,7 +3,7 @@ import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
 
-const ReviewWrapper = async ({id}) => {
+const ReviewWrapper = async ({id, placeName}) => {
 
   const allReviews = await getReviews();
   
@@ -32,7 +32,7 @@ const ReviewWrapper = async ({id}) => {
   
   return (
     <article className={style.reviewContainer}>
-    <NewReview /> 
+    <NewReview id = {id} placeName = {placeName}/> 
       {formatReviews.length === 0 ?
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
