@@ -22,7 +22,7 @@ const links = [
     },
     {
         title: 'Profile',
-        path: '/user/659410c69f7ae624673bafdb',
+        path: '/user',
         icon: 'user',
     }
 ];
