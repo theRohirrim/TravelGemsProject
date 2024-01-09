@@ -4,8 +4,9 @@ import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
 import { SessionProvider } from "next-auth/react";
 
-const ReviewWrapper = async ({id, placeName}) => {
-
+const ReviewWrapper = async ({id, placeName , user}) => {
+const {username, _id } = user 
+const userID = _id.toString()
   const allReviews = await getReviews();
   
   //filter reviews for matching id 
@@ -33,12 +34,12 @@ const ReviewWrapper = async ({id, placeName}) => {
   
   return (
     <article className={style.reviewContainer}>
-    <NewReview id = {id} placeName = {placeName}/> 
+    <NewReview id = {id} placeName = {placeName} userID={userID} username= {username}/> 
       {formatReviews.length === 0 ?
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
       formatReviews.map((review)=>{
-        return(<ReviewsCard key={review._id} review = {review} />)
+        return(<ReviewsCard key={review._id} review = {review} userID={userID} username= {username} />)
       })
       } 
     </article>
