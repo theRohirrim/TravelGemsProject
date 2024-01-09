@@ -123,13 +123,13 @@ export const handleVoting = async (reviewId) => {
   };
 
 
-  export const handleUserName = async (email) => {
-    try {
-        const currentUserName = await getUserNameByEmail(email);
-        console.log(currentUserName)
-        return currentUserName
-    } catch (error) {
-      console.log(error);
-    }
+//   export const handleUserName = async (email) => {
+//     try {
+//         const currentUserName = await getUserNameByEmail(email);
+//         console.log(currentUserName)
+//         return currentUserName
+//     } catch (error) {
+//       console.log(error);
+//     }
     
-  };
+//   };
