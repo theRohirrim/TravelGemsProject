@@ -5,7 +5,6 @@ import styles from './saveLocation.module.css';
 import { useState } from 'react';
 
 const SaveLocation = ({id, user}) => {
-    console.log("SAVELOCATIONS", user.savedLocations)
     const [isSaved, setIsSaved] = useState(user?.savedLocations.includes(id))
     const [error, setError] = useState(false)
 
