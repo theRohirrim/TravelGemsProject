@@ -8,19 +8,13 @@ import MapsNavigation from './filterAndView/mapsNavigation/MapsNavigation';
 import LocationList from './locationList/LocationList';
 import { useSession } from 'next-auth/react';
 
-const ExplorePage = ({ allLocations }) => {
+const ExplorePage = ({ allLocations, user }) => {
     const [locations, setLocations] = useState(allLocations)
     const [mapView, setMapView] = useState(true)
     const [filterOptions, setFilterOptions] = useState({})
     const [addLocation, setAddLocation] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState({})
     const [currentUser, setCurrentUser] = useState(null);
-
-    const { data: session, status, user } = useSession();
-
-    useEffect(() => {
-        setCurrentUser(user)
-    }, [status])
 
     useEffect(() => {
         let filteredLocations = allLocations
@@ -50,7 +44,7 @@ const ExplorePage = ({ allLocations }) => {
             <MapsNavigation filterOptions={filterOptions} setFilterOptions={setFilterOptions} addLocation={addLocation} setAddLocation={setAddLocation} setSelectedLocation={setSelectedLocation} />
             <MapAndListButtons mapView={mapView} setMapView={setMapView} />
             <div className={`${mapView === true && styles.disabled}`}>
-                <LocationList locations={locations} user={currentUser} />
+                <LocationList locations={locations} user={user} />
             </div>
             <div className={`${mapView === false && styles.disabled}`}>
                 <GoogleMapView locations={locations} addLocation={addLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
