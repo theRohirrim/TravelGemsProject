@@ -96,9 +96,8 @@ export const submitReview = async (formData) => {
 
 export const submitLocation = async (formData) => {
     try {
-        console.log("submit Location 1")
         const postedLocation = await postLocation(formData)
-        console.log("submit Location 2 - posted location", postedLocation)
+        return postedLocation
     } catch (error) {
         console.log(error, "error")
         throw new Error("Failed to post location")

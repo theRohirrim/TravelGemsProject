@@ -32,9 +32,7 @@ export const getLocations = async () => {
 export const postLocation = async (locationData) => {
     try {
         connectToDatabase()
-        console.log("postLocation")
         const newLocation = await Locations.create(locationData);
-        console.log(newLocation, "new location")
         return newLocation;
     } catch (error) {
         throw new Error("failed to add new location");

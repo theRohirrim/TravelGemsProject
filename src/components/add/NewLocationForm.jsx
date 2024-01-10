@@ -1,6 +1,6 @@
 "use client"
 import { submitLocation } from '@/lib/action';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
 
 export default function NewLocationForm({ latitude, longitude }) {
@@ -19,14 +19,25 @@ export default function NewLocationForm({ latitude, longitude }) {
         { value: 'Entertainment', label: 'Entertainment' }
     ]
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+            // find the address from the lat and lon
+            const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY; 
+            const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+            const response = await fetch(url);
+            const formatRes = await response.json(); 
+            let singleLocation = formatRes.results[0].formatted_address          
+
+
+            
 
         const data = {
             created_by: "spikeman",
             categories: ["Scenic"],
             place_name: placeName,
-            address: location,
+            address: location.length === 0 ? singleLocation : location,
             latitude: Number(latitude),
             longitude: Number(longitude),
             description: description,
@@ -34,10 +45,9 @@ export default function NewLocationForm({ latitude, longitude }) {
         }
 
 
-        try {
-            console.log(data, "submitting data")
+        try {              
+ 
             const postedLocation = await submitLocation(data)
-            console.log(postedLocation, "postedLocation")
             setPlaceName("")
             setLocation("")
             setDescription("")
