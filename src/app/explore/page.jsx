@@ -18,7 +18,7 @@ const Home = async () => {
   const session = await auth()
   console.log(session)
 
-  const user = await getUserByEmail(session.user.email)
+  const user = await getUserByEmail(session?.user.email)
   console.log(user)
 
   // FETCHING WITHOUT API
