@@ -7,8 +7,6 @@ export default function NewLocationForm({ latitude, longitude }) {
     const [placeName, setPlaceName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    // let categories = []
-    // const categories = ["Mystery", "Scenic", "Shopping", "Sports", "Entertainment"]
     const [categories, setCategories] = useState([]);
 
     let categoryOptions = [
