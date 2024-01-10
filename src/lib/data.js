@@ -157,6 +157,14 @@ export const deleteSavedLocation = async (id, user) => {
 
 }
 
+export const getSavedLocations = async (ids) => {
+    try {
+        return await Locations.find({ '_id': { $in: ids } });
+    } catch (error) {
+        throw new Error("Failed to get saved locations")
+    }
+}
+
 // when filtered 
 export const getReviews = async () => {
     try {

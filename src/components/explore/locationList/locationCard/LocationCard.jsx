@@ -3,8 +3,7 @@ import styles from './locationcard.module.css'
 import Link from 'next/link'
 import SaveLocation from '@/components/saveLocation/SaveLocation'
 
-const LocationCard = ({location, user}) => {
-
+const LocationCard = ({location, user, setPageLocations}) => {
     return (
         <div className="card bg-base-100 shadow-xl">
             <figure><img className='w-full h-48 object-cover' src={location.img} alt="" /></figure>
@@ -23,7 +22,7 @@ const LocationCard = ({location, user}) => {
                                 </p>
                             ))}
                     </div>
-                    {user && <SaveLocation id={location._id} user={user} />}
+                    {user && <SaveLocation id={location._id.toString()} user={user} setPageLocations={setPageLocations} />}
                 </div>
             </div>
         </div>
