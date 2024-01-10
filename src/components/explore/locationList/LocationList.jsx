@@ -1,14 +1,12 @@
 import LocationCard from "./locationCard/LocationCard"
 import styles from "./locationlist.module.css"
 
-const LocationList = ({locations, user}) => {
-
-
+const LocationList = ({locations, user, setPageLocations}) => {    
     return (
         <div className={styles.container}>
         {locations.map((location) => (
             <div key={location._id} className={styles.card}>
-            <LocationCard key={location.place_name} location={location} user={user} />
+            <LocationCard key={location.place_name} location={location} user={user} setPageLocations={setPageLocations} />
             </div>
         ))}
         </div>

@@ -1,3 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: whitesmoke;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.button:hover {
+    transform: translateY(2px);
+    background-color: #f44566; 
+}
+
 .button {
     background-color: whitesmoke;
     color: black;
@@ -14,8 +32,4 @@
 .active {
     background-color: rgb(172, 26, 172);
     color: var(--bg);
-}
-
-.hidden {
-    display: none;
 }
