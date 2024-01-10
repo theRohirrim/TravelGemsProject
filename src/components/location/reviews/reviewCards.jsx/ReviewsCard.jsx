@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import style from './reviews.module.css';
 import { deleteReview, handleVoting } from '@/lib/action';
 
