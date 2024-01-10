@@ -18,7 +18,6 @@ export default function NewLocationForm({ latitude, longitude }) {
         { value: 'Entertainment', label: 'Entertainment' }
     ]
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -40,7 +39,6 @@ export default function NewLocationForm({ latitude, longitude }) {
             img,
         }
 
-        console.log(data, "this")
         try {              
             const postedLocation = await submitLocation(data)
             setPlaceName("")
@@ -48,7 +46,6 @@ export default function NewLocationForm({ latitude, longitude }) {
             setDescription("")
             setCategories([])
             setImg("")
-
         } catch (error) {
             throw new Error("could not submit location")
         }
@@ -61,22 +58,16 @@ export default function NewLocationForm({ latitude, longitude }) {
         setCategories(selectedCategories)
     }
 
-    //covert to base64 Strings, allows upload of small images
-    // const handleFileChange = (e) => {
-    //     const reader = new FileReader()
-    //     reader.readAsDataURL(e.target.files[0])
-    //     reader.onload = () => {
-    //         console.log(reader.result)
-    //         setImg(reader.result)
-    //     }
-    //     reader.onerror = error => {
-    //         console.log("Error: ", error)
-    //     }
-    // }
-
+    //convert to base64 Strings, allows upload of small images
     const handleFileChange = (e) => {
-        setImg(e.target.files[0])
-        console.log(img)
+        const reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = () => {
+            setImg(reader.result)
+        }
+        reader.onerror = error => {
+            console.log("Error: ", error)
+        }
     }
 
     return (
@@ -105,7 +96,7 @@ export default function NewLocationForm({ latitude, longitude }) {
                 <label htmlFor="image">Upload an image:</label>
                 <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange}/><br />
                 <button type='submit'>Add new location</button>
-                {img && <img width={100} height={100} src={img} />}
+                {img && <img width={500} height={500} src={img} />}
             </form>
         </div>
     )

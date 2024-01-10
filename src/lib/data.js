@@ -4,6 +4,7 @@ import { Users } from "@/models/users";
 import { Reviews } from '@/models/reviews';
 import mongoose from "mongoose";
 
+
 export const checkCollection = async () => {
     try {
         connectToDatabase()
@@ -29,6 +30,9 @@ export const getLocations = async () => {
         throw new Error("Error loading location data: ", error)
     }
 }
+
+
+
 export const postLocation = async (locationData) => {
     try {
         connectToDatabase()
