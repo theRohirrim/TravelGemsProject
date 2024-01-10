@@ -31,6 +31,7 @@ export const getLocations = async () => {
 }
 export const postLocation = async (locationData) => {
     try {
+        await connectToDatabase()
         console.log("postlocation")
         const newLocation = await Locations.create(locationData);
         return newLocation;
