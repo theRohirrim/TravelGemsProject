@@ -6,7 +6,7 @@ import { auth } from '@/lib/auth';
 const Home = async () => {
   // Get logged in user
   const session = await auth()
-  let user;
+  // let user;
 
   const user = await getUserByEmail(session?.user.email)
   console.log(user)
