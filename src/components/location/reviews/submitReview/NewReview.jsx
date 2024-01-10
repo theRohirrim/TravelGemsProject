@@ -69,6 +69,7 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
 
         <div className="card bg-indigo-300 shadow-xl p-2 mx-auto mb-3">
               <p>{rating/2} {rating/2 > 1? "stars" : "star"} out of 5</p>
+              
         </div>
 
         <textarea
