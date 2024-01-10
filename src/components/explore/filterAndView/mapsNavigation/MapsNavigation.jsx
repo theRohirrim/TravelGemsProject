@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from "react";
+import React from "react";
 import Select from 'react-select';
 import styles from "./mapsNav.module.css";
 import { IoMdAdd } from "react-icons/io";
