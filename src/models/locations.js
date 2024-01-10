@@ -18,7 +18,6 @@ const locationSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
-        unique: true,
         min: 3,
         max: 40
     },

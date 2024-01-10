@@ -4,10 +4,9 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
+import { postLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview, postReview, getUserNameByEmail } from './data';
-
-
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -104,6 +103,17 @@ export const submitReview = async (formData) => {
     }
 };
 
+
+export const submitLocation = async (formData) => {
+    try {
+        const postedLocation = await postLocation(formData)
+        return postedLocation
+    } catch (error) {
+        console.log(error, "error")
+        throw new Error("Failed to post location")
+    }
+};
+
 export const deleteReview = async ({reviewId, locationId}) => { 
     try { 
         const deletedReview = await deleteOneReview(reviewId)
@@ -111,8 +121,7 @@ export const deleteReview = async ({reviewId, locationId}) => {
     } catch { 
         console.log(error, "error in deleteReview")
     }
-}
-
+};
 
 export const handleVoting = async (reviewId) => {
     try {
