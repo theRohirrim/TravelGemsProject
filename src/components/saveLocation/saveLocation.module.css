@@ -1,5 +1,19 @@
 .container {
-    border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: whitesmoke;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.button:hover {
+    transform: translateY(2px);
+    background-color: #f44566; 
 }
 
 .button {

@@ -12,10 +12,6 @@ const reviewSchema = new mongoose.Schema({
     min: 1,
     max: 5,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
   location_id: {
     type: mongoose.Schema.ObjectId,
     ref: 'Locations',
@@ -28,7 +24,6 @@ const reviewSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    
   },
   votes: {
     type: Number,
@@ -36,6 +31,6 @@ const reviewSchema = new mongoose.Schema({
   place_name: {
     type: String,
   },
-});
+}, {timestamps: true}, {collection: 'reviews'});
 
 export const Reviews = mongoose.models.Reviews || mongoose.model("Reviews", reviewSchema, 'reviews')

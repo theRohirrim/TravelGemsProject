@@ -4,7 +4,10 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { postReview } from "./data";
+import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
+import { voteForReview, postReview, getUserNameByEmail } from './data';
+
+
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -60,9 +63,8 @@ export const login = async (previousState, formData) => {
     try {
         await signIn("credentials", {username, password})
     } catch (err) {
-        console.log(err)
-
-        if (err.message.includes("CredentialsSignin")) {
+        
+        if (err.type === "CredentialsSignin") {
             return {error: "Invalid username or password"}
         }
         throw err;
@@ -73,20 +75,81 @@ export const submitReview = async (formData) => {
 
     try {
         const postedReview = await postReview(formData);
-        let formatedReturn = postedReview.toObject()
+        const locationId = postedReview.location_id;
+        const reviewId = postedReview._id;
+        const newRating = postedReview.rating;  // Make sure this is correct
 
-    if (formatedReturn.location_id) formatedReturn.location_id = formatedReturn.location_id.toString();
-    if (formatedReturn.user_id) formatedReturn.user_id = formatedReturn.user_id.toString();
-    if (formatedReturn._id) formatedReturn._id = formatedReturn._id.toString();
-    const review_id = formatedReturn._id
-    if (formatedReturn.createdAt) formatedReturn.createdAt = formatedReturn.createdAt.toISOString();
+        let formattedReturn = postedReview.toObject ? postedReview.toObject() : { ...postedReview };
 
-        
-    return formatedReturn;
+        if (formattedReturn.location_id) formattedReturn.location_id = formattedReturn.location_id.toString();
+        if (formattedReturn.user_id) formattedReturn.user_id = formattedReturn.user_id.toString();
+        if (formattedReturn._id) formattedReturn._id = formattedReturn._id.toString();
+
+
+
+        const locationData = await getLocationById(locationId);
+        const singleLocation = locationData[0]
+
+        if (!singleLocation || !Array.isArray(singleLocation.reviews_by_id)) {
+            throw new Error("Invalid location data received");
+        }
+
+        const { reviews_by_id, rating } = singleLocation;
+        const newAverage = ((rating * reviews_by_id.length) + newRating) / (reviews_by_id.length + 1);
+        await updateLocationWithReviewId({ locationId, reviewId, newAverage });
+
+        return formattedReturn;
     } catch (error) {
-        throw new Error("failed to adding review");
+        console.error("Error in submitReview:", error);
+        throw new Error("Failed to add review: " + error.message);
+    }
+};
+
+export const deleteReview = async ({reviewId, locationId}) => { 
+    try { 
+        const deletedReview = await deleteOneReview(reviewId)
+        const removedReviewIdLocation = await removeReviewFromLocation(reviewId, locationId)    
+    } catch { 
+        console.log(error, "error in deleteReview")
+    }
+}
+
+
+export const handleVoting = async (reviewId) => {
+    try {
+        const updatedReview = await voteForReview(reviewId);
+        return updatedReview
+    } catch (error) {
+      console.log(error);
+      
     }
 };
 
 
+export const handleUserName = async (email) => {
+    try {
+        const currentUserName = await getUserNameByEmail(email);
+        console.log(currentUserName)
+        return currentUserName
+    } catch (error) {
+        console.log(error);
+    }
+};
 
+export const saveLocationAction = async (id, email) => {
+    const user = await getUserByEmail(email)
+    try {
+        if (user.savedLocations.includes(id)){
+            console.log("IN DELETE")
+            await deleteSavedLocation(id, user)
+            console.log("Successfully deleted location from user saved list")
+        } else {
+            console.log("IN ADD")
+            await addSavedLocation(id, user)
+            console.log("successfully added location to users saved list")
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    savedLocations: {
+        type: Array,
+        default: []
+    }
 },{timestamps: true}, {collection: 'users'})
 
 export const Users = mongoose.models?.Users || mongoose.model("Users", userSchema, 'users')

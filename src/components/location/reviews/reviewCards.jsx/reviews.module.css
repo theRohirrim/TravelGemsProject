@@ -12,5 +12,16 @@
 
     width: 95vw;
     margin: auto; 
+}
 
+.button{
+    border-radius: 30px;
+    cursor: pointer;
+    width: 60px;
+    height: 4vh;
+    margin-right: 50px;
+    background-color:#cdb4db;
+    border:none;
+    color:#000;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
 }

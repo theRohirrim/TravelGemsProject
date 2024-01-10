@@ -13,11 +13,26 @@ const SingleUserPage = async ({ params }) => {
 
     return (
         <main className={styles.container}>
-            <h1>{user.username}</h1>
-            <h1>profile img</h1>
-            <p>{user.email}</p>
-            <Reviews userReviews={userReviews} /> 
-            <Locations locations={locations} />
+
+            <div className="stats shadow bg-indigo-400 m-2">
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                    <div className="avatar online">
+                        <div className="w-16 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    </div>
+                    <div className="stat-value">{user.username}</div>
+                    <div className="stat-title">{user.email}</div>
+                </div>
+            </div>
+
+            
+                <Reviews userReviews={userReviews} /> 
+                <Locations locations={locations} />
+            
+
         </main>
     )
 }
