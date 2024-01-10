@@ -1,6 +1,6 @@
 "use client"
 import { submitLocation } from '@/lib/action';
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import Select from 'react-select';
 
 export default function NewLocationForm({ latitude, longitude }) {
@@ -8,6 +8,7 @@ export default function NewLocationForm({ latitude, longitude }) {
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
     const [categories, setCategories] = useState([]);
+    const [img, setImg] = useState("");
 
     let categoryOptions = [
         { value: 'Mystery', label: 'Mystery' },
@@ -16,7 +17,6 @@ export default function NewLocationForm({ latitude, longitude }) {
         { value: 'Sports', label: 'Sports' },
         { value: 'Entertainment', label: 'Entertainment' }
     ]
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,9 +28,6 @@ export default function NewLocationForm({ latitude, longitude }) {
             const formatRes = await response.json(); 
             let singleLocation = formatRes.results[0].formatted_address          
 
-
-            
-
         const data = {
             created_by: "spikeman",
             categories: ["Scenic"],
@@ -38,19 +35,17 @@ export default function NewLocationForm({ latitude, longitude }) {
             address: location.length === 0 ? singleLocation : location,
             latitude: Number(latitude),
             longitude: Number(longitude),
-            description: description,
-            img: "https://images.pexels.com/photos/134061/pexels-photo-134061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2z"
+            description,
+            img,
         }
 
-
         try {              
- 
             const postedLocation = await submitLocation(data)
             setPlaceName("")
             setLocation("")
             setDescription("")
             setCategories([])
-
+            setImg("")
         } catch (error) {
             throw new Error("could not submit location")
         }
@@ -63,6 +58,18 @@ export default function NewLocationForm({ latitude, longitude }) {
         setCategories(selectedCategories)
     }
 
+    //convert to base64 Strings, allows upload of small images
+    const handleFileChange = (e) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = () => {
+            setImg(reader.result)
+        }
+        reader.onerror = error => {
+            console.log("Error: ", error)
+        }
+    }
+
     return (
         <div>
             <h1>New gem</h1>
@@ -71,13 +78,6 @@ export default function NewLocationForm({ latitude, longitude }) {
                 <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Leadenhall Market" /><br />
                 <label htmlFor="location">Location:</label>
                 <input value={location} onChange={e => setLocation(e.target.value)} type="text" id="location" placeholder="London" /><br />
-                {/*                 
-                <label htmlFor="category">Categories:</label>
-                
-                <select value={category} onChange={e => setCategory(e.target.value)} name="category" id="category" multiple>
-                    <option value="market">Market</option>
-                    <option value="park">Park</option>
-                </select><br /> */}
 
                 <div >
                     <p>Categories:</p>
@@ -91,12 +91,12 @@ export default function NewLocationForm({ latitude, longitude }) {
                     />
                 </div>
 
-
                 <label htmlFor="description">Description:</label>
                 <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="A beautiful covered market in the historic center of London"></textarea><br />
                 <label htmlFor="image">Upload an image:</label>
-                <input type="file" id="image" name="image" /><br />
+                <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange}/><br />
                 <button type='submit'>Add new location</button>
+                {img && <img width={500} height={500} src={img} />}
             </form>
         </div>
     )
