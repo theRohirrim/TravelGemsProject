@@ -2,6 +2,19 @@
     border: 1px solid green;
 }
 
+.button {
+    background-color: whitesmoke;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.button:hover {
+    transform: translateY(2px);
+    background-color: #f44566; 
+}
+
 .active {
     background-color: rgb(172, 26, 172);
     color: var(--bg);
