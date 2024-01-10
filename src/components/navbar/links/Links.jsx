@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 
 const Links = () => {
     const { data: session } = useSession();
-    console.log(session)
     const profilePath = session ? `/user/${session.user.id}` : '/login';
     const links = [
         {
