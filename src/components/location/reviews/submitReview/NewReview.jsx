@@ -9,9 +9,15 @@ import { useSession } from 'next-auth/react';
 const NewReview =  ({ id, placeName ,username , userID }) => {
   const locationId = id;
   const place_name = placeName;
-  const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState(10);
   const [reviewBody, setReviewBody] = useState('');
   const [newReview, setNewReview] = useState([]);
+
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
+  };
+
+  console.log(rating)
 
 
   const handleReviewInput = (event) => {
@@ -25,7 +31,7 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
 
     const reviewData = {
       body: reviewBody,
-      rating: rating,
+      rating: rating/2,
       location_id: locationId,
       user_id:userID,
       username: username,
@@ -46,37 +52,28 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
 
   return (
     <>
-      <form className={style.newReview} onSubmit={formSubmission}>
-        <div>
-          {[...Array(5)].map((star, i) => {
-            const currentRating = i + 1;
-
-            return (
-              <label key={i}>
-                <input
-                  type='radio'
-                  name='rating'
-                  className={style.radioButton}
-                  value={currentRating}
-                  onChange={() => {
-                    if (rating === currentRating) {
-                      setRating(null);
-                    } else {
-                      setRating(currentRating);
-                    }
-                  }}
-                />
-                <FaGem
-                  className={style.star}
-                  size={50}
-                  color={currentRating <= rating ? '#ffc107' : '#e4e5e9'}
-                />
-              </label>
-            );
-          })}
+      <form className="flex flex-col my-5 card bg-indigo-400 shadow-xl p-2" onSubmit={formSubmission}>
+      
+        <div className="rating rating-lg rating-half mx-auto mb-3">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+            <input
+              key={index}
+              type="radio"
+              name="rating-10"
+              className={`bg-indigo-900 mask mask-star-2 mask-half-${index % 2 === 0 ? '2' : '1'} `}
+              checked={rating === index}
+              onChange={() => handleRatingChange(index)}
+            />
+          ))}
         </div>
+
+        <div className="card bg-indigo-300 shadow-xl p-2 mx-auto mb-3">
+              <p>{rating/2} {rating/2 > 1? "stars" : "star"} out of 5</p>
+              
+        </div>
+
         <textarea
-          className={style.reviewInput}
+          className="mx-auto w-5/6 rounded-lg mb-3 p-2"
           type='text'
           placeholder='Share your thoughts..'
           onChange={handleReviewInput}
@@ -88,13 +85,9 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
         <input type='hidden' name='locationId' value={locationId} />
         <input type='hidden' name='place_name' value={place_name} />
 
-        <button type='submit'>Add Review</button>
+        <button type='submit' className='btn btn-active btn-neutral w-5/6 mx-auto'>Add Review</button>
       </form>
-      {newReview.length > 0
-        ? newReview.map((review) => {
-            return <ReviewsCard key={review._id} review={review} userID={userID}/>;
-          })
-        : null}
+      
     </>
   );
 };

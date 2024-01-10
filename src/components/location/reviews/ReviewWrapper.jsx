@@ -5,6 +5,7 @@ import NewReview from "./submitReview/NewReview";
 
 
 const ReviewWrapper = async ({id, placeName , user}) => {
+
 let username;
 let _id ;
 let userID;
@@ -17,6 +18,7 @@ if (user){
   username= null
   userID = null
 }
+
   const allReviews = await getReviews();
   
   //filter reviews for matching id 

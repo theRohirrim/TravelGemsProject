@@ -11,6 +11,7 @@ const SingleLocationPage = async ({ params }) => {
     console.log(session , "this is the session in review")
   
     const user = await getUserByEmail(session?.user.email)
+
     console.log(user, "this is the user review")
 
     let location = await getLocationById(id)
