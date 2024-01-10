@@ -15,10 +15,9 @@ const SaveLocation = ({id, user, setPageLocations}) => {
         try {
             await saveLocationAction(id, user.email);
             setIsSaved((prev) => {return !prev})
-            if (pathname = "/saved") {
-                console.log("inside pathname block", pathname)
+            if (setPageLocations) {
                 setPageLocations((prev) => {
-                    return prev.filter(function(e) { return e !== id })
+                    return prev.filter(function(e) { return e._id !== id })
                 })
             }
         } catch (error) {
