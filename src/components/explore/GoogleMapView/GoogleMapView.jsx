@@ -6,7 +6,8 @@ import style from "./googleMap.module.css"
 import Link from 'next/link';
 import { LiaLocationArrowSolid } from "react-icons/lia"
 
-const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLocation }) => {
+
+const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation, setSelectedLocation }) => {
     const [coordinates, setCoordinates] = useState({ lat: 51.507351, lng: -0.127758 });
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
@@ -15,11 +16,10 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
             setCoordinates({ lat: latitude, lng: longitude })
         })
+        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+        if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
 
-    useEffect(() => {
-        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
-    }, [selectLocation]);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
@@ -75,7 +75,6 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
 
     const handleMapClick = (e) => {
         setSelectedLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() })
-
     }
 
     return (
@@ -85,7 +84,6 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                 mapContainerStyle={containerStyle}
                 center={coordinates}
                 zoom={12}
-               
             >
                 {locations.map((location) => (
                     <Marker
@@ -103,8 +101,16 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                     />
                 ))}
 
-                {addLocation && <MarkerF position={selectedLocation}>
-                    <InfoWindow visible={true}>
+                {addLocation && <MarkerF
+                    position={selectedLocation}
+                    icon={{
+                        url: "/travel_icon.svg",
+                        scaledSize: {
+                            width: 40,
+                            height: 40
+                        }
+                    }}>
+                    <InfoWindow onCloseClick={() => setAddLocation(false)}>
                         <Link href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
                             <p>Add new travel gem</p>
                         </Link>
