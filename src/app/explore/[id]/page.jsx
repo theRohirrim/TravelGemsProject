@@ -11,7 +11,7 @@ const SingleLocationPage = async ({ params }) => {
     console.log(session , "this is the session in review")
   
     const user = await getUserByEmail(session.user.email)
-    console.log(user[0], "this is the user review")
+    console.log(user, "this is the user review")
 
     let location = await getLocationById(id)
     location = location[0]
@@ -20,7 +20,7 @@ const SingleLocationPage = async ({ params }) => {
     return (
         <>
         <LocationCard  location ={location} user={user} /> 
-        <ReviewWrapper id ={id} placeName ={location.place_name} user={user[0]}/> 
+        <ReviewWrapper id ={id} placeName ={location.place_name} user={user}/> 
         </>
     )
 }

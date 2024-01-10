@@ -5,8 +5,10 @@ import NewReview from "./submitReview/NewReview";
 import { SessionProvider } from "next-auth/react";
 
 const ReviewWrapper = async ({id, placeName , user}) => {
-const {username, _id } = user 
-const userID = _id.toString()
+  console.log(user,"user")
+const {username, _id } = user
+
+const userID = _id
   const allReviews = await getReviews();
   
   //filter reviews for matching id 
