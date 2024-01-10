@@ -7,7 +7,7 @@ const LocationCard = async ({location}) => {
     const roundedRating = location.rating.toFixed(2)
 
     return (
-        <section className="mt-[80px] mb-5 mt-5 w-5/6 mx-auto lg:mt-40 ">
+        <section className="mt-40 mb-5 w-5/6 mx-auto  ">
 
             <div className="card bg-base-100 shadow-xl">
                 <figure><img className='w-full h-96 object-cover md:h-[1000px]' src={location.img} alt="" /></figure>

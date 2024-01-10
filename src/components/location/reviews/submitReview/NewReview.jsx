@@ -27,7 +27,7 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
 
   const formSubmission = async (e) => {
     e.preventDefault();
-    if (rating === null) setRating(0);
+    
 
     const reviewData = {
       body: reviewBody,
@@ -46,7 +46,8 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
       console.error('Error submitting review:', error);
     }
     setReviewBody('');
-    setRating(null);
+    setRating(10);
+    window.location.reload()
     
   };
 
@@ -60,7 +61,7 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
               key={index}
               type="radio"
               name="rating-10"
-              className={`bg-indigo-900 mask mask-star-2 mask-half-${index % 2 === 0 ? '2' : '1'} `}
+              className={index % 2 === 0 ? 'bg-indigo-900 mask mask-star-2 mask-half-2' : 'bg-indigo-900 mask mask-star-2 mask-half-1'}
               checked={rating === index}
               onChange={() => handleRatingChange(index)}
             />
