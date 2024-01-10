@@ -55,7 +55,7 @@ if (user){
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
       formatReviews.map((review)=>{
-        return(<ReviewsCard key={review._id} review = {review} userID={userID} username= {username} />)
+        return(<ReviewsCard key={review._id} review = {review} userID={userID} username= {username} user={user} />)
       })
       } 
     </article>
