@@ -2,17 +2,30 @@
 
 import { handleSaveLocation, saveLocationAction } from '@/lib/action';
 import styles from './saveLocation.module.css';
+import { useState } from 'react';
 
 const SaveLocation = ({id, user}) => {
+    console.log("SAVELOCATIONS", user.savedLocations)
+    const [isSaved, setIsSaved] = useState(user?.savedLocations.includes(id))
+    const [error, setError] = useState(false)
 
     const handleSaveLocation = async (id, user) => {
-        await saveLocationAction(id, user.email);
+        try {
+            await saveLocationAction(id, user.email);
+            setIsSaved((prev) => {return !prev})
+        } catch (error) {
+            console.log(error)
+            setError(true)
+        }
     }
 
     return (
-        <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${user?.savedLocations.includes(id) && styles.active}`}>
-            Save Location
-        </button>
+        <div className={styles.container}>
+            <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${isSaved && styles.active}`}>
+                Save Location
+            </button>
+            {error && "Try again later"}
+        </div>
     )
 }
 
