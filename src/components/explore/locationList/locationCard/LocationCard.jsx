@@ -3,7 +3,7 @@ import styles from './locationcard.module.css'
 import Link from 'next/link'
 import SaveLocation from '@/components/saveLocation/SaveLocation'
 
-const LocationCard = ({location}) => {
+const LocationCard = ({location, user}) => {
 
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -23,7 +23,7 @@ const LocationCard = ({location}) => {
                                 </p>
                             ))}
                     </div>
-                    <SaveLocation />
+                    {user && <SaveLocation id={location._id} user={user} />}
                 </div>
             </div>
         </div>
