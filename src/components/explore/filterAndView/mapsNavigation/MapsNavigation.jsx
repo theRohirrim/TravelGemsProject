@@ -58,7 +58,7 @@ const MapsNavigation = ({filterOptions, setFilterOptions, setAddLocation, addLoc
                         {addLocation && <div tabIndex={0} className="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-64">
                             <div tabIndex={0} className="card-body">
                             <h2 className="card-title"></h2> 
-                                <p>select a location on the map</p>
+                                <p>Select a location on the map</p>
                             </div>
                         </div>}
                     </div>
