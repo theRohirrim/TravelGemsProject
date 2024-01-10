@@ -10,7 +10,8 @@ const SingleLocationPage = async ({ params }) => {
     const session = await auth()
     console.log(session , "this is the session in review")
   
-    const user = await getUserByEmail(session.user.email)
+    const user = await getUserByEmail(session?.user.email)
+
     console.log(user, "this is the user review")
 
     let location = await getLocationById(id)

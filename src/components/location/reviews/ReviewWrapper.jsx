@@ -2,13 +2,23 @@ import { getReviews } from "@/lib/data";
 import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
-import { SessionProvider } from "next-auth/react";
+
 
 const ReviewWrapper = async ({id, placeName , user}) => {
-  console.log(user,"user")
-const {username, _id } = user
 
-const userID = _id
+let username;
+let _id ;
+let userID;
+
+if (user){
+   username = user.username
+   _id = user._id
+   userID = _id.toString()
+} else {
+  username= null
+  userID = null
+}
+
   const allReviews = await getReviews();
   
   //filter reviews for matching id 
@@ -35,8 +45,12 @@ const userID = _id
   
   
   return (
+
     <article className={style.reviewContainer}>
-    <NewReview id = {id} placeName = {placeName} userID={userID} username= {username}/> 
+    {user ? <NewReview id = {id} placeName = {placeName} userID={userID} username= {username}/> :  <p className={style.reviewCard}>
+      Please login to add a review!
+    </p> }
+ 
       {formatReviews.length === 0 ?
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
