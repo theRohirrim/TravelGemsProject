@@ -12,16 +12,14 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
 
-
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
             setCoordinates({ lat: latitude, lng: longitude })
         })
+        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+        if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
 
-    useEffect(() => {
-        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
-    }, [selectLocation]);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
@@ -77,7 +75,6 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
 
     const handleMapClick = (e) => {
         setSelectedLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() })
-
     }
 
     return (
@@ -87,7 +84,6 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
                 mapContainerStyle={containerStyle}
                 center={coordinates}
                 zoom={12}
-
             >
                 {locations.map((location) => (
                     <Marker
