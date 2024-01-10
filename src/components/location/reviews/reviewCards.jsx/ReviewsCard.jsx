@@ -4,8 +4,6 @@ import style from './reviews.module.css';
 import { deleteReview, handleVoting } from '@/lib/action';
 
 const ReviewsCard = ({ review , userID , username }) => {
-  console.log(userID , "this is the userID in the reviewCard")
-  console.log(username , "this is the userID in the reviewCard")
   const [voted, setVoted] = useState(false);
   const [updatedVotes, setUpdatedVotes] = useState(review.votes);
 
@@ -17,7 +15,6 @@ const ReviewsCard = ({ review , userID , username }) => {
       if (!voted) {
         const updatedReview = await handleVoting(review._id);
         setVoted(true);
-        console.log(updatedReview," here is the update votes")
         setUpdatedVotes(updatedReview.votes);
       }
     } catch (error) {

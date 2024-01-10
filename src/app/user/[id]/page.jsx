@@ -7,7 +7,7 @@ const SingleUserPage = async ({ params }) => {
     const id = params.id
 
     let user = await getUserById(id)
-    user = user[0]
+    user = user
     const userReviews = await getReviewsById(id)
     const locations = await getLocationsByUsername(user.username)
 

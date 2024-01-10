@@ -2,7 +2,8 @@ import LocationCard from "./locationCard/LocationCard"
 import styles from "./locationlist.module.css"
 
 const LocationList = ({locations, user}) => {
-    
+
+
     return (
         <div className={styles.container}>
         {locations.map((location) => (

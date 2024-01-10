@@ -61,7 +61,6 @@ export default function NewLocationForm({ latitude, longitude }) {
             return option.value
         })
         setCategories(selectedCategories)
-        console.log(categories)
     }
 
     return (

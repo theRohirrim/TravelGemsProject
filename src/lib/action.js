@@ -6,7 +6,7 @@ import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { postLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
-import { voteForReview, postReview, getUserNameByEmail } from './data';
+import { voteForReview, postReview } from './data';
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -133,16 +133,6 @@ export const handleVoting = async (reviewId) => {
     }
 };
 
-
-export const handleUserName = async (email) => {
-    try {
-        const currentUserName = await getUserNameByEmail(email);
-        console.log(currentUserName)
-        return currentUserName
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 export const saveLocationAction = async (id, email) => {
     const user = await getUserByEmail(email)
