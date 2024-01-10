@@ -31,10 +31,10 @@ export const getLocations = async () => {
 }
 export const postLocation = async (locationData) => {
     try {
+        connectToDatabase()
         const newLocation = await Locations.create(locationData);
         return newLocation;
     } catch (error) {
-        console.log(error, "post location err")
         throw new Error("failed to add new location");
     }
 }

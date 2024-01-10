@@ -11,8 +11,8 @@ export default function NewLocationForm({latitude, longitude}) {
     const data = {
         created_by: "spikeman",
         categories: ["Park"],
-        place_name: "hyde park",
-        address: "Norway",
+        place_name: "Another park",
+        address: "Another location",
         latitude: 51.5113275358464,
         longitude: -0.16587415199083466,
         description:"nice park",
@@ -24,6 +24,7 @@ export default function NewLocationForm({latitude, longitude}) {
 
         try {
             const postedLocation = await submitLocation(data)
+            console.log(postedLocation, "postedLocation")
         } catch (error) {
             throw new Error("could not submit location")
         }
