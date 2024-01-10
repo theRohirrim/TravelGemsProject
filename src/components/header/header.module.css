@@ -1,5 +1,5 @@
 .container{
-    height: 10vh;
+    height: 12vh;
 
     background-color: #8EB5F0;
 
@@ -20,11 +20,9 @@
 
 .logo{
     width: 10vh;
-
 }
 
 .header{
-    padding-top: 2vh;
     width: 35vh;
 }
 
@@ -52,8 +50,11 @@
     background-color: #f44566; 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 430px) {
     .header{
         width: 20vh;
+    }
+    .logo{
+        width: 8vh;
     }
 }
