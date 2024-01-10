@@ -1,5 +1,4 @@
 "use client"
-
 import { submitLocation } from '@/lib/action';
 import React, { useState } from 'react'
 
@@ -17,7 +16,7 @@ export default function NewLocationForm({latitude, longitude}) {
         latitude: 51.5113275358464,
         longitude: -0.16587415199083466,
         description:"nice park",
-        img:"https://images.pexels.com/photos/134061/pexels-photo-134061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2z"
+        // img:"https://images.pexels.com/photos/134061/pexels-photo-134061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2z"
     }
 
     const handleSubmit = async (e) => {
