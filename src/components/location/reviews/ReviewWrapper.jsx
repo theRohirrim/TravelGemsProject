@@ -3,7 +3,21 @@ import style from "./ReviewWrapper.module.css"
 import ReviewsCard from "./reviewCards.jsx/ReviewsCard";
 import NewReview from "./submitReview/NewReview";
 
-const ReviewWrapper = async ({id}) => {
+
+const ReviewWrapper = async ({id, placeName , user}) => {
+
+let username;
+let _id ;
+let userID;
+
+if (user){
+   username = user.username
+   _id = user._id
+   userID = _id.toString()
+} else {
+  username= null
+  userID = null
+}
 
   const allReviews = await getReviews();
   
@@ -31,14 +45,19 @@ const ReviewWrapper = async ({id}) => {
   
   
   return (
+
     <article className={style.reviewContainer}>
-    <NewReview /> 
+    {user ? <NewReview id = {id} placeName = {placeName} userID={userID} username= {username}/> :  <p className={style.reviewCard}>
+      Please login to add a review!
+    </p> }
+ 
       {formatReviews.length === 0 ?
         <div className={style.reviewCard}> Be the first to review this location ...</div>
       : 
       formatReviews.map((review)=>{
-        return(<ReviewsCard key={review._id} review = {review} />)
-      })} 
+        return(<ReviewsCard key={review._id} review = {review} userID={userID} username= {username} />)
+      })
+      } 
     </article>
   )
 }

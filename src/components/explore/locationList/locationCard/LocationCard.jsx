@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import styles from './locationcard.module.css'
 import Link from 'next/link'
+import SaveLocation from '@/components/saveLocation/SaveLocation'
 
-const LocationCard = ({location}) => {
+const LocationCard = ({location, user}) => {
 
     return (
         <div className="card bg-base-100 shadow-xl">
@@ -14,13 +15,16 @@ const LocationCard = ({location}) => {
                     </Link>
                 <p>{location.description}</p>
                 <p>{location.rating} rating</p>
-
-                {location.categories.map(category => (
-                            <p className="badge badge-neutral">
-                                <em>{category} </em>
-                            </p>
-                        ))}
-
+                <div className={styles.footer}>
+                    <div className={styles.categories}>
+                    {location.categories.map(category => (
+                                <p key={category} className="badge badge-neutral">
+                                    <em>{category} </em>
+                                </p>
+                            ))}
+                    </div>
+                    {user && <SaveLocation id={location._id} user={user} />}
+                </div>
             </div>
         </div>
     )
