@@ -7,8 +7,9 @@ export default function NewLocationForm({ latitude, longitude }) {
     const [placeName, setPlaceName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    let categories = []
+    // let categories = []
     // const categories = ["Mystery", "Scenic", "Shopping", "Sports", "Entertainment"]
+    const [categories, setCategories] = useState([]);
 
     let categoryOptions = [
         { value: 'Mystery', label: 'Mystery' },
@@ -23,12 +24,12 @@ export default function NewLocationForm({ latitude, longitude }) {
 
         const data = {
             created_by: "spikeman",
-            categories: categories,
+            categories: ["Scenic"],
             place_name: placeName,
             address: location,
             latitude: Number(latitude),
             longitude: Number(longitude),
-            description,
+            description: description,
             img: "https://images.pexels.com/photos/134061/pexels-photo-134061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2z"
         }
 
@@ -39,9 +40,8 @@ export default function NewLocationForm({ latitude, longitude }) {
             console.log(postedLocation, "postedLocation")
             setPlaceName("")
             setLocation("")
-            setCategory("")
             setDescription("")
-            categories = []
+            setCategories([])
 
         } catch (error) {
             throw new Error("could not submit location")
@@ -49,9 +49,10 @@ export default function NewLocationForm({ latitude, longitude }) {
     }
 
     const handleCategoryChange = (selectedOption) => {
-        categories = selectedOption.map((option) => {
+        const selectedCategories = selectedOption.map((option) => {
             return option.value
         })
+        setCategories(selectedCategories)
         console.log(categories)
     }
 
