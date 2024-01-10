@@ -13,7 +13,7 @@ export default function NewLocationForm({latitude, longitude}) {
         created_by: "spikeman",
         categories: ["Park"],
         place_name: "hyde park",
-        address: "London",
+        address: "Norway",
         latitude: 51.5113275358464,
         longitude: -0.16587415199083466,
         description:"nice park",
@@ -22,11 +22,9 @@ export default function NewLocationForm({latitude, longitude}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("submit...")
 
         try {
-            console.log("submit trying...")
-            await submitLocation(data)
+            const postedLocation = await submitLocation(data)
         } catch (error) {
             throw new Error("could not submit location")
         }
