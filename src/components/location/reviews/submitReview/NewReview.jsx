@@ -2,18 +2,11 @@
 import { useState } from 'react';
 import style from './NewReview.module.css';
 import { FaGem } from 'react-icons/fa';
-import { submitReview,handleUserName } from '@/lib/action';
+import { submitReview } from '@/lib/action';
 import ReviewsCard from '../reviewCards.jsx/ReviewsCard';
 import { useSession } from 'next-auth/react';
 
-const NewReview =  ({ id, placeName }) => {
-  const { data: session, status } = useSession();
-  console.log('Session Status:', status);
-  console.log('Full Session:', session);
-  console.log(session?.user?.id, 'this is the id');
-  console.log(session?.user?.email, 'this is the email');
-  const userEmail = session?.user?.email
-
+const NewReview =  ({ id, placeName ,username , userID }) => {
   const locationId = id;
   const place_name = placeName;
   const [rating, setRating] = useState(null);
@@ -28,15 +21,14 @@ const NewReview =  ({ id, placeName }) => {
 
   const formSubmission = async (e) => {
     e.preventDefault();
-    const userName =  await handleUserName(userEmail)
     if (rating === null) setRating(0);
 
     const reviewData = {
       body: reviewBody,
       rating: rating,
       location_id: locationId,
-      user_id: session?.user?.id,
-      username: userName,
+      user_id:userID,
+      username: username,
       votes: 0,
       place_name: place_name,
     };
@@ -47,9 +39,9 @@ const NewReview =  ({ id, placeName }) => {
     } catch (error) {
       console.error('Error submitting review:', error);
     }
-
     setReviewBody('');
     setRating(null);
+    
   };
 
   return (
@@ -100,7 +92,7 @@ const NewReview =  ({ id, placeName }) => {
       </form>
       {newReview.length > 0
         ? newReview.map((review) => {
-            return <ReviewsCard key={review._id} review={review} />;
+            return <ReviewsCard key={review._id} review={review} userID={userID}/>;
           })
         : null}
     </>

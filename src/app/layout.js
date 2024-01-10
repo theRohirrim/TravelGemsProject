@@ -10,12 +10,18 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'TravelGems',
   description: 'Find hidden gems near you',
+  icons:{
+    icon:['./favicon_folder/favicon.ico?v=4'],
+    apple:['./favicon_folder/apple-touch-icon.png?v=4'],
+    shortcut:['./favicon_folder/apple-touch-icon.png']
+  }
 }
 
 export default function RootLayout({ children }) {
   return (
     <SessionProvider>
     <html lang="en">
+      
       <body className={inter.className}>
         <Provider>
           <div className='max-w-full'>

@@ -117,21 +117,22 @@ export const deleteReview = async ({reviewId, locationId}) => {
 export const handleVoting = async (reviewId) => {
     try {
         const updatedReview = await voteForReview(reviewId);
+        return updatedReview
     } catch (error) {
       console.log(error);
+      
     }
 };
 
 
 export const handleUserName = async (email) => {
-try {
-    const currentUserName = await getUserNameByEmail(email);
-    console.log(currentUserName)
-    return currentUserName
-} catch (error) {
-    console.log(error);
-}
-
+    try {
+        const currentUserName = await getUserNameByEmail(email);
+        console.log(currentUserName)
+        return currentUserName
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export const saveLocationAction = async (id, email) => {
