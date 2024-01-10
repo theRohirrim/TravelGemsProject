@@ -113,7 +113,7 @@ export const getUsers = async () => {
 export const getUserById = async (_id) => {
     try {
         connectToDatabase()
-        const user = await Users.find({_id})
+        const user = await Users.findOne({_id})
         return user
 
     } catch (error) {
@@ -132,6 +132,29 @@ export const getUserByEmail = async(email) => {
         console.log(error)
         throw new Error("Failed to fetch individual user data")
     }
+}
+
+export const addSavedLocation = async (id, user) => {
+
+    const newArray = [...user.savedLocations, id]
+            
+    user.savedLocations = newArray
+
+    console.log("ACTION - add", user.savedLocations)
+
+    user.save()
+}
+
+export const deleteSavedLocation = async (id, user) => {
+
+    const filteredArray = user.savedLocations.filter(function(e) { return e !== id })
+
+    user.savedLocations = filteredArray
+
+    console.log("ACTION - delete", user.savedLocations)
+
+    user.save()
+
 }
 
 // when filtered 

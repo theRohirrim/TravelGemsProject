@@ -1,14 +1,18 @@
-import { handleSaveLocation } from '@/lib/action';
-import styles from './saveLocation.module.css'
+'use client'
+
+import { handleSaveLocation, saveLocationAction } from '@/lib/action';
+import styles from './saveLocation.module.css';
 
 const SaveLocation = ({id, user}) => {
-    
+
+    const handleSaveLocation = async (id, user) => {
+        await saveLocationAction(id, user.email);
+    }
+
     return (
-        <form action={handleSaveLocation(id, user)}>
-            <button className={`${styles.button} ${user?.savedLocations.includes(id) && styles.active}`}>
-                Save Location
-            </button>
-        </form>
+        <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${user?.savedLocations.includes(id) && styles.active}`}>
+            Save Location
+        </button>
     )
 }
 

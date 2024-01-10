@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { deleteOneReview, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
+import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview, postReview, getUserNameByEmail } from './data';
 
 
@@ -134,28 +134,17 @@ try {
 
 };
 
-export const handleSaveLocation = async (id, user) => {
-    console.log("ACTION", user)
+export const saveLocationAction = async (id, email) => {
+    const user = await getUserByEmail(email)
     try {
-        const currentUser = await getUserByEmail(user.email)
         if (user.savedLocations.includes(id)){
-
-            const filteredArray = currentUser.savedLocations.filter(function(e) { return e !== id })
-
-            currentUser.savedLocations = filteredArray
-
-            console.log("ACTION - delete", currentUser.savedLocations)
-
-            currentUser.save()
+            console.log("IN DELETE")
+            await deleteSavedLocation(id, user)
+            console.log("Successfully deleted location from user saved list")
         } else {
-            const newArray = [...currentUser.savedLocations, id]
-            
-            currentUser.savedLocations = newArray
-
-            console.log("ACTION - add", currentUser.savedLocations)
-
-            currentUser.save();
-
+            console.log("IN ADD")
+            await addSavedLocation(id, user)
+            console.log("successfully added location to users saved list")
         }
 
     } catch (error) {
