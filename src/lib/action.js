@@ -4,7 +4,7 @@ import { Users } from "@/models/users";
 import { signIn, signOut } from "./auth";
 import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
-import { postLocation } from "./data";
+import { deleteReviewByLocation, postLocation, removeLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview, postReview } from './data';
 import { revalidatePath } from "next/cache";
@@ -150,5 +150,15 @@ export const saveLocationAction = async (id, email) => {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const deleteLocation = async (locationId) => { 
+    try { 
+        console.log(locationId, "in action js")
+        await removeLocation(locationId)
+        await deleteReviewByLocation(locationId)
+    } catch { 
+        console.log("error in action.js with delete")
     }
 }

@@ -238,3 +238,23 @@ export const voteForReview = async (reviewId) => {
         console.log(error);
     }
 };
+
+export const deleteReviewByLocation = async (locationId) => { 
+    try { 
+        console.log(locationId, "deleting reviews")
+    const deletedReview = await Reviews.deleteMany( { "location_id":  locationId })
+     console.log(deletedReview, "deleted Review Here") 
+    } catch { 
+        console.log("error with delete reviews by location id")
+    }
+}
+
+export const removeLocation = async (locationId) => { 
+    try { 
+        console.log(locationId, "deleting location")
+        const deletedLocation = await Locations.deleteOne( {"_id":  locationId})
+         console.log(deletedLocation, "deleted Location here") 
+        } catch { 
+            console.log("error with delete reviews by location id")
+        }
+}
