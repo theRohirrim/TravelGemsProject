@@ -36,7 +36,8 @@ export default function NewLocationForm({ latitude, longitude }) {
             latitude: Number(latitude),
             longitude: Number(longitude),
             description,
-            img,
+            img: img,
+            rating: 0,
         }
 
         try {              
