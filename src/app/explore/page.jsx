@@ -11,7 +11,6 @@ const Home = async () => {
   const user = await getUserByEmail(session?.user.email)
 
 
-
   // FETCHING WITHOUT API
   let allLocations = await getLocations();
   allLocations = JSON.parse(JSON.stringify(allLocations))

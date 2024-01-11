@@ -13,9 +13,10 @@ const Links = () => {
             icon: 'explore',
         },
         {
-            title: 'Network',
-            path: '/network',
+            title: 'Share',
+            path: '/add',
             icon: 'network',
+            // need a new icon for post location
         },
         {
             title: 'Saved',
