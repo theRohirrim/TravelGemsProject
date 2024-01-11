@@ -2,6 +2,7 @@ import Image from 'next/image'
 import styles from './locationcard.module.css'
 import Link from 'next/link'
 import SaveLocation from '@/components/saveLocation/SaveLocation'
+import { CiShoppingTag } from "react-icons/ci";
 
 const LocationCard = ({location, user, setPageLocations}) => {
 
@@ -33,9 +34,10 @@ const LocationCard = ({location, user, setPageLocations}) => {
                 <div className={styles.footer}>
                     <div className={styles.categories}>
                     {location.categories.map(category => (
-                                <p key={category} className="badge badge-neutral">
+                                <button key={category} className="btn btn-primary mr-4 btn-sm glass">
+                                    <CiShoppingTag />
                                     <em>{category} </em>
-                                </p>
+                                </button>
                             ))}
                     </div>
                     {user && <SaveLocation id={location._id.toString()} user={user} setPageLocations={setPageLocations} />}
