@@ -89,13 +89,17 @@ export default function NewLocNoLat({ latitude, longitude }) {
 
                                 <div className='join join-vertical'>
                                     <p className='bg-indigo-300 join-item p-2'>Categories:</p>
-                                    <Select
-                                        isMulti
-                                        name="categories"
-                                        options={categoryOptions}
-                                        onChange={handleCategoryChange}
-                                        classNamePrefix="select"
-                                    />
+
+                                    <div className="card bg-base-100 shadow-xl join-item p-2">
+                                            <Select
+                                                isMulti
+                                                name="categories"
+                                                options={categoryOptions}
+                                                onChange={handleCategoryChange}
+                                                classNamePrefix="select"
+                                            />    
+                                    </div>
+
                                 </div>
 
                                 <div className='join join-vertical'>
