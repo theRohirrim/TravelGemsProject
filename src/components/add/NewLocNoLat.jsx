@@ -119,8 +119,6 @@ export default function NewLocNoLat({ latitude, longitude }) {
                         </form>
                 </div>
             </div>
-
-            
         </div>
     )
 }
