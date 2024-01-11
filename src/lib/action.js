@@ -6,7 +6,7 @@ import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { deleteReviewByLocation, postLocation, removeLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
-import { voteForReview, postReview, getUserNameByEmail } from './data';
+import { voteForReview, postReview } from './data';
 import { revalidatePath } from "next/cache";
 
 export const handleGithubLogin = async () => {
@@ -134,15 +134,6 @@ export const handleVoting = async (reviewId) => {
     }
 };
 
-
-export const handleUserName = async (email) => {
-    try {
-        const currentUserName = await getUserNameByEmail(email);
-        return currentUserName
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 export const saveLocationAction = async (id, email) => {
     const user = await getUserByEmail(email)

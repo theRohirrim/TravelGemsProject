@@ -117,12 +117,8 @@ export default function NewLocNoLat({ latitude, longitude }) {
                                 <button type='submit' className="btn btn-primary ">Add new location</button>
                             </div>
                         </form>
-
-                    
                 </div>
             </div>
-
-            
         </div>
     )
 }
