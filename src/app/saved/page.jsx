@@ -1,10 +1,10 @@
 import { auth } from '@/lib/auth';
 import styles from './saved.module.css'
 import { getSavedLocations, getUserByEmail } from '@/lib/data';
-import LocationList from '@/components/explore/locationList/LocationList';
 import SavedLocationWrapper from '@/components/explore/savedLocationWrapper/SavedLocationWrapper';
 
 const SavedPage = async () => {
+
     // Get logged in user
     const session = await auth()
     let user;
