@@ -6,7 +6,8 @@ import { connectToDatabase } from "./db";
 import bcrypt from 'bcryptjs'
 import { postLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
-import { voteForReview, postReview } from './data';
+import { voteForReview, postReview, getUserNameByEmail } from './data';
+import { revalidatePath } from "next/cache";
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -136,18 +137,27 @@ export const handleVoting = async (reviewId) => {
 };
 
 
+export const handleUserName = async (email) => {
+    try {
+        const currentUserName = await getUserNameByEmail(email);
+        return currentUserName
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const saveLocationAction = async (id, email) => {
     const user = await getUserByEmail(email)
     try {
         if (user.savedLocations.includes(id)){
-            console.log("IN DELETE")
             await deleteSavedLocation(id, user)
-            console.log("Successfully deleted location from user saved list")
         } else {
-            console.log("IN ADD")
             await addSavedLocation(id, user)
-            console.log("successfully added location to users saved list")
         }
+
+        revalidatePath('/saved')
+        revalidatePath('/explore')
+        revalidatePath('explore/[id]')
 
     } catch (error) {
         console.log(error)

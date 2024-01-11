@@ -53,7 +53,8 @@ import Select from 'react-select';
             longitude: Number(longitude),
             rating: 0,
             description,
-            img,
+            img: img,
+            rating: 0,
         }
           
             await submitLocation(data)
