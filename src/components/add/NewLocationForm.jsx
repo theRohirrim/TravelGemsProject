@@ -51,6 +51,7 @@ import Select from 'react-select';
             address: location,
             latitude: Number(latitude),
             longitude: Number(longitude),
+            rating: 0,
             description,
             img,
         }
