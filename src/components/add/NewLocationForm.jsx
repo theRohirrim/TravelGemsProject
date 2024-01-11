@@ -89,6 +89,8 @@ const NewLocationForm = ({ latitude, longitude }) => {
 
     return (
         <div>
+            
+
             <h1>New gem</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="place-name">Place name:</label>
