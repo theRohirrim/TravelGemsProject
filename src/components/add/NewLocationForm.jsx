@@ -1,9 +1,9 @@
 "use client"
 import { submitLocation } from '@/lib/action';
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
 
- const NewLocationForm = ({ latitude, longitude }) => {
+const NewLocationForm = ({ latitude, longitude }) => {
     const [placeName, setPlaceName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
@@ -37,12 +37,12 @@ import Select from 'react-select';
         fetchAddress();
     }, [latitude, longitude]);
 
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-            
-            // find the address from the lat and lon
+
+        // find the address from the lat and lon
 
         const data = {
             created_by: "spikeman",
@@ -55,34 +55,17 @@ import Select from 'react-select';
             img: img,
             rating: 0,
         }
-          
-try { 
 
-    submitLocation(data)
-    setPlaceName("")
-    setLocation("")
-    setDescription("")
-    setCategories([])
-    setImg("")    
-} catch { 
-    console.log("error in New Location")
-}
-
-            // submitLocation(data)
-            // .then((res) => { 
-            //     console.log(res)
-            // })
-            // .then(()=> { 
-            //     setPlaceName("")
-            //     setLocation("")
-            //     setDescription("")
-            //     setCategories([])
-            //     setImg("")    
-            // })
-            // .catch((err)=> { 
-            //     console.log("error in New Location")
-            // })
-
+        try {
+            submitLocation(data)
+            setPlaceName("")
+            setLocation("")
+            setDescription("")
+            setCategories([])
+            setImg("")
+        } catch {
+            throw new Error("Could not add new location")
+        }
     }
 
     const handleCategoryChange = (selectedOption) => {
@@ -111,7 +94,7 @@ try {
                 <label htmlFor="place-name">Place name:</label>
                 <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." /><br />
                 <label htmlFor="location">Location:</label>
-                <input value={location} onChange={e => {setLocation(e.target.value)} } type="text" id="location" placeholder="Address... " /><br />
+                <input value={location} onChange={e => { setLocation(e.target.value) }} type="text" id="location" placeholder="Address... " /><br />
 
                 <div >
                     <p>Categories:</p>
@@ -128,7 +111,7 @@ try {
                 <label htmlFor="description">Description:</label>
                 <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. "></textarea><br />
                 <label htmlFor="image">Upload an image:</label>
-                <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange}/><br />
+                <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange} /><br />
                 <button type='submit'>Add new location</button>
                 {img && <img width={500} height={500} src={img} />}
             </form>
