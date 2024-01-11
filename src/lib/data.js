@@ -201,7 +201,7 @@ export const postReview = async (reviewData) => {
 
 export const deleteOneReview = async (reviewId) => { 
 try { 
-    const deletedReview = await Reviews.deleteOne( {"_id": new ObjectId(reviewId)})
+    const deletedReview = await Reviews.deleteOne( {"_id": reviewId})
     return deletedReview
 
 } catch (error) {
@@ -210,10 +210,9 @@ try {
 }
 
 export const removeReviewFromLocation = async (reviewId, locationId) => { 
-
     try { 
         const updatedLocation = await Locations.updateOne(
-            {_id : new ObjectId(locationId)}, 
+            {_id : locationId}, 
             { "$pull": { "reviews_by_id": reviewId } })
 
         return updatedLocation

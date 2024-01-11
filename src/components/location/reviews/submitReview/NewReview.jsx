@@ -17,8 +17,6 @@ const NewReview =  ({ id, placeName ,username , userID }) => {
     setRating(newRating);
   };
 
-  console.log(rating)
-
 
   const handleReviewInput = (event) => {
     let reviewContent = event.target.value;
