@@ -3,7 +3,7 @@ import { submitLocation } from '@/lib/action';
 import React, {useEffect, useState } from 'react'
 import Select from 'react-select';
 
- const NewLocationForm = ({ latitude, longitude }) => {
+export default function NewLocNoLat({ latitude, longitude }) {
     const [placeName, setPlaceName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
@@ -18,49 +18,40 @@ import Select from 'react-select';
         { value: 'Entertainment', label: 'Entertainment' }
     ]
 
-
-
-    useEffect(() => {
-        const fetchAddress = async () => {
-            const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-            const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
-            try {
-                const response = await fetch(url);
-                const formatRes = await response.json();
-                let locationAddress = formatRes.results[0].formatted_address;
-                setLocation(locationAddress);
-            } catch (error) {
-                console.error("Error fetching location: ", error);
-            }
-        };
-
-        fetchAddress();
-    }, [latitude, longitude]);
-
-    
     const handleSubmit = async (e) => {
         e.preventDefault()
 
             
             // find the address from the lat and lon
+            const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY; 
+            const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+            const response = await fetch(url);
+            const formatRes = await response.json(); 
+            let singleLocation = formatRes.results[0].formatted_address          
+
+            console.log(singleLocation, "loc in newlocation")
 
         const data = {
             created_by: "spikeman",
             categories: ["Scenic"],
             place_name: placeName,
-            address: location,
+            address: location.length === 0 ? singleLocation : location,
             latitude: Number(latitude),
             longitude: Number(longitude),
             description,
             img,
         }
-          
-            await submitLocation(data)
+
+        try {              
+            const postedLocation = await submitLocation(data)
             setPlaceName("")
             setLocation("")
             setDescription("")
             setCategories([])
             setImg("")
+        } catch (error) {
+            throw new Error("could not submit location")
+        }
     }
 
     const handleCategoryChange = (selectedOption) => {
@@ -87,9 +78,9 @@ import Select from 'react-select';
             <h1>New gem</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="place-name">Place name:</label>
-                <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." /><br />
+                <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Leadenhall Market" /><br />
                 <label htmlFor="location">Location:</label>
-                <input value={location} onChange={e => {setLocation(e.target.value)} } type="text" id="location" placeholder="Address... " /><br />
+                <input value={location} onChange={e => setLocation(e.target.value)} type="text" id="location" placeholder="London" /><br />
 
                 <div >
                     <p>Categories:</p>
@@ -104,7 +95,7 @@ import Select from 'react-select';
                 </div>
 
                 <label htmlFor="description">Description:</label>
-                <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. "></textarea><br />
+                <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="A beautiful covered market in the historic center of London"></textarea><br />
                 <label htmlFor="image">Upload an image:</label>
                 <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange}/><br />
                 <button type='submit'>Add new location</button>
@@ -113,5 +104,3 @@ import Select from 'react-select';
         </div>
     )
 }
-
-export default NewLocationForm
