@@ -12,9 +12,11 @@ const NewLocationForm = ({ user }) => {
     const [categories, setCategories] = useState([]);
     const [img, setImg] = useState("");
 
+    let latitude
+    let longitude
     const searchParams = useSearchParams()
-    const latitude = searchParams.get('latitude')
-    const longitude = searchParams.get('longitude')
+    latitude = searchParams.get('latitude')
+    longitude = searchParams.get('longitude')
 
     let username;
 
@@ -74,9 +76,7 @@ const NewLocationForm = ({ user }) => {
     }, [latitude, longitude]);
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
+    const handleSubmit = () => {
 
         // find the address from the lat and lon
 
@@ -128,23 +128,33 @@ const NewLocationForm = ({ user }) => {
     const handlePlaceChanged = () => {
         const [place] = inputRef.current.getPlaces()
         if (place) {
-            console.log(place)
-            console.log(place.formatted_address, "add")
-            console.log(place.geometry.location.lat(), "lat")
+            setLocation(place.formatted_address)
+            latitude = place.geometry.location.lat()
+            longitude = place.geometry.location.lng()
         }
     }
     return (
         <div>
             <h1>New gem</h1>
-            <form onSubmit={handleSubmit}>
+            <form action={handleSubmit} onSubmit={() => false}>
                 <label htmlFor="place-name">Place name:</label>
-                <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." /><br />
+                <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." required/><br />
+
+                {/* <label htmlFor="location">Location:</label>
+                {latitude ?
+                    <input value={location} type="text" id="location" disabled />
+                    :
+                    <input value={location} onChange={e => { setLocation(e.target.value) }} type="text" id="location" placeholder="Address... " />} */}
 
                 <label htmlFor="location">Location:</label>
                 {latitude ?
                     <input value={location} type="text" id="location" disabled />
                     :
-                    <input value={location} onChange={e => { setLocation(e.target.value) }} type="text" id="location" placeholder="Address... " />}
+                    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={["places"]}>
+                    <StandaloneSearchBox onLoad={ref => (inputRef.current = ref)} onPlacesChanged={handlePlaceChanged}>
+                        <input type='text' placeholder='Enter location' />
+                    </StandaloneSearchBox>
+                </LoadScript>}
 
 
                 <div >
@@ -159,19 +169,14 @@ const NewLocationForm = ({ user }) => {
                     />
                 </div>
 
-                <label htmlFor="description">Description:</label>
-                <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. "></textarea><br />
+                <label htmlFor="description" >Description:</label>
+                <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. " required></textarea><br />
                 <label htmlFor="image">Upload an image:</label>
                 <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange} /><br />
                 <button type='submit'>Add new location</button>
                 {img && <img width={500} height={500} src={img} />}
             </form>
 
-            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={["places"]}>
-                <StandaloneSearchBox onLoad={ref => (inputRef.current = ref)} onPlacesChanged={handlePlaceChanged}>
-                    <input type='text' placeholder='Enter location' />
-                </StandaloneSearchBox>
-            </LoadScript>
 
         </div>
     )
