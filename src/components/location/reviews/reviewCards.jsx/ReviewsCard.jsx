@@ -41,21 +41,47 @@ const ReviewsCard = ({ review , userID , username, user }) => {
   const [voteMessage, setVoteMessage] = useState(null);
 
   return (
-    <section className={style.reviewCard} key={review._id.toString()}>
-      <p>"{review.body}" - {review.username}</p>
-      <p>{review.rating}/5</p>
-      <p>{review.createdAt ? review.createdAt.toLocaleDateString() : "04/01/2024"}</p>
-      <p>{updatedVotes} votes</p>
-      <button onClick={handleVote} disabled={voted} className={style.button}>
-        {voted ? 'Voted!' : 'Like'}
-      </button>
-      {voteMessage && <p  className={style.login}>{voteMessage}</p>}
+    <section className="card bg-base-100 shadow-xl my-10 lg:w-5/6 lg:mx-auto" key={review._id.toString()}>
 
-      {review.user_id === userID ? (
-        <button onClick={handleDelete} className={style.button}>
-          Delete
-        </button>
-      ) : null}
+      <div className="card-body rounded-lg bg-indigo-400">
+
+      <div className="stats shadow bg-indigo-300">
+  
+        <div className="stat place-content-center px-1 lg:px-4">
+          <div className="stat-value text-xs lg:text-base ">{review.username}</div>
+        </div>
+        <div className="stat px-1">
+          <div className="stat-title text-xs lg:text-base">rating out of 5</div>
+          <div className="stat-value text-xs lg:text-base">{review.rating}</div>
+        </div>
+        <div className="stat px-1">
+          <div className="stat-title text-xs lg:text-base">posted at</div>
+          <div className="stat-value text-xs lg:text-base">{review.createdAt ? review.createdAt.toLocaleDateString() : "04/01/2024"}</div>
+        </div>
+        <div className="stat px-1">
+          <div className="stat-title text-xs lg:text-base">votes</div>
+          <div className="stat-value text-xs lg:text-base">{updatedVotes}</div>
+        </div>
+        
+      </div>
+
+        <p className="text-sm text-gray-800 bg-white bg-opacity-75 p-4 rounded-lg">{review.body}</p>
+
+        <div className='flex'>
+          <button onClick={handleVote} disabled={voted} className={style.button}>
+            {voted ? 'Voted!' : 'Like'}
+          </button>
+          {voteMessage && <p  className={style.login}>{voteMessage}</p>}
+
+          {review.user_id === userID ? (
+            <button onClick={handleDelete} className={style.button}>
+              Delete
+            </button>
+          ) : null}
+          </div>
+        </div>
+        
+
     </section>
   );
 };

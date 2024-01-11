@@ -140,12 +140,6 @@ const NewLocationForm = ({ user }) => {
                 <label htmlFor="place-name">Place name:</label>
                 <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." required/><br />
 
-                {/* <label htmlFor="location">Location:</label>
-                {latitude ?
-                    <input value={location} type="text" id="location" disabled />
-                    :
-                    <input value={location} onChange={e => { setLocation(e.target.value) }} type="text" id="location" placeholder="Address... " />} */}
-
                 <label htmlFor="location">Location:</label>
                 {latitude ?
                     <input value={location} type="text" id="location" disabled />
@@ -156,18 +150,20 @@ const NewLocationForm = ({ user }) => {
                     </StandaloneSearchBox>
                 </LoadScript>}
 
+                                <div className='join join-vertical'>
+                                    <p className='bg-indigo-300 join-item p-2'>Categories:</p>
 
-                <div >
-                    <p>Categories:</p>
-                    <Select
-                        isMulti
-                        name="categories"
-                        options={categoryOptions}
-                        onChange={handleCategoryChange}
+                                    <div className="card bg-base-100 shadow-xl join-item p-2">
+                                            <Select
+                                                isMulti
+                                                name="categories"
+                                                options={categoryOptions}
+                                                onChange={handleCategoryChange}
+                                                classNamePrefix="select"
+                                            />    
+                                    </div>
 
-                        classNamePrefix="select"
-                    />
-                </div>
+                                </div>
 
                 <label htmlFor="description" >Description:</label>
                 <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. " required></textarea><br />
