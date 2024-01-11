@@ -38,7 +38,7 @@ import Select from 'react-select';
     }, [latitude, longitude]);
 
     
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
             
@@ -56,12 +56,33 @@ import Select from 'react-select';
             rating: 0,
         }
           
-            await submitLocation(data)
-            setPlaceName("")
-            setLocation("")
-            setDescription("")
-            setCategories([])
-            setImg("")
+try { 
+
+    submitLocation(data)
+    setPlaceName("")
+    setLocation("")
+    setDescription("")
+    setCategories([])
+    setImg("")    
+} catch { 
+    console.log("error in New Location")
+}
+
+            // submitLocation(data)
+            // .then((res) => { 
+            //     console.log(res)
+            // })
+            // .then(()=> { 
+            //     setPlaceName("")
+            //     setLocation("")
+            //     setDescription("")
+            //     setCategories([])
+            //     setImg("")    
+            // })
+            // .catch((err)=> { 
+            //     console.log("error in New Location")
+            // })
+
     }
 
     const handleCategoryChange = (selectedOption) => {

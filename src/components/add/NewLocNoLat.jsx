@@ -21,23 +21,14 @@ export default function NewLocNoLat({ latitude, longitude }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-            
-            // find the address from the lat and lon
-            const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY; 
-            const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
-            const response = await fetch(url);
-            const formatRes = await response.json(); 
-            let singleLocation = formatRes.results[0].formatted_address          
-
-            console.log(singleLocation, "loc in newlocation")
-
+    
         const data = {
             created_by: "spikeman",
             categories: ["Scenic"],
             place_name: placeName,
-            address: location.length === 0 ? singleLocation : location,
-            latitude: Number(latitude),
-            longitude: Number(longitude),
+            address: location,
+            latitude: 51.471328509969794,
+            longitude: -0.13931652922238413,
             description,
             img,
         }
