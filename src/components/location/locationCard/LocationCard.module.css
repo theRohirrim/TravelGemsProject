@@ -63,3 +63,16 @@
 .desc {
     display: flex;
 }
+
+.delete { 
+        background-color: whitesmoke;
+        color: black;
+        padding: 5px;
+        margin-left: 55vw;
+        border-radius: 5px;
+        display:flex;
+        flex-direction:row;
+        justify-content:flex-end;
+        align-items:center;
+        gap:4px;
+}

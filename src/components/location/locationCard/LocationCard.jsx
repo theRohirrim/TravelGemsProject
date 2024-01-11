@@ -52,7 +52,7 @@ const LocationCard = async ({location, user}) => {
 
                     {user.username === location.created_by && 
                     <div>
-<button onClick={() => handleDelete(locationId)}>Delete</button>
+<button onClick={() => handleDelete(locationId)} className={styles.delete}>Delete</button>
                     </div>}  
 
 
