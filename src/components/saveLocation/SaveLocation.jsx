@@ -4,7 +4,7 @@ import { saveLocationAction } from '@/lib/action';
 import styles from './saveLocation.module.css';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-
+import { FaBookmark } from 'react-icons/fa';
 const SaveLocation = ({id, user, setPageLocations}) => {
     const [isSaved, setIsSaved] = useState(user?.savedLocations.includes(id))
     const [error, setError] = useState(false)
@@ -28,8 +28,8 @@ const SaveLocation = ({id, user, setPageLocations}) => {
     
     return (
         <div className={styles.container}>
-            <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${isSaved && styles.active}`}>
-                Save Location
+            <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${isSaved && styles.active}`}   >
+            <FaBookmark /> {isSaved ? 'unsave' : 'Save'}
             </button>
             {error && "Try again later"}
         </div>
