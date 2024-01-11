@@ -11,15 +11,16 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
     const [coordinates, setCoordinates] = useState({ lat: 51.507351, lng: -0.127758 });
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
+    const [geoLocation, setGeoLocation] = useState(false);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
             setCoordinates({ lat: latitude, lng: longitude })
+            setGeoLocation(true)
         })
         calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
         if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
-
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
@@ -139,8 +140,8 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
-                                <p className={style.directions} onClick={handleDirectionsClick}>
-                                    <LiaLocationArrowSolid /> {distance} mi</p>
+                               {geoLocation && <p className={style.directions} onClick={handleDirectionsClick}>
+                                    <LiaLocationArrowSolid /> {distance} mi</p>}
                             </div>
                         </div>
                     </InfoWindow>
