@@ -7,6 +7,7 @@ import bcrypt from 'bcryptjs'
 import { postLocation } from "./data";
 import { addSavedLocation, deleteOneReview, deleteSavedLocation, getLocationById, getUserByEmail, removeReviewFromLocation, updateLocationWithReviewId } from "./data";
 import { voteForReview, postReview, getUserNameByEmail } from './data';
+import { revalidatePath } from "next/cache";
 
 export const handleGithubLogin = async () => {
     await signIn("github", {callbackUrl: "/explore"})
@@ -157,6 +158,10 @@ export const saveLocationAction = async (id, email) => {
             await addSavedLocation(id, user)
             console.log("successfully added location to users saved list")
         }
+
+        revalidatePath('/saved')
+        revalidatePath('/explore')
+        revalidatePath('explore/[id]')
 
     } catch (error) {
         console.log(error)

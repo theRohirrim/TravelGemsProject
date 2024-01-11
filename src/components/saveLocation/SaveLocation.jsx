@@ -16,9 +16,9 @@ const SaveLocation = ({id, user, setPageLocations}) => {
             await saveLocationAction(id, user.email);
             setIsSaved((prev) => {return !prev})
             if (setPageLocations) {
-                setPageLocations((prev) => {
-                    return prev.filter(function(e) { return e._id !== id })
-                })
+                // setPageLocations((prev) => {
+                //     return prev.filter(function(e) { return e._id !== id })
+                // })
             }
         } catch (error) {
             console.log(error)
