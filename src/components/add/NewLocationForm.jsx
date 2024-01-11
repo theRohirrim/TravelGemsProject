@@ -1,14 +1,29 @@
 "use client"
 import { submitLocation } from '@/lib/action';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
 
-const NewLocationForm = ({ latitude, longitude }) => {
+const NewLocationForm = ({ user }) => {
     const [placeName, setPlaceName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
     const [categories, setCategories] = useState([]);
     const [img, setImg] = useState("");
+
+    const searchParams = useSearchParams()
+    const latitude = searchParams.get('latitude')
+    const longitude = searchParams.get('longitude')
+
+    let username;
+    
+    if (user){
+       username = user.username
+       
+    } else {
+      username= null
+    }
+
 
     let categoryOptions = [
         { value: 'Mystery', label: 'Mystery' },
@@ -45,7 +60,7 @@ const NewLocationForm = ({ latitude, longitude }) => {
         // find the address from the lat and lon
 
         const data = {
-            created_by: "spikeman",
+            created_by: username,
             categories: ["Scenic"],
             place_name: placeName,
             address: location,
