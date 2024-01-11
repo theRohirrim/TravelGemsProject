@@ -1,8 +1,9 @@
 import Image from "next/image"
 import styles from "./LocationCard.module.css"
+import SaveLocation from "@/components/saveLocation/SaveLocation"
 
 
-const LocationCard = async ({location}) => { 
+const LocationCard = async ({location, user}) => { 
 
     const roundedRating = location.rating.toFixed(2)
 
@@ -28,7 +29,10 @@ const LocationCard = async ({location}) => {
                         </div>
                     </div>
                     
-                    <p className="p-2">{location.description}</p>
+                    <div className={styles.desc}>
+                        <p className="p-2">{location.description}</p>
+                        {user && <SaveLocation id={location._id.toString()} user={user} />}
+                    </div>
 
                     <div className="flex flex-col justify-evenly gap-4 sm:flex-row sm:gap-8">
                         {location.categories.map(category => (
