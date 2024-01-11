@@ -1,11 +1,27 @@
+"use client"
+
 import Image from "next/image"
 import styles from "./LocationCard.module.css"
 import SaveLocation from "@/components/saveLocation/SaveLocation"
+import { deleteLocation } from "@/lib/action"
 
 
 const LocationCard = async ({location, user}) => { 
 
     const roundedRating = location.rating.toFixed(2)
+
+    const locationId = location._id
+
+    const handleDelete = async (locationId) => { 
+        try{
+            console.log("sending locaiton card")
+           const deleted = await deleteLocation(locationId)
+           console.log(deleted, "deleted in location card")
+            window.location.href = '/explore'
+        } catch { 
+            console.log("DELETE Error in location card.jsx")
+        }
+    }
 
     return (
         <section className="mt-40 mb-5 w-5/6 mx-auto  ">
@@ -34,6 +50,12 @@ const LocationCard = async ({location, user}) => {
                         {user && <SaveLocation id={location._id.toString()} user={user} />}
                     </div>
 
+                    {user.username === location.created_by && 
+                    <div>
+<button onClick={() => handleDelete(locationId)}>Delete</button>
+                    </div>}  
+
+
                     <div className="flex flex-col justify-evenly gap-4 sm:flex-row sm:gap-8">
                         {location.categories.map(category => (
                                     <p className="badge badge-neutral ">
@@ -49,49 +71,3 @@ const LocationCard = async ({location, user}) => {
 }
 
 export default LocationCard
-
-
-
-// Spencer's attempt at making a partially highlighted star 
-// please feel free to delete/ammend
-
-// let starAverage = location.rating
-
-// const fullStars = Math.floor(starAverage);
-// const starArr = [];
-// for(let i = 1; i <= fullStars; i++){
-// starArr.push(100);}
-
-// if(starAverage < 5) {
-// const partialStar = starAverage - fullStars * 100;
-// starArr.push(partialStar);
-// const emptyStars = 5 - starArr.length;
-
-// for(let i=1; i<= emptyStars; i++) {
-// starArr.push(0);}
-// }
-
-// function PartialFillIcon({ fillPercentage }) {
-// const iconSize = 50; // Size of the icon
-    
-// return ( <div style={{ position: 'relative', width: iconSize, height: iconSize }}>
-// {/* Filled Icon */}
-// <FaGem 
-//   size={iconSize} 
-//   color="#ff643d" // Full star color
-//   style={{ position: 'absolute', zIndex: 1 }}
-// />
-
-// {/* Overlay Icon (Unfilled Part) */}
-// <FaGem 
-//   size={iconSize} 
-//   color="#bbbac0" // Color for the unfilled part
-//   style={{ 
-//     position: 'absolute', 
-//     clipPath: `inset(0 ${100 - fillPercentage}% 0 0)`, // Clip based on fill percentage
-//     zIndex: 2
-//   }} 
-// />
-// </div>
-// );
-// }
