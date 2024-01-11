@@ -8,7 +8,8 @@ import { LiaLocationArrowSolid } from "react-icons/lia"
 
 
 const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation, setSelectedLocation }) => {
-    const [coordinates, setCoordinates] = useState({ lat: 51.507351, lng: -0.127758 });
+    const [mapCoords, setMapCoords] = useState({ lat: 51.507351, lng: -0.127758 })
+    const [coordinates, setCoordinates] = useState({});
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
     const [geoLocation, setGeoLocation] = useState(false);
@@ -21,6 +22,15 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
         calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
         if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
+
+
+    useEffect(() => {
+        navigator.permissions.query({ name: "geolocation" }).then(result => {
+            if (result.state === "granted") {
+                setMapCoords(coordinates)
+            }
+        })
+    }, [geoLocation]);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
@@ -83,7 +93,7 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
             {isLoaded && <GoogleMap
                 onClick={handleMapClick}
                 mapContainerStyle={containerStyle}
-                center={coordinates}
+                center={mapCoords}
                 zoom={12}
             >
                 {locations.map((location) => (
