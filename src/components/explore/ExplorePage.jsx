@@ -47,7 +47,7 @@ const ExplorePage = ({ allLocations, user }) => {
                 <LocationList locations={locations} user={user} />
             </div>
             <div className={`${mapView === false && styles.disabled}`}>
-                <GoogleMapView locations={locations} addLocation={addLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
+                <GoogleMapView locations={locations} addLocation={addLocation} setAddLocation={setAddLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
             </div>
         </>
     )

@@ -6,20 +6,31 @@ import style from "./googleMap.module.css"
 import Link from 'next/link';
 import { LiaLocationArrowSolid } from "react-icons/lia"
 
-const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLocation }) => {
-    const [coordinates, setCoordinates] = useState({ lat: 51.507351, lng: -0.127758 });
+
+const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation, setSelectedLocation }) => {
+    const [mapCoords, setMapCoords] = useState({ lat: 51.507351, lng: -0.127758 })
+    const [coordinates, setCoordinates] = useState({});
     const [selectLocation, setSelectLocation] = useState("");
     const [distance, setDistance] = useState(0);
+    const [geoLocation, setGeoLocation] = useState(false);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
             setCoordinates({ lat: latitude, lng: longitude })
+            setGeoLocation(true)
         })
+        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+        if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
 
+
     useEffect(() => {
-        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
-    }, [selectLocation]);
+        navigator.permissions.query({ name: "geolocation" }).then(result => {
+            if (result.state === "granted") {
+                setMapCoords(coordinates)
+            }
+        })
+    }, [geoLocation]);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
         const earthRadius = 6371; // in kilometers
@@ -75,7 +86,6 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
 
     const handleMapClick = (e) => {
         setSelectedLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() })
-
     }
 
     return (
@@ -83,9 +93,8 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
             {isLoaded && <GoogleMap
                 onClick={handleMapClick}
                 mapContainerStyle={containerStyle}
-                center={coordinates}
+                center={mapCoords}
                 zoom={12}
-               
             >
                 {locations.map((location) => (
                     <Marker
@@ -103,8 +112,16 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                     />
                 ))}
 
-                {addLocation && <MarkerF position={selectedLocation}>
-                    <InfoWindow visible={true}>
+                {addLocation && <MarkerF
+                    position={selectedLocation}
+                    icon={{
+                        url: "/travel_icon.svg",
+                        scaledSize: {
+                            width: 40,
+                            height: 40
+                        }
+                    }}>
+                    <InfoWindow onCloseClick={() => setAddLocation(false)}>
                         <Link href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
                             <p>Add new travel gem</p>
                         </Link>
@@ -133,8 +150,8 @@ const GoogleMapView = ({ locations, addLocation, selectedLocation, setSelectedLo
                                 </Link>
                                 <p>{selectLocation.category}</p>
                                 <p> {`${stringLimit(selectLocation.description, 100)}...`}</p>
-                                <p className={style.directions} onClick={handleDirectionsClick}>
-                                    <LiaLocationArrowSolid /> {distance} mi</p>
+                               {geoLocation && <p className={style.directions} onClick={handleDirectionsClick}>
+                                    <LiaLocationArrowSolid /> {distance} mi</p>}
                             </div>
                         </div>
                     </InfoWindow>

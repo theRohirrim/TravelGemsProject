@@ -9,7 +9,7 @@ const Home = async () => {
   // let user;
 
   const user = await getUserByEmail(session?.user.email)
-  console.log(user)
+
 
 
   // FETCHING WITHOUT API
