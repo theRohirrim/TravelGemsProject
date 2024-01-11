@@ -29,7 +29,7 @@ const SaveLocation = ({id, user, setPageLocations}) => {
     return (
         <div className={styles.container}>
             <button onClick={() => handleSaveLocation(id, user)} className={`${styles.button} ${isSaved && styles.active}`}   >
-            <FaBookmark /> Save
+            <FaBookmark /> {isSaved ? 'unsave' : 'Save'}
             </button>
             {error && "Try again later"}
         </div>
