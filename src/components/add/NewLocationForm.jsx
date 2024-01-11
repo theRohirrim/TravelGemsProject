@@ -134,47 +134,74 @@ const NewLocationForm = ({ user }) => {
         }
     }
     return (
-        <div>
-            <h1>New gem</h1>
-            <form action={handleSubmit} onSubmit={() => false}>
-                <label htmlFor="place-name">Place name:</label>
-                <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." required/><br />
+        <>
+            <div>
+                <div className="card bg-base-100 shadow-xl w-5/6 bg-indigo-500 mx-auto ">
+                    <figure>{img && <img className='w-full h-full object-cover' src={img} />}</figure>
+                    <div className="card-body">
+                        <h2 className="card-title text-2xl">New gem</h2>
+                            <form onSubmit={handleSubmit}>
+                                
+                                <div className='flex flex-col gap-2'>
 
-                <label htmlFor="location">Location:</label>
-                {latitude ?
-                    <input value={location} type="text" id="location" disabled />
-                    :
-                    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={["places"]}>
-                    <StandaloneSearchBox onLoad={ref => (inputRef.current = ref)} onPlacesChanged={handlePlaceChanged}>
-                        <input type='text' placeholder='Enter location' />
-                    </StandaloneSearchBox>
-                </LoadScript>}
+                                    <div className='flex flex-col lg:flex-row gap-5 '>
+                                        <div className='join join-vertical w-full'>
+                                            <label htmlFor="place-name" className='bg-indigo-300 w-full  join-item p-2'>Place name:</label>
+                                            <input value={placeName} onChange={e => setPlaceName(e.target.value)} type="text" id="place-name" placeholder="Name your Gem.." className="input input-bordered w-full  rounded-t-none "/><br />
+                                        </div>
 
-                                <div className='join join-vertical'>
-                                    <p className='bg-indigo-300 join-item p-2'>Categories:</p>
-
-                                    <div className="card bg-base-100 shadow-xl join-item p-2">
-                                            <Select
-                                                isMulti
-                                                name="categories"
-                                                options={categoryOptions}
-                                                onChange={handleCategoryChange}
-                                                classNamePrefix="select"
-                                            />    
+                                        <div className='join join-vertical w-full'>
+                                            <label htmlFor="location" className='bg-indigo-300 w-full  join-item p-2'>Location:</label>
+                                            {/* <input value={location} onChange={e => setLocation(e.target.value)} type="text" id="location" placeholder="enter a location" className="input input-bordered w-full  rounded-t-none"/><br /> */}
+                                            
+                                            {latitude ?
+                                                <input value={location} type="text" id="location" disabled />
+                                                :
+                                                <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={["places"]}>
+                                                <StandaloneSearchBox onLoad={ref => (inputRef.current = ref)} onPlacesChanged={handlePlaceChanged}>
+                                                    <input type='text' placeholder='Enter location' className="input input-bordered w-full  rounded-t-none"/>
+                                                </StandaloneSearchBox>
+                                                </LoadScript>}
+                                        </div>
                                     </div>
 
+
+                                    <div className='join join-vertical'>
+                                        <p className='bg-indigo-300 join-item p-2'>Categories:</p>
+
+                                        <div className="card bg-base-100 shadow-xl join-item p-2">
+                                                <Select
+                                                    isMulti
+                                                    name="categories"
+                                                    options={categoryOptions}
+                                                    onChange={handleCategoryChange}
+                                                    classNamePrefix="select"
+                                                />    
+                                        </div>
+
+                                    </div>
+
+                                    <div className='join join-vertical'>
+                                        <label htmlFor="description" className='bg-indigo-300 join-item p-2'>Description:</label>
+                                        <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.." className="textarea w-full rounded-t-none"></textarea><br />
+                                    </div>
+
+                                    <div className='join join-vertical'>
+                                        <label htmlFor="image" className='bg-indigo-300 join-item p-2'>Upload an image:</label>
+                                        <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange} className="file-input max-w-x rounded-t-none"/><br />
+                                    </div>
                                 </div>
-
-                <label htmlFor="description" >Description:</label>
-                <textarea value={description} onChange={e => setDescription(e.target.value)} id="description" placeholder="a brief description of your gem.. " required></textarea><br />
-                <label htmlFor="image">Upload an image:</label>
-                <input type="file" id="image" name="image" accept='image/*' onChange={handleFileChange} /><br />
-                <button type='submit'>Add new location</button>
-                {img && <img width={500} height={500} src={img} />}
-            </form>
-
-
-        </div>
+                                
+                                <div className="card-actions justify-end">
+                                    <button type='submit' className="btn btn-primary ">Add new location</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        
+            
+        </>
     )
 }
 
