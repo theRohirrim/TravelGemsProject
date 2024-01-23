@@ -1,12 +1,4 @@
-import styles from "./locations.module.css"
-import Link from "next/link";
-import { GoDot } from "react-icons/go";
-import { FaGem } from "react-icons/fa";
-
 const Locations = ({ locations }) => {
-
-
-
     return (
         <div className="">
                 {locations.map(location => (

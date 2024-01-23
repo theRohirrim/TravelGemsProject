@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import styles from "./LocationCard.module.css"
 import SaveLocation from "@/components/saveLocation/SaveLocation"
 import { deleteLocation } from "@/lib/action"

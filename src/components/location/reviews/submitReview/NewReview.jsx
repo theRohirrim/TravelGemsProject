@@ -1,10 +1,6 @@
 'use client';
 import { useState } from 'react';
-import style from './NewReview.module.css';
-import { FaGem } from 'react-icons/fa';
 import { submitReview } from '@/lib/action';
-import ReviewsCard from '../reviewCards.jsx/ReviewsCard';
-import { useSession } from 'next-auth/react';
 
 const NewReview =  ({ id, placeName ,username , userID }) => {
   const locationId = id;

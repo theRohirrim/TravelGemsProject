@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react"
 import LocationList from "../locationList/LocationList"
-import { useRouter } from "next/navigation"
 
 const SavedLocationWrapper = ({locations, user}) => {
     const [pageLocations, setPageLocations] = useState(locations)

@@ -1,6 +1,5 @@
 'use client';
 
-import React from "react";
 import Select from 'react-select';
 import styles from "./mapsNav.module.css";
 import { IoMdAdd } from "react-icons/io";

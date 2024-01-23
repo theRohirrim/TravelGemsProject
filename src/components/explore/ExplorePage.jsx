@@ -6,7 +6,7 @@ import styles from './explorepage.module.css'
 import MapAndListButtons from './filterAndView/Map&ListButons/Map&ListButtons';
 import MapsNavigation from './filterAndView/mapsNavigation/MapsNavigation';
 import LocationList from './locationList/LocationList';
-import { useSession } from 'next-auth/react';
+
 
 const ExplorePage = ({ allLocations, user }) => {
     const [locations, setLocations] = useState(allLocations)
@@ -14,7 +14,6 @@ const ExplorePage = ({ allLocations, user }) => {
     const [filterOptions, setFilterOptions] = useState({})
     const [addLocation, setAddLocation] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState({})
-    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
         let filteredLocations = allLocations
@@ -47,7 +46,7 @@ const ExplorePage = ({ allLocations, user }) => {
                 <LocationList locations={locations} user={user} />
             </div>
             <div className={`${mapView === false && styles.disabled}`}>
-                <GoogleMapView locations={locations} addLocation={addLocation} setAddLocation={setAddLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
+                <GoogleMapView user={user} locations={locations} addLocation={addLocation} setAddLocation={setAddLocation} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
             </div>
         </>
     )

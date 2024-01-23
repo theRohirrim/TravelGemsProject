@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import styles from './locationcard.module.css'
 import Link from 'next/link'
 import SaveLocation from '@/components/saveLocation/SaveLocation'
