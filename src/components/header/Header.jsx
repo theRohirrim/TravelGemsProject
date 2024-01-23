@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styles from './header.module.css'
 import { handleLogout } from '@/lib/action';
 import { auth } from '@/lib/auth';

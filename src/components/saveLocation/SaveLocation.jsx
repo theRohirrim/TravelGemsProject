@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { MdBookmarkAdd } from "react-icons/md";
 import { MdBookmarkRemove } from "react-icons/md";
+
 const SaveLocation = ({id, user, setPageLocations}) => {
     const [isSaved, setIsSaved] = useState(user?.savedLocations.includes(id))
     const [error, setError] = useState(false)

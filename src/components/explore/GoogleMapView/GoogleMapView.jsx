@@ -1,13 +1,14 @@
 "use client"
 import { GoogleMap, Marker, InfoWindow, useLoadScript, MarkerF } from '@react-google-maps/api';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image'
 import style from "./googleMap.module.css"
 import Link from 'next/link';
 import { LiaLocationArrowSolid } from "react-icons/lia"
+import { calculateDistance } from '@/lib/distance';
 
 
-const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation, setSelectedLocation }) => {
+const GoogleMapView = ({ user, locations, addLocation,setAddLocation, selectedLocation, setSelectedLocation }) => {
     const [mapCoords, setMapCoords] = useState({ lat: 51.507351, lng: -0.127758 })
     const [coordinates, setCoordinates] = useState({});
     const [selectLocation, setSelectLocation] = useState("");
@@ -19,7 +20,8 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
             setCoordinates({ lat: latitude, lng: longitude })
             setGeoLocation(true)
         })
-        calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+        const calculatedDistance = calculateDistance(coordinates.lat, coordinates.lng, selectLocation.latitude, selectLocation.longitude)
+        setDistance(calculatedDistance.toFixed(1))
         if (selectLocation) setAddLocation(false)
     }, [selectLocation]);
 
@@ -31,25 +33,6 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
             }
         })
     }, [geoLocation]);
-
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-        const earthRadius = 6371; // in kilometers
-
-        const degToRad = (deg) => {
-            return deg * (Math.PI / 180);
-        };
-
-        const dLat = degToRad(lat2 - lat1);
-        const dLon = degToRad(lon2 - lon1);
-
-        const a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-        const distance = earthRadius * c;
-        setDistance(distance.toFixed(1))
-    };
 
     const containerStyle = {
         width: '80vw',
@@ -122,7 +105,7 @@ const GoogleMapView = ({ locations, addLocation,setAddLocation, selectedLocation
                         }
                     }}>
                     <InfoWindow onCloseClick={() => setAddLocation(false)}>
-                        <Link href={`/add?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}`}>
+                        <Link href={user ? `/share?latitude=${selectedLocation.lat}&longitude=${selectedLocation.lng}` : `/login`}>
                             <p>Add new travel gem</p>
                         </Link>
                     </InfoWindow>

@@ -2,8 +2,10 @@
 import { submitLocation } from '@/lib/action';
 import { LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Select from 'react-select';
+
+const libraries = ['places']
 
 const NewLocationForm = ({ user }) => {
     const [placeName, setPlaceName] = useState("");
@@ -22,7 +24,6 @@ const NewLocationForm = ({ user }) => {
 
     if (user) {
         username = user.username
-
     } else {
         username = null
     }
@@ -38,23 +39,23 @@ const NewLocationForm = ({ user }) => {
 
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
-    useEffect(() => {
-        const fetchCoordinates = async () => {
-            const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-            const address = '24%20Sussex%20Drive%20Ottawa%20ON'; // URL-encoded address
-            const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
+    // useEffect(() => {
+    //     const fetchCoordinates = async () => {
+    //         const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+    //         const address = '24%20Sussex%20Drive%20Ottawa%20ON'; // URL-encoded address
+    //         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
 
-            try {
-                const response = await fetch(url);
-                const formatRes = await response.json();
-                const location = formatRes.results[0].geometry.location;
-            } catch (error) {
-                console.error("Error fetching coordinates: ", error);
-            }
-        };
+    //         try {
+    //             const response = await fetch(url);
+    //             const formatRes = await response.json();
+    //             const location = formatRes.results[0].geometry.location;
+    //         } catch (error) {
+    //             console.error("Error fetching coordinates: ", error);
+    //         }
+    //     };
 
-        fetchCoordinates();
-    }, []);
+    //     fetchCoordinates();
+    // }, []);
 
     useEffect(() => {
         const fetchAddress = async () => {
@@ -77,9 +78,7 @@ const NewLocationForm = ({ user }) => {
 
 
     const handleSubmit = () => {
-
         // find the address from the lat and lon
-
         const data = {
             created_by: username,
             categories: ["Scenic"],
@@ -152,12 +151,11 @@ const NewLocationForm = ({ user }) => {
 
                                         <div className='join join-vertical w-full'>
                                             <label htmlFor="location" className='bg-indigo-300 w-full  join-item p-2'>Location:</label>
-                                            {/* <input value={location} onChange={e => setLocation(e.target.value)} type="text" id="location" placeholder="enter a location" className="input input-bordered w-full  rounded-t-none"/><br /> */}
                                             
                                             {latitude ?
                                                 <input value={location} type="text" id="location" disabled />
                                                 :
-                                                <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={["places"]}>
+                                                <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY} libraries={libraries}>
                                                 <StandaloneSearchBox onLoad={ref => (inputRef.current = ref)} onPlacesChanged={handlePlaceChanged}>
                                                     <input type='text' placeholder='Enter location' className="input input-bordered w-full  rounded-t-none"/>
                                                 </StandaloneSearchBox>

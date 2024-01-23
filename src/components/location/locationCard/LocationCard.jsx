@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import styles from "./LocationCard.module.css"
 import SaveLocation from "@/components/saveLocation/SaveLocation"
 import { deleteLocation } from "@/lib/action"
@@ -50,7 +49,7 @@ const LocationCard = async ({location, user}) => {
                         {user && <SaveLocation id={location._id.toString()} user={user} />}
                     </div>
 
-                    {user.username === location.created_by && 
+                    {user?.username === location.created_by && 
                     <div>
 <button onClick={() => handleDelete(locationId)}>Delete</button>
                     </div>}  

@@ -1,4 +1,4 @@
-import { checkCollection, getLocations, getUserByEmail } from '@/lib/data';
+import {getLocations, getUserByEmail } from '@/lib/data';
 import ExplorePage from '@/components/explore/ExplorePage';
 import { auth } from '@/lib/auth';
 

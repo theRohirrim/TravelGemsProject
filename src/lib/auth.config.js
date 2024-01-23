@@ -23,6 +23,7 @@ export const authConfig = {
     authorized({ auth, request }) {
       const user = auth?.user;
       const isOnNetworkPage = request.nextUrl?.pathname.startsWith('/network');
+      const isOnSharePage = request.nextUrl?.pathname.startsWith('/share');
       const isOnSavedPage = request.nextUrl?.pathname.startsWith('/saved');
       const isOnLoginPage = request.nextUrl?.pathname.startsWith('/login');
 
@@ -34,6 +35,10 @@ export const authConfig = {
 
       // ONLY AUTHENTICATED USERS CAN REACH THE BLOG PAGE
       if (isOnSavedPage && !user) {
+        return false;
+      }
+
+      if (isOnSharePage && !user) {
         return false;
       }
 
